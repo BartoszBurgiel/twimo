@@ -1,2 +1,3 @@
 # ignore database
-repository/SQLite/sql
+./repository/SQLite/sql
+*.db
