@@ -17,3 +17,13 @@ func (r Repo) GetLocation(locationID string) *core.Location {
 func (r Repo) GetCommentsOfLocation(locationID string) []*core.Comment {
 	return nil
 }
+
+func (r Repo) GetLocationsFavUsers(locationID string) []*core.User {
+
+	return nil
+}
+
+func (r Repo) GetLocationRatings(locationID string) []*core.Rating {
+
+	return nil
+}

@@ -21,5 +21,21 @@ type Repository interface {
 	// Get all users that have given location as favorite
 	GetLocationsFavUsers(locationID string) []*core.User
 
+	// Get all ratings from the Db of given locations
 	GetLocationRatings(locationID string) []*core.Rating
+
+	// Add a comment by a user about a given location
+	AddComment(locationID, userID, title, content string)
+
+	// Add a rating about a location by a user
+	AddRating(locationID, userID string, value int)
+
+	// Set a given location as the favorite location of a user
+	SetAsFavoriteLocation(locationID, userID string)
+
+	// Delete a comment
+	DeleteComment(commentID, userID string)
+
+	// Delete a rating
+	DeleteRating(ratingID, userID string)
 }

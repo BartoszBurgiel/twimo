@@ -1,3 +1,0 @@
-# ignore database
-repository/sqlitedb/sql
-*.db
