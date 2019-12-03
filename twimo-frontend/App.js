@@ -1,19 +1,20 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function App() {
+function Greeting(props) {
   return (
-    <View style={styles.container}>
-      <Text>twimo</Text>
+    <View style={{ alignItems: "center" }}>
+      <Text>Hello {props.name}</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+export default function LotsOfGreetings() {
+  return (
+    <View style={{ alignItems: "center", top: 50 }}>
+      <Greeting name="Louis" />
+      <Greeting name="Bartosz" />
+      <Greeting name="Whoever" />
+    </View>
+  );
+}
