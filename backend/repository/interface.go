@@ -16,5 +16,10 @@ type Repository interface {
 	GetLocation(locationID string) *core.Location
 
 	// Get all comments of a location with given ID
-	GetCommentsOfLocation(locationID string) []*core.Location
+	GetCommentsOfLocation(locationID string) []*core.Comment
+
+	// Get all users that have given location as favorite
+	GetLocationsFavUsers(locationID string) []*core.User
+
+	GetLocationRatings(locationID string) []*core.Rating
 }

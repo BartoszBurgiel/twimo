@@ -25,6 +25,7 @@ func New(path string) (*Repo, error) {
 	return r, r.init()
 }
 
+// initialize a repository
 func (r *Repo) init() error {
 
 	// Check if database folder exists

@@ -6,13 +6,19 @@ type User struct {
 	Password string
 	Email    string
 
-	// Key to rows in Comment struct
-	Comments string
+	Comments struct {
+		// Key to rows in Comment struct
+		Key      string
+		Comments []*Comment
+	}
 
 	// Key to rows in Location struct
 	FavLocation string
 
-	// Key to rows in Ratings struct
-	Ratings string
-	ID      string
+	Ratings struct {
+		// Key to rows in Ratings struct
+		Key     string
+		Ratings []*Rating
+	}
+	ID string
 }
