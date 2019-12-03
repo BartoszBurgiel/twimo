@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS 'users' (
 CREATE TABLE IF NOT EXISTS 'ratings' (
 	'userID' 		VARCHAR(16), 
 	'locationID' 	VARCHAR(16), 
-	'value'			NUMERIC
+	'value'			NUMERIC,
+    'id'            VARCHAR(16)
 ) ;
 
 CREATE TABLE IF NOT EXISTS 'comments' (
