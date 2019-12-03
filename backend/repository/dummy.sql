@@ -40,7 +40,8 @@ INSERT INTO comments VALUES (
 INSERT INTO ratings VALUES (
     "69696", 
     "64201", 
-    10
+    10, 
+    "efba0"
 ) ;
 
 INSERT INTO location_fav_users VALUES (
