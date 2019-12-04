@@ -25,17 +25,17 @@ type Repository interface {
 	GetLocationRatings(locationID string) []*core.Rating
 
 	// Add a comment by a user about a given location
-	AddComment(locationID, userID, title, content string)
+	AddComment(comment core.Comment) error
 
 	// Add a rating about a location by a user
-	AddRating(locationID, userID string, value int)
+	AddRating(rating core.Rating) error
 
 	// Set a given location as the favorite location of a user
-	SetAsFavoriteLocation(locationID, userID string)
+	SetAsFavoriteLocation(locationID, userID string) error
 
 	// Delete a comment
-	DeleteComment(commentID, userID string)
+	DeleteComment(commentID string) error
 
 	// Delete a rating
-	DeleteRating(ratingID, userID string)
+	DeleteRating(ratingID string) error
 }
