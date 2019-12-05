@@ -11,3 +11,7 @@
   * Rating
     * get all ratings of a given location 
     * get the average rating of a given location 
+
+## Frontend 
+* Favicon.ico
+  * nothing crazy, the error messages are driving me nuts!

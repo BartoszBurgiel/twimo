@@ -5,8 +5,6 @@ import (
 	"kanbanBoard/engine"
 	"net/http"
 	"twimo/backend/repository"
-
-	"github.com/gorilla/websocket"
 )
 
 // Server struct
@@ -35,16 +33,10 @@ func (s *Server) init() error {
 
 	// Add route for main page
 	s.router.Route("/")["GET"] = http.HandlerFunc(s.handleIndexGET)
+	s.router.Route("/users")["GET"] = http.HandlerFunc(s.handleUsersGET)
+	s.router.Route("/users/ws")["GET"] = http.HandlerFunc(s.handleUserWS)
 
 	return nil
-}
-
-// Create a buffer that will store data to send
-// via websocket
-var upgrader = websocket.Upgrader{
-	// Bits
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
 }
 
 // Serve HTTP protocol
