@@ -32,9 +32,6 @@ func (s *Server) handleUserWS(w http.ResponseWriter, r *http.Request) {
 	// Make connection
 	conn, err := upgrader.Upgrade(w, r, nil)
 
-	// Schedule closure of the connection
-	defer conn.Close()
-
 	// Error handling
 	if err != nil {
 		fmt.Println(err)
@@ -47,12 +44,16 @@ func (s *Server) handleUserWS(w http.ResponseWriter, r *http.Request) {
 
 // Websocket echoer
 func echo(conn *websocket.Conn, s *Server) {
+	// Schedule closure of the connection
+	defer conn.Close()
+
 	for {
 
 		// Get message
 		_, msg, err := conn.ReadMessage()
 		if err != nil {
 			fmt.Println("Error reading message", err)
+			return
 		}
 
 		// Convert msg to string
@@ -62,14 +63,17 @@ func echo(conn *websocket.Conn, s *Server) {
 		fmt.Println("Got message: ", userID)
 
 		// Get users
-		user := s.repo.GetUser(userID)
-
-		// Write the user to the db
-		if err := conn.WriteJSON(user); err != nil {
-			fmt.Println(err)
+		if user, err := s.repo.GetUser(userID); err != nil {
+			// Write the user to the db
+			if err := conn.WriteMessage(1, []byte(fmt.Sprintf("No user with the id %s has been found in the DB", userID))); err != nil {
+				fmt.Println(err)
+			}
 		} else {
-			fmt.Println(err)
-			panic(err)
+
+			// Write the user to the db
+			if err := conn.WriteJSON(user); err != nil {
+				fmt.Println(err)
+			}
 		}
 	}
 }

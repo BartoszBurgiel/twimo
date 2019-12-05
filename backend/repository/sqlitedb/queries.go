@@ -6,7 +6,7 @@ import (
 )
 
 // GetUser returns a pointer to a user struct created from Db
-func (r Repo) GetUser(userID string) *core.User {
+func (r Repo) GetUser(userID string) (*core.User, error) {
 	// Get  rows
 	rows, err := r.db.Query(`SELECT name, password, email, comments, favlocation, ratings, id FROM users WHERE id = ? ; `, userID)
 
@@ -20,8 +20,13 @@ func (r Repo) GetUser(userID string) *core.User {
 	// Variables
 	var name, password, email, comments, favlocation, ratings, id string
 
+	// Iterate over rows
 	for rows.Next() {
 		rows.Scan(&name, &password, &email, &comments, &favlocation, &ratings, &id)
+	}
+
+	if name == "" {
+		return nil, fmt.Errorf("No users found with id %s", userID)
 	}
 
 	// Build struct
@@ -49,7 +54,7 @@ func (r Repo) GetUser(userID string) *core.User {
 
 	fmt.Println("Chosen user: ", user)
 
-	return user
+	return user, nil
 }
 
 // GetComment returns a pointer to a commment struct creater from Db
