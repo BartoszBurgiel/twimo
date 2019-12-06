@@ -10,6 +10,9 @@ func (r Repo) GetUser(userID string) (*core.User, error) {
 	// Get  rows
 	rows, err := r.db.Query(`SELECT name, password, email, comments, favlocation, ratings, id FROM users WHERE id = ? ; `, userID)
 
+	// Schedule closing of the db
+	defer rows.Close()
+
 	if err != nil {
 		fmt.Println(err)
 		panic(err)

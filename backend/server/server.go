@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"kanbanBoard/engine"
 	"net/http"
+	"strings"
 	"twimo/backend/repository"
 )
 
@@ -39,18 +40,34 @@ func (s *Server) init() error {
 	return nil
 }
 
-// Serve HTTP protocol
+// ServeHTTP to the server
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// Get Path
-	p := Path(r.URL.Path)
+	url := r.URL.String()
+	if !prefixChecker(url, "/style", "/favicon.ico") {
+		p := Path(r.URL.Path)
+		m := Method(r.Method)
 
-	// Get Method
-	m := Method(r.Method)
+		fmt.Println(p, m)
 
-	// Log requests
-	fmt.Println("Path", p)
-	fmt.Println("Method", m)
+		s.router.Route(p)[m].ServeHTTP(w, r)
+		return
+	}
 
-	// Call function
-	s.router.Route(p)[m].ServeHTTP(w, r)
+	s.handleGETAssets(w, r)
+}
+
+// If assets are called -> host assets
+func (s Server) handleGETAssets(w http.ResponseWriter, r *http.Request) {
+	http.FileServer(http.Dir("../server/assets/")).ServeHTTP(w, r)
+}
+
+// prefixChecker checks if any of given prefixes is in the url
+func prefixChecker(url string, prefix ...string) bool {
+	out := false
+	for _, p := range prefix {
+		if strings.HasPrefix(url, p) {
+			out = true
+		}
+	}
+	return out
 }
