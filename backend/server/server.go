@@ -34,9 +34,13 @@ func (s *Server) init() error {
 
 	// Add route for main page
 	s.router.Route("/")["GET"] = http.HandlerFunc(s.handleIndexGET)
+
+	// Getter pages
 	s.router.Route("/users")["GET"] = http.HandlerFunc(s.handleUsersGET)
 	s.router.Route("/users/ws")["GET"] = http.HandlerFunc(s.handleUserWS)
 
+	s.router.Route("/comments")["GET"] = http.HandlerFunc(s.handleCommentsGET)
+	s.router.Route("/comments/ws")["GET"] = http.HandlerFunc(s.handleCommentsWS)
 	return nil
 }
 

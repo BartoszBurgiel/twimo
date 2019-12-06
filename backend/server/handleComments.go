@@ -7,15 +7,15 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-// Handle GET request on /users
-func (s *Server) handleUsersGET(w http.ResponseWriter, r *http.Request) {
+// Handle GET request on /comments
+func (s *Server) handleCommentsGET(w http.ResponseWriter, r *http.Request) {
 
 	// Serve the file
-	http.ServeFile(w, r, "../server/assets/users.html")
+	http.ServeFile(w, r, "../server/assets/comments.html")
 }
 
-// Websocket handler for user
-func (s *Server) handleUserWS(w http.ResponseWriter, r *http.Request) {
+// Websocket handler for comment
+func (s *Server) handleCommentsWS(w http.ResponseWriter, r *http.Request) {
 
 	// Execute only when not on /ws
 	if r.Header.Get("Origin") != "http://"+r.Host {
@@ -39,11 +39,11 @@ func (s *Server) handleUserWS(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Start goroutine echoing the websocket
-	go echoUsers(conn, s)
+	go echoComments(conn, s)
 }
 
 // Websocket echoer
-func echoUsers(conn *websocket.Conn, s *Server) {
+func echoComments(conn *websocket.Conn, s *Server) {
 	// Schedule closure of the connection
 	defer conn.Close()
 
@@ -57,21 +57,22 @@ func echoUsers(conn *websocket.Conn, s *Server) {
 		}
 
 		// Convert msg to string
-		userID := string(msg)
+		commentID := string(msg)
 
 		// Log message
-		fmt.Println("Got message: ", userID)
+		fmt.Println("Got message: ", commentID)
 
-		// Get users
-		if user, err := s.repo.GetUser(userID); err != nil {
-			// Write the user to the db
-			if err := conn.WriteMessage(1, []byte(fmt.Sprintf("No user with the id %s has been found in the DB", userID))); err != nil {
+		// Get comment
+		if comment, err := s.repo.GetComment(commentID); err != nil {
+
+			// Write log
+			if err := conn.WriteMessage(1, []byte(fmt.Sprintf("No user with the id %s has been found in the DB", comment))); err != nil {
 				fmt.Println(err)
 			}
 		} else {
 
-			// Write the user to the db
-			if err := conn.WriteJSON(user); err != nil {
+			// Write the user to the ws
+			if err := conn.WriteJSON(comment); err != nil {
 				fmt.Println(err)
 			}
 		}

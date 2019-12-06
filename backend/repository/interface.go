@@ -10,10 +10,10 @@ type Repository interface {
 	GetUser(userID string) (*core.User, error)
 
 	// Get a comment with given ID
-	GetComment(commentID string) *core.Comment
+	GetComment(commentID string) (*core.Comment, error)
 
 	// Get a location with given ID
-	GetLocation(locationID string) *core.Location
+	GetLocation(locationID string) (*core.Location, error)
 
 	// Get all comments of a location with given ID
 	GetCommentsOfLocation(locationID string) []*core.Comment

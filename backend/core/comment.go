@@ -10,4 +10,7 @@ type Comment struct {
 
 	// Location's ID
 	Location string
+
+	// Comment's ID
+	ID string
 }
