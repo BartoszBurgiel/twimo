@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { Toolbar } from "react-native-material-ui";
 
 function Greeting(props) {
   return (
@@ -11,8 +12,24 @@ function Greeting(props) {
 
 export default function LotsOfGreetings() {
   return (
-    <View style={{ alignItems: "center", top: 50 }}>
-      <Greeting name="Bartosz" />
+    <View>
+      <Toolbar
+        leftElement="menu"
+        centerElement="Searchable"
+        searchable={{
+          autoFocus: true,
+          placeholder: "Search"
+        }}
+        rightElement={{
+          menu: {
+            icon: "more-vert",
+            labels: ["item 1", "item 2"]
+          }
+        }}
+        onRightElementPress={label => {
+          console.log(label);
+        }}
+      />
     </View>
   );
 }
