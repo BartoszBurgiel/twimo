@@ -5,17 +5,30 @@ const setupDB = `CREATE TABLE IF NOT EXISTS 'users' (
 	'password'  		VARCHAR(16),
 	'email'             VARCHAR(16),
 	'comments'		    VARCHAR(16), 
-	'favorite-location' VARCHAR(16), 
-	'ratings'           VARCHAR(16)
-	) ;
+	'favlocation'       VARCHAR(16), 
+	'ratings'           VARCHAR(16), 
+	'id'				VARCHAR(16)
+) ;
+
+CREATE TABLE IF NOT EXISTS 'ratings' (
+	'userID' 		VARCHAR(16), 
+	'locationID' 	VARCHAR(16), 
+	'value'			NUMERIC,
+    'id'            VARCHAR(16)
+) ;
 
 CREATE TABLE IF NOT EXISTS 'comments' (
 	'title' 	   	VARCHAR(16),
 	'content'  		TEXT,
-	'user'          VARCHAR(16),
-	'location'		VARCHAR(16), 
+	'userID'        VARCHAR(16),
+	'locationID'	VARCHAR(16), 
 	'id'            VARCHAR(16)
-	) ;
+) ;
+
+CREATE TABLE IF NOT EXISTS 'location_fav_users' (
+	'userID' 		VARCHAR(16), 
+	'locationID' 	VARCHAR(16)
+) ;
 
 CREATE TABLE IF NOT EXISTS 'locations' (
 	'name' 	    		VARCHAR(16),
@@ -24,6 +37,11 @@ CREATE TABLE IF NOT EXISTS 'locations' (
 	'desc'              TEXT,
 	'comments'		    VARCHAR(16), 
 	'users'             VARCHAR(16), 
-	'ratings'           VARCHAR(16)
-	) ;
+	'ratings'           VARCHAR(16), 
+	'id'				VARCHAR(16)
+) ;
+
+
+
+
 `
