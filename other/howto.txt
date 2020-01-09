@@ -1,0 +1,8 @@
+init postgresql server
+
+https://github.com/malnvenshorn/OctoPrint-FilamentManager/wiki/Setup-PostgreSQL-on-Arch-Linux
+
+start postgresql server 
+
+sudo systemctl start postgresql.service
+sudo systemctl enable postgresql.service
