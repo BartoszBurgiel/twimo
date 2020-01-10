@@ -2,7 +2,6 @@ package server
 
 import (
 	"fmt"
-	"kanbanBoard/engine"
 	"net/http"
 	"strings"
 	"twimo/backend/repository"
@@ -11,17 +10,14 @@ import (
 // Server struct
 type Server struct {
 	router *Router
-	engine *engine.Engine
 	repo   repository.Repository
 }
 
 // NewServer returns new server
 func NewServer(r repository.Repository) (*Server, error) {
-	newEngine := &engine.Engine{}
 
 	s := &Server{
-		engine: newEngine,
-		repo:   r,
+		repo: r,
 	}
 
 	s.router = NewRouter()

@@ -30,3 +30,12 @@ foo := 0 <br>
 ...<br>
 foo = 49<br>
 </code>
+
+# Operations 
+
+### foreach loop 
+<code>
+for [index], [variable] := range [array] { <br>
+    ... <br>
+}
+</code>
