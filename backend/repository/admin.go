@@ -67,6 +67,9 @@ func (r Repo) GetAllUsers() (users []*core.User, err error) {
 			return users, err
 		}
 
+		// Decode user
+		user.Decode()
+
 		// Add tempuser to users
 		users = append(users, &user)
 	}

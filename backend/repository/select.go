@@ -34,6 +34,9 @@ func (r Repo) GetUser(userID string) (user *core.User, err error) {
 		return user, fmt.Errorf("No users found with id %s", userID)
 	}
 
+	// Decode user
+	user.Decode()
+
 	return user, err
 }
 

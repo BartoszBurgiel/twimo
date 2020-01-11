@@ -80,6 +80,11 @@ func GenerateEncoded() bytes.Buffer {
 	// Write generated querries for adding ratings
 	allQuerries.WriteString(ratingQueries)
 
+	// Decode users so that comment's title isn't hashed
+	for _, user := range users {
+		user.Decode()
+	}
+
 	// Generate comment querries
 	commentQuerries := generateComments(users, locations)
 

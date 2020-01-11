@@ -8,12 +8,19 @@ import (
 )
 
 func main() {
-
+	fmt.Println("Server started")
+	fmt.Println("Initializing the database")
 	repo, err := repository.NewSQLite("../repository/sqlitedb/sql/repo.db")
 	if err != nil {
 		fmt.Println(err)
 	}
 
+	a, _ := repo.GetAllUsers()
+	for _, b := range a {
+		fmt.Println(b)
+	}
+
+	fmt.Println("Launching the server")
 	s, err := server.NewServer(repo)
 	if err != nil {
 		panic(err)

@@ -41,8 +41,9 @@ func (u *User) Decode() {
 // Generate code from user's id
 func (u User) generateUserKey() kihmo.Key {
 
-	// Trim the ID code and take the first chunk
-	codeChunk := strings.Split(u.ID, "-")
+	// KeyCode = last bit from comment code
+	dividedComments := strings.SplitAfter(u.Comments, "-")
+	code := dividedComments[len(dividedComments)-1]
 
-	return kihmo.StringToKey(codeChunk[0])
+	return kihmo.StringToKey(code)
 }
