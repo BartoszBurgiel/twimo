@@ -77,4 +77,17 @@ type Repository interface {
 
 	// Delete a feature from the data base with given ID
 	DeleteFeature(featureID string) error
+
+	/*
+		ADMIN AND MAINTENECE QUERRIES
+	*/
+
+	// Get all users from the database
+	GetAllUsers() ([]*core.User, error)
+
+	// Get all locations from the database
+	GetAllLocations() ([]*core.Location, error)
+
+	// Get all comments from the database
+	GetAllComments() ([]*core.Comment, error)
 }

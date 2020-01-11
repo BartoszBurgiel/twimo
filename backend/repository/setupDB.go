@@ -1,4 +1,4 @@
-package sqlitedb
+package repository
 
 const setupDB = `-- Table storing all user's information
 -- name, password and email will be encoded with kihmo

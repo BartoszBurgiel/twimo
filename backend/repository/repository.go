@@ -1,4 +1,4 @@
-package sqlitedb
+package repository
 
 import (
 	"database/sql"
@@ -16,17 +16,17 @@ type Repo struct {
 	path string
 }
 
-// New creates a new repository
-func New(path string) (*Repo, error) {
+// NewSQLite creates a new repository
+func NewSQLite(path string) (*Repo, error) {
 	r := &Repo{
 		path: path,
 	}
 
-	return r, r.init()
+	return r, r.initSQLite()
 }
 
 // initialize a repository
-func (r *Repo) init() error {
+func (r *Repo) initSQLite() error {
 
 	// Check if database folder exists
 	// If not - mkdir

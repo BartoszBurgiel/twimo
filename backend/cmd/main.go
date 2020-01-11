@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"twimo/backend/repository/sqlitedb"
+	"twimo/backend/repository"
 	"twimo/backend/server"
 )
 
 func main() {
 
-	repo, err := sqlitedb.New("../repository/sqlitedb/sql/repo.db")
+	repo, err := repository.NewSQLite("../repository/sqlitedb/sql/repo.db")
 	if err != nil {
 		fmt.Println(err)
 	}

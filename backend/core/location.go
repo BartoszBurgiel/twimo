@@ -13,17 +13,11 @@ type Location struct {
 	// Description
 	Desc string
 
-	Comments struct {
-		// Key to rows in Comments
-		Key      string
-		Comments []*Comment
-	}
+	Comments string
 
-	Ratings struct {
-		// Key to rows in Ratings
-		Key     string
-		Ratings []*Rating
-	}
+	Users string
+
+	Ratings string
 
 	ID string
 }
