@@ -117,6 +117,110 @@ func generateUsers() (string, []user) {
 	return querries, users
 }
 
+// Generate user querries
+func generateEncodedUsers() (string, []user) {
+
+	// Array storing all names
+	names := []string{
+		"Louis",
+		"Bartosz",
+		"Jannik",
+		"Kai",
+		"Tim",
+		"Bettina",
+		"Aleksandra",
+		"Jens",
+		"Klaus",
+		"Michael",
+		"Rudolph",
+		"Stefan",
+		"Lukas",
+		"Luca",
+		"Adalbert",
+	}
+
+	// Array stroing all surnames
+	surnames := []string{
+		"Beul",
+		"Burgiel",
+		"Weyer",
+		"Huntington",
+		"Dell",
+		"Jauch",
+		"Schmidt",
+		"Schneider",
+		"Müller",
+		"Spohr",
+		"Langscheid",
+		"Stenz",
+		"Sauer",
+	}
+
+	// Array storing all user structs
+	users := []user{}
+
+	/*
+	 Generate users
+	 Iterate over both arrays and generate all possible users
+	*/
+
+	// Iterate over names
+	for i := 0; i < len(names); i++ {
+
+		// Iterate over surnames
+		for j := 0; j < len(surnames); j++ {
+
+			// Assemble field variables
+			fullName := names[i] + " " + surnames[j]
+
+			// first letter of name+.+surname+@mail.com
+			email := names[i] + "." + surnames[j] + "@main.com"
+			password := "PASSWORD"
+
+			// Random keys by using google's encrytpion tool
+			comments := uuid.New().String()
+			favlocation := uuid.New().String()
+			ratings := uuid.New().String()
+			id := uuid.New().String()
+
+			// Build temporary user struct
+			tempUser := user{
+				name:        fullName,
+				email:       email,
+				password:    password,
+				comments:    comments,
+				favlocation: favlocation,
+				ratings:     ratings,
+				id:          id,
+			}
+
+			// Encode tempUser
+			tempUser.Encode()
+
+			// Add temp user to the array of users
+			users = append(users, tempUser)
+		}
+	}
+
+	/*
+	 Write querries
+	*/
+
+	querries := ""
+
+	// Iterate over users
+	for _, user := range users {
+
+		// Setup querry with 'printf' - like casting
+		querries += fmt.Sprintf(addNewUser, user.name, user.password, user.email, user.comments, user.favlocation, user.ratings, user.id)
+
+		// Add line break
+		querries += "\n"
+	}
+
+	return querries, users
+}
+
 // generate location querries
 func generateLocations() (string, []location) {
 

@@ -21,3 +21,8 @@ type Location struct {
 
 	ID string
 }
+
+// GenerateID based on the
+func (l Location) GenerateID() string {
+	return ""
+}

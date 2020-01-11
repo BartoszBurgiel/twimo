@@ -1,5 +1,10 @@
 package dummygenerator
 
+import (
+	"kihmo"
+	"strings"
+)
+
 // Stores all data of the user needed to compose the querries
 type user struct {
 	name        string
@@ -21,4 +26,40 @@ type location struct {
 	users    string
 	ratings  string
 	id       string
+}
+
+/*
+BARTOSZ'S PART
+*/
+
+// Encode user's personal information with kihmo
+func (u *user) Encode() {
+
+	// KeyCode = last bit from comment code
+	dividedComments := strings.SplitAfter(u.comments, "-")
+	code := dividedComments[len(dividedComments)-1]
+
+	// Generate key
+	key := kihmo.StringToKey(code)
+
+	// Encode
+	u.name = key.Lock([]byte(u.name))
+	u.password = key.Lock([]byte(u.password))
+	u.email = key.Lock([]byte(u.email))
+}
+
+// Decode user's personal information with kihmo
+func (u *user) Decode() {
+
+	// KeyCode = last bit from comment code
+	dividedComments := strings.SplitAfter(u.comments, "-")
+	code := dividedComments[len(dividedComments)-1]
+
+	// Generate key
+	key := kihmo.StringToKey(code)
+
+	// Encode
+	u.name = string(key.Unlock(u.name))
+	u.password = string(key.Unlock(u.password))
+	u.email = string(key.Unlock(u.email))
 }

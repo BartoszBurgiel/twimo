@@ -18,4 +18,16 @@ func main() {
 		// Print error
 		fmt.Println(err)
 	}
+
+	// Call the gererator method here
+	querries = dummygenerator.GenerateEncoded()
+
+	// Write querries off to a file
+	err = ioutil.WriteFile("encodedSetup.sql", querries.Bytes(), 6440)
+
+	// Check if no errors occured
+	if err != nil {
+		// Print error
+		fmt.Println(err)
+	}
 }

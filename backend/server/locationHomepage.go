@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 )
@@ -24,9 +23,23 @@ func (s *Server) initLocationHomepageRouter() {
 // Format locations name so that it can be used as a link
 func processLocationsNameToRoute(name string) string {
 
-	return "/" + strings.ReplaceAll(name, " ", "")
+	return "/" + strings.ReplaceAll(name, " ", "_")
 }
 
 func (s *Server) handleLocationHomepage(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL, "helllo")
+	/*
+		Determine which location
+	*/
+
+	// Get the name from the url
+	locationName := r.URL.String()
+
+	// Add whitespace
+	locationName = strings.ReplaceAll(locationName, "_", " ")
+
+	// Delete the '/'
+	locationName = locationName[1:]
+
+	// Derive ID from the
+
 }

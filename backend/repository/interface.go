@@ -21,6 +21,9 @@ type Repository interface {
 	// Get a location with given ID
 	GetLocation(locationID string) (*core.Location, error)
 
+	// Get a location with given name
+	GetLocationFromName(locationName string) (*core.Location, error)
+
 	// Get all comments of a location with given ID
 	GetCommentsOfLocation(locationID string) ([]*core.Comment, error)
 

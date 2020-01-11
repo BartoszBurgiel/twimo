@@ -106,6 +106,36 @@ func (r Repo) GetLocation(locationID string) (location *core.Location, err error
 	return location, err
 }
 
+// GetLocationFromName return all rows from a the database of a location with a given name
+func (r Repo) GetLocationFromName(locationName string) (location *core.Location, err error) {
+	location = &core.Location{}
+
+	// Get  rows
+	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings FROM locations WHERE name = ?  ; `, locationName)
+	if err != nil {
+		fmt.Println(err)
+		return location, err
+	}
+
+	// Schedule closing of the db
+	defer rows.Close()
+
+	// Iterate over rows
+	for rows.Next() {
+		rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Comments, &location.Users, &location.Ratings)
+	}
+
+	// Check if title is empty -> comment not found
+	if location.Name == "" {
+		return location, fmt.Errorf("Location with id %s not found in the database", locationName)
+	}
+
+	// // Set location's id
+	// location.ID = locationID
+
+	return location, err
+}
+
 // GetCommentsOfLocation returns a slice of pointers to comment structs from one location
 func (r Repo) GetCommentsOfLocation(locationID string) (comments []*core.Comment, err error) {
 	return comments, err
