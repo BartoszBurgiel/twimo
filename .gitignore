@@ -2,3 +2,4 @@
 backend/repository/sqlitedb/sql/repo.db
 other/dummyGenerator/cmd/setup.sql
 other/dummyGenerator/cmd/encodedSetup.sql
+backend/repository/sqlitedb/sql/repo.db-journal

@@ -81,8 +81,8 @@ func GenerateEncoded() bytes.Buffer {
 	allQuerries.WriteString(ratingQueries)
 
 	// Decode users so that comment's title isn't hashed
-	for _, user := range users {
-		user.Decode()
+	for i := 0; i < len(users); i++ {
+		users[i].Decode()
 	}
 
 	// Generate comment querries

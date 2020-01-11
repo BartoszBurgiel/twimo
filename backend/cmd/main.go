@@ -14,12 +14,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	a, _ := repo.GetAllUsers()
-	for _, b := range a {
-		fmt.Println(b)
-	}
-
+	
 	fmt.Println("Launching the server")
 	s, err := server.NewServer(repo)
 	if err != nil {

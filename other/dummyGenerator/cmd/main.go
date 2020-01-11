@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	// Call the gererator method here
+
+	// Generate normal querries
 	querries := dummygenerator.Generate()
 
 	// Write querries off to a file
@@ -19,7 +20,11 @@ func main() {
 		fmt.Println(err)
 	}
 
-	// Call the gererator method here
+	/*
+		BARTOSZ'S PART
+	*/
+
+	// Generate encoded querries
 	querries = dummygenerator.GenerateEncoded()
 
 	// Write querries off to a file
