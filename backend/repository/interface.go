@@ -90,4 +90,7 @@ type Repository interface {
 
 	// Get all comments from the database
 	GetAllComments() ([]*core.Comment, error)
+
+	// Get all names of the locations
+	GetLocationNames() ([]string, error)
 }

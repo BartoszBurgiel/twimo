@@ -105,3 +105,35 @@ func (r Repo) GetAllComments() (comments []*core.Comment, err error) {
 
 	return comments, err
 }
+
+// GetLocationNames from the database and return these as a string
+// slice
+func (r Repo) GetLocationNames() (names []string, err error) {
+	// Run querry
+	rows, err := r.db.Query(`SELECT name FROM locations ;`)
+	if err != nil {
+		fmt.Println(err)
+		return names, err
+	}
+
+	// Schedule closing of the rows
+	defer rows.Close()
+
+	var name string
+
+	// Iterate over rows
+	for rows.Next() {
+
+		// Fill name
+		err := rows.Scan(&name)
+		if err != nil {
+			fmt.Println(err)
+			return names, err
+		}
+
+		// Append name to names slice
+		names = append(names, name)
+	}
+
+	return names, err
+}

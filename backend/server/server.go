@@ -31,6 +31,9 @@ func (s *Server) init() error {
 	// Add route for main page
 	s.router.Route("/")["GET"] = http.HandlerFunc(s.handleIndexGET)
 
+	// Init location home pages
+	s.initLocationHomepageRouter()
+
 	// Getter pages
 	s.router.Route("/users")["GET"] = http.HandlerFunc(s.handleUsersGET)
 	s.router.Route("/users/ws")["GET"] = http.HandlerFunc(s.handleUserWS)
