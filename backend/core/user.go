@@ -22,9 +22,9 @@ func (u *User) Encode() {
 	key := u.generateUserKey()
 
 	// Encode name password and email
-	u.Name = key.Lock([]byte(u.Name))
-	u.Password = key.Lock([]byte(u.Password))
-	u.Email = key.Lock([]byte(u.Email))
+	u.Name, _ = key.Lock([]byte(u.Name), 60)
+	u.Password, _ = key.Lock([]byte(u.Password), 60)
+	u.Email, _ = key.Lock([]byte(u.Email), 60)
 }
 
 // Decode user's personal data with kihmo
@@ -33,9 +33,13 @@ func (u *User) Decode() {
 	key := u.generateUserKey()
 
 	// Encode name password and email
-	u.Name = string(key.Unlock(u.Name))
-	u.Password = string(key.Unlock(u.Password))
-	u.Email = string(key.Unlock(u.Email))
+	name, _ := key.Unlock(u.Name, 60)
+	password, _ := key.Unlock(u.Password, 60)
+	email, _ := key.Unlock(u.Email, 60)
+
+	u.Name = string(name)
+	u.Password = string(password)
+	u.Email = string(email)
 }
 
 // Generate code from user's id
@@ -44,6 +48,6 @@ func (u User) generateUserKey() kihmo.Key {
 	// KeyCode = last bit from comment code
 	dividedComments := strings.SplitAfter(u.Comments, "-")
 	code := dividedComments[len(dividedComments)-1]
-
-	return kihmo.StringToKey(code)
+	key, _ := kihmo.StringToKey(code)
+	return key
 }

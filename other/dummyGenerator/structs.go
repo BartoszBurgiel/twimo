@@ -40,12 +40,12 @@ func (u *user) Encode() {
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
-	key := kihmo.StringToKey(code)
+	key, _ := kihmo.StringToKey(code)
 
 	// Encode
-	u.name = key.Lock([]byte(u.name))
-	u.password = key.Lock([]byte(u.password))
-	u.email = key.Lock([]byte(u.email))
+	u.name, _ = key.Lock([]byte(u.name), 60)
+	u.password, _ = key.Lock([]byte(u.password), 60)
+	u.email, _ = key.Lock([]byte(u.email), 60)
 }
 
 // Decode user's personal information with kihmo
@@ -56,10 +56,14 @@ func (u *user) Decode() {
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
-	key := kihmo.StringToKey(code)
+	key, _ := kihmo.StringToKey(code)
 
 	// Encode
-	u.name = string(key.Unlock(u.name))
-	u.password = string(key.Unlock(u.password))
-	u.email = string(key.Unlock(u.email))
+	name, _ := key.Unlock(u.name, 60)
+	password, _ := key.Unlock(u.password, 60)
+	email, _ := key.Unlock(u.email, 60)
+
+	u.name = string(name)
+	u.password = string(password)
+	u.email = string(email)
 }
