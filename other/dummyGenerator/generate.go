@@ -2,6 +2,7 @@ package dummygenerator
 
 import (
 	"fmt"
+	"kihmo"
 	"math/rand"
 	"time"
 
@@ -75,6 +76,13 @@ func generateUsers() (string, []user) {
 			// first letter of name+.+surname+@mail.com
 			email := names[i] + "." + surnames[j] + "@main.com"
 			password := "PASSWORD"
+
+			/* BARTOSZ'S PART */
+			// hash password
+			password, err := kihmo.Hash(password, 60)
+			if err != nil {
+				panic(err)
+			}
 
 			// Random keys by using google's encrytpion tool
 			comments := uuid.New().String()
@@ -176,6 +184,13 @@ func generateEncodedUsers() (string, []user) {
 			// first letter of name+.+surname+@mail.com
 			email := names[i] + "." + surnames[j] + "@main.com"
 			password := "PASSWORD"
+
+			/* BARTOSZ'S PART */
+			// hash password
+			password, err := kihmo.Hash(password, 60)
+			if err != nil {
+				panic(err)
+			}
 
 			// Random keys by using google's encrytpion tool
 			comments := uuid.New().String()
