@@ -75,7 +75,7 @@ func generateUsers() (string, []user) {
 
 			// first letter of name+.+surname+@mail.com
 			email := names[i] + "." + surnames[j] + "@main.com"
-			password := "PASSWORD"
+			password := names[i] + surnames[j] + "69"
 
 			/* BARTOSZ'S PART */
 			// hash password
@@ -183,7 +183,7 @@ func generateEncodedUsers() (string, []user) {
 
 			// first letter of name+.+surname+@mail.com
 			email := names[i] + "." + surnames[j] + "@main.com"
-			password := "PASSWORD"
+			password := names[i] + surnames[j] + "69"
 
 			/* BARTOSZ'S PART */
 			// hash password

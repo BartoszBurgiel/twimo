@@ -44,7 +44,6 @@ func (u *user) Encode() {
 
 	// Encode
 	u.name, _ = key.Lock([]byte(u.name), 60)
-	u.password, _ = key.Lock([]byte(u.password), 60)
 	u.email, _ = key.Lock([]byte(u.email), 60)
 }
 
@@ -60,10 +59,8 @@ func (u *user) Decode() {
 
 	// Encode
 	name, _ := key.Unlock(u.name, 60)
-	password, _ := key.Unlock(u.password, 60)
 	email, _ := key.Unlock(u.email, 60)
 
 	u.name = string(name)
-	u.password = string(password)
 	u.email = string(email)
 }
