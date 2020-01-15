@@ -22,10 +22,14 @@ func (s *Server) initLocationHomepageRouter() {
 
 // Format locations name so that it can be used as a link
 func processLocationsNameToRoute(name string) string {
-
+	// Handle all umlauts
+	name = strings.ReplaceAll(name, "ä", "ae")
+	name = strings.ReplaceAll(name, "ü", "ue")
+	name = strings.ReplaceAll(name, "ö", "oe")
 	return "/" + strings.ReplaceAll(name, " ", "_")
 }
 
+// handle the GET request from the location homepage
 func (s *Server) handleLocationHomepage(w http.ResponseWriter, r *http.Request) {
 	/*
 		Determine which location

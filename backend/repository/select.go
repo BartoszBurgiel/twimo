@@ -109,6 +109,40 @@ func (r Repo) GetLocation(locationID string) (location *core.Location, err error
 	return location, err
 }
 
+// GetLocationsAsLink returns all locations' data so that they be displayed as an <a> tag: name and link
+func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
+
+	// Get  rows
+	rows, err := r.db.Query(`SELECT name FROM locations ; `)
+	if err != nil {
+		fmt.Println(err)
+		return locations, err
+	}
+
+	// Schedule closing of the db
+	defer rows.Close()
+
+	// Iterate over rows
+	for rows.Next() {
+		tempLocationRoute := core.LocationRoute{}
+		name := ""
+
+		rows.Scan(&name)
+
+		// Check if name is empty -> comment not found
+		if name == "" {
+			return locations, fmt.Errorf("No locations found in the database")
+		}
+
+		// Create route and append to the locations slice
+		tempLocationRoute.New(name)
+
+		locations = append(locations, tempLocationRoute)
+	}
+
+	return locations, err
+}
+
 // GetLocationFromName return all rows from a the database of a location with a given name
 func (r Repo) GetLocationFromName(locationName string) (location *core.Location, err error) {
 	location = &core.Location{}

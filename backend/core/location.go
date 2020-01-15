@@ -1,5 +1,7 @@
 package core
 
+import "strings"
+
 // Location struct represents a location
 type Location struct {
 	Name string
@@ -10,8 +12,9 @@ type Location struct {
 		Y float64
 	}
 
-	// Description
 	Desc string
+
+	HomePage string
 
 	Comments string
 
@@ -22,7 +25,22 @@ type Location struct {
 	ID string
 }
 
-// GenerateID based on the
-func (l Location) GenerateID() string {
-	return ""
+// LocationRoute contains all information about a location so that it can be displayed
+// as a <a> link
+type LocationRoute struct {
+	// Original name
+	LocationName string
+	// Link of the route on server
+	LocationLink string
+}
+
+// New locationRoute created from the name
+func (l *LocationRoute) New(locationName string) {
+	l.LocationName = locationName
+	l.LocationLink = "/" + strings.ReplaceAll(locationName, " ", "_")
+
+	// Handle all umlauts
+	l.LocationLink = strings.ReplaceAll(l.LocationLink, "ä", "ae")
+	l.LocationLink = strings.ReplaceAll(l.LocationLink, "ü", "ue")
+	l.LocationLink = strings.ReplaceAll(l.LocationLink, "ö", "oe")
 }
