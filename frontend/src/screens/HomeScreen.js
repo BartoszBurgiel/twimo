@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Moin!</Text>
+      <Text style={styles.textStyle}>Hello iOS!</Text>
     </View>
   );
 };
