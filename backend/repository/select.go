@@ -42,12 +42,12 @@ func (r Repo) GetUser(userID string) (user core.User, err error) {
 }
 
 // GetUsersComments from the database
-func (r Repo) GetUsersComments(userID string) (comments []*core.Comment, err error) {
+func (r Repo) GetUsersComments(userID string) (comments []core.Comment, err error) {
 	return comments, err
 }
 
 // GetUsersRatings from the database
-func (r Repo) GetUsersRatings(userID string) (ratings []*core.Rating, err error) {
+func (r Repo) GetUsersRatings(userID string) (ratings []core.Rating, err error) {
 	return ratings, err
 }
 
