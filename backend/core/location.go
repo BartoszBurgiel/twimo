@@ -34,13 +34,16 @@ type LocationRoute struct {
 	LocationLink string
 }
 
-// New locationRoute created from the name
-func (l *LocationRoute) New(locationName string) {
-	l.LocationName = locationName
-	l.LocationLink = "/" + strings.ReplaceAll(locationName, " ", "_")
+// New location route with formatted link
+func (l *LocationRoute) New(name string) {
+	l.LocationName = name
 
 	// Handle all umlauts
-	l.LocationLink = strings.ReplaceAll(l.LocationLink, "ä", "ae")
-	l.LocationLink = strings.ReplaceAll(l.LocationLink, "ü", "ue")
-	l.LocationLink = strings.ReplaceAll(l.LocationLink, "ö", "oe")
+	name = strings.ReplaceAll(name, "ä", "+")
+	name = strings.ReplaceAll(name, "ü", "*")
+	name = strings.ReplaceAll(name, "ö", "$")
+	name = "/" + strings.ReplaceAll(name, " ", "_")
+
+	l.LocationLink = name
+
 }

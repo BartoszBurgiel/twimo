@@ -140,3 +140,34 @@ func (r Repo) GetLocationNames() (names []string, err error) {
 
 	return names, err
 }
+
+// GetLocationIDs returns the IDs of all locations in the database
+func (r Repo) GetLocationIDs() (IDs []string, err error) {
+	// Run querry
+	rows, err := r.db.Query(`SELECT id FROM locations ;`)
+	if err != nil {
+		fmt.Println(err)
+		return IDs, err
+	}
+
+	// Schedule closing of the rows
+	defer rows.Close()
+
+	var ID string
+
+	// Iterate over rows
+	for rows.Next() {
+
+		// Fill name
+		err := rows.Scan(&ID)
+		if err != nil {
+			fmt.Println(err)
+			return IDs, err
+		}
+
+		// Append name to IDs slice
+		IDs = append(IDs, "/"+ID)
+	}
+
+	return IDs, err
+}

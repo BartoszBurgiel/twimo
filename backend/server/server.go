@@ -42,6 +42,7 @@ func (s *Server) init() error {
 	s.router.Route("/comments/ws")["GET"] = http.HandlerFunc(s.handleCommentsWS)
 
 	s.router.Route("/locationList")["GET"] = http.HandlerFunc(s.handleLocationListGET)
+
 	return nil
 }
 

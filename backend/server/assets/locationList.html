@@ -2,7 +2,7 @@
     <h1>All locations</h1>
         <ul>
             {{range .}}
-                <li><a href="locahost:8080{{.LocationLink}}">{{.LocationName}}</a></li>
+                <li><a href="{{.LocationLink}}" target="_blank">{{.LocationName}}</a></li>
             {{end}}
         </ul>
 {{end}}

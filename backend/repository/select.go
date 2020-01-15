@@ -125,7 +125,6 @@ func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
 
 	// Iterate over rows
 	for rows.Next() {
-		tempLocationRoute := core.LocationRoute{}
 		name := ""
 
 		rows.Scan(&name)
@@ -135,9 +134,11 @@ func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
 			return locations, fmt.Errorf("No locations found in the database")
 		}
 
-		// Create route and append to the locations slice
+		// assemble temporary location
+		tempLocationRoute := core.LocationRoute{}
 		tempLocationRoute.New(name)
 
+		// push to the locations slice
 		locations = append(locations, tempLocationRoute)
 	}
 

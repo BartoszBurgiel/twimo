@@ -99,4 +99,7 @@ type Repository interface {
 
 	// Get all names of the locations
 	GetLocationNames() ([]string, error)
+
+	// Get all IDs of the locations
+	GetLocationIDs() ([]string, error)
 }
