@@ -7,7 +7,7 @@ import "twimo/backend/core"
 type Repository interface {
 
 	// Get a user with given ID
-	GetUser(userID string) (*core.User, error)
+	GetUser(userID string) (core.User, error)
 
 	// Get comments given user has written
 	GetUsersComments(userID string) ([]*core.Comment, error)

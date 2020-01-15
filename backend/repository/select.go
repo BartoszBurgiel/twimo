@@ -10,8 +10,9 @@ import (
 )
 
 // GetUser returns a pointer to a user struct created from Db
-func (r Repo) GetUser(userID string) (user *core.User, err error) {
-	// Set user's id
+func (r Repo) GetUser(userID string) (user core.User, err error) {
+
+	// Set userID
 	user.ID = userID
 
 	// Get  rows
