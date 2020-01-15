@@ -23,6 +23,7 @@ type location struct {
 	coordY   int
 	desc     string
 	comments string
+	website  string
 	users    string
 	ratings  string
 	id       string
