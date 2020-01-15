@@ -3,11 +3,14 @@ import { View, Text, Button, StyleSheet } from "react-native";
 
 import color from "../../utils/colorPallet";
 
-const HomeScreen = () => {
+const HomeScreen = props => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Hello iOS!</Text>
-      <Button title="trolololol"></Button>
+      <Text style={styles.textStyle}>Hello iOS...</Text>
+      <Button
+        title="Click me hard!"
+        onPress={() => props.navigation.navigate("Details")}
+      ></Button>
     </View>
   );
 };
@@ -15,14 +18,14 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.brand.light,
+    backgroundColor: color.white,
     alignItems: "center",
     justifyContent: "center"
   },
   textStyle: {
     fontSize: 50,
     fontWeight: "bold",
-    color: color.brand.dark
+    color: color.brand.normal
   }
 });
 
