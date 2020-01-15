@@ -1,10 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
+
+import color from "../../utils/colorPallet";
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.textStyle}>Hello iOS!</Text>
+      <Button title="trolololol"></Button>
     </View>
   );
 };
@@ -12,12 +15,14 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: color.brand.light,
     alignItems: "center",
     justifyContent: "center"
   },
   textStyle: {
-    fontSize: 50
+    fontSize: 50,
+    fontWeight: "bold",
+    color: color.brand.dark
   }
 });
 
