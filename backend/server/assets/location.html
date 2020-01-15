@@ -4,4 +4,11 @@
 <a href="{{.HomePage}}">HomePage</a>
 <br>
 <p>{{.Desc}}</p>
+
+{{range .Comments.Comments}}
+    <h2>{{.Title}}</h2>
+    <h6>{{.User.User.Name}}</h6>
+    <p>{{.Content}}</p>
+{{end}}
+
 {{end}}

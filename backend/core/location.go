@@ -16,7 +16,11 @@ type Location struct {
 
 	HomePage string
 
-	Comments string
+	// Contains key to the comments in the database and comments objects
+	Comments struct {
+		Key      string
+		Comments []Comment
+	}
 
 	Users string
 

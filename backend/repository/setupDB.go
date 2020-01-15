@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS locations (
 	coordY            NUMERIC,
 	descr              TEXT,
 	webpage				VARCHAR(16),
-	comments		    VARCHAR(16), 
 	users             VARCHAR(16), 
 	ratings           VARCHAR(16), 
 	id				VARCHAR(16)
 ) ;
+
 
 
 `

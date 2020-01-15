@@ -4,7 +4,7 @@ package dummygenerator
 const addNewUser = `INSERT INTO users VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s') ;`
 
 // SQL querry to add one new location
-const addNewLocation = `INSERT INTO locations VALUES('%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s') ;`
+const addNewLocation = `INSERT INTO locations VALUES('%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s') ;`
 
 // SQL querry to add one new rating
 const addNewRating = `INSERT INTO ratings VALUES('%s', '%s', '%d', '%s') ;`

@@ -29,7 +29,7 @@ func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 		location := core.Location{}
 
 		// Construct tempLocation
-		err := rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Comments, &location.Users, &location.Ratings, &location.ID)
+		err := rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Comments.Key, &location.Users, &location.Ratings, &location.ID)
 		if err != nil {
 			fmt.Println(err)
 			return locations, err
@@ -96,7 +96,7 @@ func (r Repo) GetAllComments() (comments []core.Comment, err error) {
 		comment := core.Comment{}
 
 		// Construct tempuser
-		err := rows.Scan(&comment.Title, &comment.Content, &comment.User, &comment.Location, &comment.ID)
+		err := rows.Scan(&comment.Title, &comment.Content, &comment.User.Key, &comment.Location, &comment.ID)
 		if err != nil {
 			fmt.Println(err)
 			return comments, err

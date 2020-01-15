@@ -68,7 +68,7 @@ func (r Repo) GetComment(commentID string) (comment core.Comment, err error) {
 
 	// Iterate over rows
 	for rows.Next() {
-		rows.Scan(&comment.Title, &comment.Content, &comment.User, &comment.Location)
+		rows.Scan(&comment.Title, &comment.Content, &comment.User.Key, &comment.Location)
 	}
 
 	// Check if title is empty -> comment not found
@@ -85,7 +85,7 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 	location.ID = locationID
 
 	// Get  rows
-	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings FROM locations WHERE id = ?  ; `, locationID)
+	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, users, ratings FROM locations WHERE id = ?  ; `, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return location, err
@@ -96,7 +96,7 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 
 	// Iterate over rows
 	for rows.Next() {
-		rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Comments, &location.Users, &location.Ratings)
+		rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Users, &location.Ratings)
 	}
 
 	// Check if title is empty -> comment not found
@@ -149,7 +149,7 @@ func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
 func (r Repo) GetLocationFromName(locationName string) (location core.Location, err error) {
 
 	// Get  rows
-	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings FROM locations WHERE name = ?  ; `, locationName)
+	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, users, ratings, id FROM locations WHERE name = ?  ; `, locationName)
 	if err != nil {
 		fmt.Println(err)
 		return location, err
@@ -160,7 +160,7 @@ func (r Repo) GetLocationFromName(locationName string) (location core.Location, 
 
 	// Iterate over rows
 	for rows.Next() {
-		rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Comments, &location.Users, &location.Ratings)
+		rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Users, &location.Ratings, &location.ID)
 	}
 
 	// Check if title is empty -> comment not found
@@ -176,6 +176,32 @@ func (r Repo) GetLocationFromName(locationName string) (location core.Location, 
 
 // GetCommentsOfLocation returns a slice of pointers to comment structs from one location
 func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment, err error) {
+	// Get  rows
+	rows, err := r.db.Query(`SELECT title, content, userID, locationID, id FROM comments WHERE locationID = ?  ; `, locationID)
+	if err != nil {
+		fmt.Println(err)
+		return comments, err
+	}
+
+	// Schedule closing of the db
+	defer rows.Close()
+
+	// Temporary comment that will be filled by scan
+	var comment core.Comment
+
+	// Iterate over rows
+	for rows.Next() {
+		rows.Scan(&comment.Title, &comment.Content, &comment.User.Key, &comment.Location, &comment.ID)
+
+		// Check if title is empty -> comment not found
+		if comment.Title == "" {
+			return comments, fmt.Errorf("No comments found ")
+		}
+
+		// Append to comments
+		comments = append(comments, comment)
+	}
+
 	return comments, err
 }
 
