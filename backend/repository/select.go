@@ -52,7 +52,7 @@ func (r Repo) GetUsersRatings(userID string) (ratings []*core.Rating, err error)
 }
 
 // GetComment returns a pointer to a commment struct creater from Db
-func (r Repo) GetComment(commentID string) (comment *core.Comment, err error) {
+func (r Repo) GetComment(commentID string) (comment core.Comment, err error) {
 	// Set comment;s id
 	comment.ID = commentID
 
@@ -73,16 +73,16 @@ func (r Repo) GetComment(commentID string) (comment *core.Comment, err error) {
 
 	// Check if title is empty -> comment not found
 	if comment.Title == "" {
-		return nil, fmt.Errorf("Comment with id %s not found in the database", commentID)
+		return comment, fmt.Errorf("Comment with id %s not found in the database", commentID)
 	}
 
 	return comment, err
 }
 
 // GetLocation returns a pointer to a location struct creater from Db
-func (r Repo) GetLocation(locationID string) (location *core.Location, err error) {
+func (r Repo) GetLocation(locationID string) (location core.Location, err error) {
 
-	location = &core.Location{}
+	location.ID = locationID
 
 	// Get  rows
 	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings FROM locations WHERE id = ?  ; `, locationID)
@@ -145,8 +145,7 @@ func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
 }
 
 // GetLocationFromName return all rows from a the database of a location with a given name
-func (r Repo) GetLocationFromName(locationName string) (location *core.Location, err error) {
-	location = &core.Location{}
+func (r Repo) GetLocationFromName(locationName string) (location core.Location, err error) {
 
 	// Get  rows
 	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings FROM locations WHERE name = ?  ; `, locationName)
@@ -175,18 +174,18 @@ func (r Repo) GetLocationFromName(locationName string) (location *core.Location,
 }
 
 // GetCommentsOfLocation returns a slice of pointers to comment structs from one location
-func (r Repo) GetCommentsOfLocation(locationID string) (comments []*core.Comment, err error) {
+func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment, err error) {
 	return comments, err
 }
 
 // GetLocationsFavUsers returns a slice of pointers to user structs whose given location is the favorite
-func (r Repo) GetLocationsFavUsers(locationID string) (users []*core.User, err error) {
+func (r Repo) GetLocationsFavUsers(locationID string) (users []core.User, err error) {
 
 	return users, err
 }
 
 // GetLocationRatings returns a slice of pointers to rating structs
-func (r Repo) GetLocationRatings(locationID string) (ratings []*core.Rating, err error) {
+func (r Repo) GetLocationRatings(locationID string) (ratings []core.Rating, err error) {
 
 	return ratings, err
 }
@@ -197,11 +196,11 @@ func (r Repo) GetLocationAvrRating(locationID string) (avr float64) {
 }
 
 // GetLocationsDishes from the database
-func (r Repo) GetLocationsDishes(locationID string) (dishes []*core.Dish, err error) {
+func (r Repo) GetLocationsDishes(locationID string) (dishes []core.Dish, err error) {
 	return dishes, err
 }
 
 // GetLocationsFeatures from the database
-func (r Repo) GetLocationsFeatures(locationID string) (features []*core.Feature, err error) {
+func (r Repo) GetLocationsFeatures(locationID string) (features []core.Feature, err error) {
 	return features, err
 }

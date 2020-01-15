@@ -10,7 +10,7 @@ ADMIN AND MAINTENENCE QUERRIES
 */
 
 // GetAllLocations from the database
-func (r Repo) GetAllLocations() (locations []*core.Location, err error) {
+func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 
 	// Run querry
 	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings, id FROM locations ;`)
@@ -36,14 +36,14 @@ func (r Repo) GetAllLocations() (locations []*core.Location, err error) {
 		}
 
 		// Add tempLocation to locations
-		locations = append(locations, &location)
+		locations = append(locations, location)
 	}
 
 	return locations, err
 }
 
 // GetAllUsers from the database
-func (r Repo) GetAllUsers() (users []*core.User, err error) {
+func (r Repo) GetAllUsers() (users []core.User, err error) {
 
 	// Run querry
 	rows, err := r.db.Query(`SELECT name, password, email, comments, favlocation, ratings, id FROM users ;`)
@@ -71,14 +71,14 @@ func (r Repo) GetAllUsers() (users []*core.User, err error) {
 		user.Decode()
 
 		// Add tempuser to users
-		users = append(users, &user)
+		users = append(users, user)
 	}
 
 	return users, err
 }
 
 // GetAllComments from the database
-func (r Repo) GetAllComments() (comments []*core.Comment, err error) {
+func (r Repo) GetAllComments() (comments []core.Comment, err error) {
 	// Run querry
 	rows, err := r.db.Query(`SELECT title, content, userID, locationID, id FROM comments ;`)
 	if err != nil {
@@ -103,7 +103,7 @@ func (r Repo) GetAllComments() (comments []*core.Comment, err error) {
 		}
 
 		// Add tempuser to comments
-		comments = append(comments, &comment)
+		comments = append(comments, comment)
 	}
 
 	return comments, err
