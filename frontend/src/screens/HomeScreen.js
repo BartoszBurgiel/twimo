@@ -8,7 +8,11 @@ const HomeScreen = props => {
     <View style={styles.container}>
       <Text style={styles.textStyle}>Hello iOS...</Text>
       <Button
-        title="Click me hard!"
+        title="Click me softly ..."
+        onPress={() => props.navigation.navigate("List")}
+      ></Button>
+      <Button
+        title="... or really hard!"
         onPress={() => props.navigation.navigate("Details")}
       ></Button>
     </View>

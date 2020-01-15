@@ -16,14 +16,14 @@ const DetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.white,
+    backgroundColor: color.brand.light,
     alignItems: "center",
     justifyContent: "center"
   },
   textStyle: {
     fontSize: 30,
     fontWeight: "normal",
-    color: color.brand.normal,
+    color: color.brand.dark,
     textAlign: "center"
   }
 });
