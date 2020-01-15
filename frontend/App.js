@@ -1,22 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.textStyle}>Moin!</Text>
-    </View>
-  );
-}
+import HomeScreen from "./src/screens/HomeScreen";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  textStyle: {
-    fontSize: 50
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen
   }
 });
+
+export default createAppContainer(AppNavigator);
