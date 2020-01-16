@@ -1,8 +1,11 @@
+// Import core functionalities from react & react-native library
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+// Import color utility for consistent styling
 import color from "../../utils/colorPallet";
 
+// Define Component
 const ListScreen = () => {
   return (
     <View style={styles.container}>
@@ -14,6 +17,7 @@ const ListScreen = () => {
   );
 };
 
+// Define the styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,4 +39,5 @@ const styles = StyleSheet.create({
   }
 });
 
+// Export the above defined component
 export default ListScreen;

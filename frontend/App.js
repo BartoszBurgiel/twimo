@@ -1,4 +1,5 @@
-// In React Native, the component exported from App.js is the App's entry point
+// In React Native, the component exported from App.js is the App's entry point (root component)
+// So, here we have to define the routing and screens, like which screen is when & where displayed
 
 // Core functionality imports for navigation
 import { createAppContainer } from "react-navigation";
@@ -9,6 +10,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import DetailsScreen from "./src/screens/DetailsScreen";
 import ListScreen from "./src/screens/ListScreen";
 
+// Define the AppNavigator structure
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
@@ -20,4 +22,5 @@ const AppNavigator = createStackNavigator(
   }
 );
 
+// Export our just defined root component
 export default createAppContainer(AppNavigator);

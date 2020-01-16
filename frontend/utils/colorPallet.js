@@ -1,4 +1,5 @@
 // Colors to be used across the application
+// Derived from the brandColor #3699ef using https://adevade.github.io/color-scheme-generator/
 
 const color = {
   // White & black
