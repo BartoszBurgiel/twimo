@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import color from "../../utils/colorPallet";
 
 // Define the card component
-const Card = () => {
+const Card = props => {
   return (
     <View style={styles.card}>
       <View style={styles.pictureWrapper}>
@@ -16,10 +16,10 @@ const Card = () => {
         ></Image>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.cardHeader}>Starbucks</Text>
-        <Text style={styles.cardSubHeader}>Location</Text>
-        <Text style={styles.cardMetrics}>Rating: x / 5</Text>
-        <Text style={styles.cardMetrics}>Preise: x / 5</Text>
+        <Text style={styles.cardHeader}>{props.name}</Text>
+        <Text style={styles.cardSubHeader}>{props.location}</Text>
+        <Text style={styles.cardMetrics}>Rating: {props.rating} / 5</Text>
+        <Text style={styles.cardMetrics}>Preise: {props.pricing} / 5</Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Navigieren</Text>
         </TouchableOpacity>
