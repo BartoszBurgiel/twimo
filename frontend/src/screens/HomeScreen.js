@@ -11,10 +11,6 @@ const HomeScreen = props => {
     <View style={styles.container}>
       <Text style={styles.textStyle}>twimo</Text>
       <Button
-        title="Details"
-        onPress={() => props.navigation.navigate("Details")}
-      ></Button>
-      <Button
         title="Locations"
         onPress={() => props.navigation.navigate("List")}
       ></Button>
