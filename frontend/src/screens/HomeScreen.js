@@ -9,7 +9,7 @@ import color from "../../utils/colorPallet";
 const HomeScreen = props => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Hello iOS!</Text>
+      <Text style={styles.textStyle}>twimo</Text>
       <Button
         title="Details"
         onPress={() => props.navigation.navigate("Details")}
