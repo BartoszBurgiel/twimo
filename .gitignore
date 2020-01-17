@@ -3,3 +3,18 @@ backend/repository/sqlitedb/sql/repo.db
 other/dummyGenerator/cmd/setup.sql
 other/dummyGenerator/cmd/encodedSetup.sql
 backend/repository/sqlitedb/sql/repo.db-journal
+
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+# macOS
+.DS_Store
