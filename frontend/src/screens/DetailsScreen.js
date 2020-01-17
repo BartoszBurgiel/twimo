@@ -6,12 +6,10 @@ import { View, Text, StyleSheet } from "react-native";
 import color from "../../utils/colorPallet";
 
 // Define Component
-const DetailsScreen = () => {
+const DetailsScreen = props => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>
-        Uhhh yeah, you son of a hard clicking bitch!
-      </Text>
+      <Text style={styles.textStyle}>built & designed by Bartosz & Louis</Text>
     </View>
   );
 };
@@ -25,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   textStyle: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "normal",
     color: color.brand.dark,
     textAlign: "center"

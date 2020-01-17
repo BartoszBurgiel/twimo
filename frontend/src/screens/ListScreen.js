@@ -1,18 +1,55 @@
 // Import core functionalities from react & react-native library
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
+
+// Import custom components
+import Card from "../components/Card";
 
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
 
 // Define Component
 const ListScreen = () => {
+  // Define dummy data
+  const dummyData = [
+    {
+      name: "Cafe ABC",
+      location: "XampleVillage",
+      rating: 5,
+      pricing: 3
+    },
+    {
+      name: "Cafe DEF",
+      location: "XampleTown",
+      rating: 2,
+      pricing: 5
+    },
+    {
+      name: "Cafe GHI",
+      location: "XampleCity",
+      rating: 3,
+      pricing: 3
+    },
+    {
+      name: "Cafe JKL",
+      location: "XampleHills",
+      rating: 4,
+      pricing: 1
+    },
+    {
+      name: "Cafe XYZ",
+      location: "XampleValley",
+      rating: 3,
+      pricing: 2
+    }
+  ];
+
+  // FIXME: List isn't scrollable yet
   return (
     <View style={styles.container}>
-      <Text style={styles.softTextStyles}>
-        That didn't even count as a click...
-      </Text>
-      <Text style={styles.hardTextStyles}>Go harder next time!</Text>
+      <Card />
+      <Card />
+      <Card />
     </View>
   );
 };
@@ -21,21 +58,9 @@ const ListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.black,
+    backgroundColor: color.white,
     alignItems: "center",
     justifyContent: "center"
-  },
-  softTextStyles: {
-    fontSize: 30,
-    fontWeight: "normal",
-    color: color.brand.light,
-    textAlign: "center"
-  },
-  hardTextStyles: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: color.brand.normal,
-    textAlign: "center"
   }
 });
 
