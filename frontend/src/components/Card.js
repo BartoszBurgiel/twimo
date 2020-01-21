@@ -7,14 +7,14 @@ import { Ionicons } from "@expo/vector-icons";
 import color from "../../utils/colorPallet";
 
 // Define the card component
-const Card = props => {
+const Card = ({ data }) => {
   // Function to render star icons based on rating value
   const ratingCounter = () => {
     // Set up targetArray
     let arrayOfIcons = [];
     // Loop ratingValue times
     for (let i = 0; i < 5; i++) {
-      if (i < props.rating) {
+      if (i < data.rating) {
         arrayOfIcons.push(
           <Ionicons name="md-star" key={i} size={25} color={color.brand.dark} />
         );
@@ -42,12 +42,12 @@ const Card = props => {
         ></Image>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.cardHeader}>{props.name}</Text>
-        <Text style={styles.cardSubHeader}>{props.location}</Text>
+        <Text style={styles.cardHeader}>{data.name}</Text>
+        <Text style={styles.cardSubHeader}>{data.location}</Text>
         {ratingCounter()}
         <Text style={styles.cardMetrics}>
           <Ionicons name="logo-euro" size={20} color={color.brand.dark} />{" "}
-          {props.pricing} / 5
+          {data.pricing} / 5
         </Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Mehr Infos</Text>

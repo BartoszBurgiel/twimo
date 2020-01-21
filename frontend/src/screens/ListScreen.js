@@ -1,6 +1,6 @@
 // Import core functionalities from react & react-native library
 import React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 
 // Import custom components
 import Card from "../components/Card";
@@ -13,6 +13,7 @@ const ListScreen = () => {
   // Define dummy data
   const dummyData = [
     {
+      key: "1",
       name: "Cafe ABC",
       location: "XampleVillage",
       rating: 5,
@@ -20,6 +21,7 @@ const ListScreen = () => {
       picture: "https://placekitten.com/180/180"
     },
     {
+      key: "2",
       name: "Cafe DEF",
       location: "XampleTown",
       rating: 2,
@@ -27,6 +29,7 @@ const ListScreen = () => {
       picture: "https://placekitten.com/180/180"
     },
     {
+      key: "3",
       name: "Cafe GHI",
       location: "XampleCity",
       rating: 3,
@@ -34,6 +37,7 @@ const ListScreen = () => {
       picture: "https://placekitten.com/180/180"
     },
     {
+      key: "4",
       name: "Cafe JKL",
       location: "XampleHills",
       rating: 4,
@@ -41,6 +45,7 @@ const ListScreen = () => {
       picture: "https://placekitten.com/180/180"
     },
     {
+      key: "5",
       name: "Cafe XYZ",
       location: "XampleValley",
       rating: 3,
@@ -49,26 +54,12 @@ const ListScreen = () => {
     }
   ];
 
-  // FIXME: List isn't scrollable yet
+  // Iterate iver the given data and display them as Cards in a FlatList
   return (
     <View style={styles.container}>
-      <Card
-        name={dummyData[0].name}
-        location={dummyData[0].location}
-        rating={dummyData[0].rating}
-        pricing={dummyData[0].pricing}
-      />
-      <Card
-        name={dummyData[1].name}
-        location={dummyData[1].location}
-        rating={dummyData[1].rating}
-        pricing={dummyData[1].pricing}
-      />
-      <Card
-        name={dummyData[2].name}
-        location={dummyData[2].location}
-        rating={dummyData[2].rating}
-        pricing={dummyData[2].pricing}
+      <FlatList
+        data={dummyData}
+        renderItem={({ item }) => <Card data={item} />}
       />
     </View>
   );
