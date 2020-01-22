@@ -8,12 +8,14 @@ import { createStackNavigator } from "react-navigation-stack";
 // Component & screen imports
 import HomeScreen from "./src/screens/HomeScreen";
 import ListScreen from "./src/screens/ListScreen";
+import LocationDetailsScreen from "./src/screens/LocationDetailsScreen";
 
 // Define the AppNavigator structure
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    List: ListScreen
+    List: ListScreen,
+    LocationDetails: LocationDetailsScreen
   },
   {
     initialRouteName: "Home"

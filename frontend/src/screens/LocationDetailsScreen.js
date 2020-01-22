@@ -9,7 +9,13 @@ import color from "../../utils/colorPallet";
 const LocationDetailsScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>works</Text>
+      <Text>Some Picture</Text>
+      <Text>Kind of location</Text>
+      <Text>Name</Text>
+      <Text>Rating</Text>
+      <Text>SupplyIcons</Text>
+      <Text>Separator</Text>
+      <Text>UserRatings</Text>
     </View>
   );
 };

@@ -9,7 +9,7 @@ import Card from "../components/Card";
 import color from "../../utils/colorPallet";
 
 // Define Component
-const ListScreen = () => {
+const ListScreen = ({ navigation }) => {
   // Define dummy data
   const dummyData = [
     {
@@ -60,7 +60,7 @@ const ListScreen = () => {
       <FlatList
         data={dummyData}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <Card data={item} />}
+        renderItem={({ item }) => <Card data={item} navigation={navigation} />}
       />
     </View>
   );

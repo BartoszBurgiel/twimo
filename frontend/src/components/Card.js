@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import color from "../../utils/colorPallet";
 
 // Define the card component
-const Card = ({ data }) => {
+const Card = ({ data, navigation }) => {
   // Function to render star icons based on rating value
   const ratingCounter = () => {
     // Set up targetArray
@@ -49,7 +49,10 @@ const Card = ({ data }) => {
           <Ionicons name="logo-euro" size={20} color={color.brand.dark} />{" "}
           {data.pricing} / 5
         </Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("LocationDetails")}
+        >
           <Text style={styles.buttonText}>Mehr Infos</Text>
         </TouchableOpacity>
       </View>
@@ -61,11 +64,10 @@ const Card = ({ data }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: color.white,
-    width: 350,
+    width: 370,
     height: 200,
     padding: 10,
-    marginTop: 20,
-    marginBottom: 20,
+    marginVertical: 10,
     shadowColor: color.gray.darker,
     shadowOpacity: 0.25,
     borderRadius: 12,
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
   textWrapper: {
     justifyContent: "space-around",
     paddingLeft: 10,
-    width: 150
+    width: 170
   },
   cardHeader: {
     fontWeight: "900",
