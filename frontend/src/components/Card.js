@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.brand.light,
     height: 30,
     width: 120,
-    borderRadius: 10,
+    borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20
