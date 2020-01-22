@@ -59,6 +59,7 @@ const ListScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={dummyData}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <Card data={item} />}
       />
     </View>
