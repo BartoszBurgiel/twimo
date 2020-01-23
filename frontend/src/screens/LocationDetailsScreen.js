@@ -1,6 +1,13 @@
 // Import core functionality dependencies
 import React from "react";
-import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  ScrollView,
+  FlatList,
+  Text,
+  StyleSheet,
+  Image
+} from "react-native";
 
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
@@ -12,6 +19,7 @@ import ReviewCard from "../components/ReviewCard";
 
 const dummyReviews = [
   {
+    key: "1",
     name: "Bartosz Burgiel",
     avatar: "https://api.adorable.io/avatars/50/bartosz@mail.com.png",
     rating: 5,
@@ -19,6 +27,7 @@ const dummyReviews = [
       "Klasse Handwerksbäcker, gemütliches und stilvolles Café mit hervorragenden Backwaren und bestem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
   },
   {
+    key: "2",
     name: "Louis Beul",
     avatar: "https://api.adorable.io/avatars/50/louis@mail.com.png",
     rating: 4,
@@ -26,15 +35,17 @@ const dummyReviews = [
       "Klasse Cafe, gemütliches und stilvolles Ambiente mit hervorragenden Backwaren und gutem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
   },
   {
+    key: "3",
     name: "Bettina Justus",
     avatar: "https://api.adorable.io/avatars/50/betti@mail.com.png",
     rating: 3,
     content:
-      "Naja, gemütliches isses schon irgendwie. Aber der Durchzug ist heftig. Unbedingt ne Jacke mitnehmen - sonst gibt's ne fette Erkältung! Ansonsten kann man da schon hingehen"
+      "Naja, gemütliches isses schon irgendwie. Aber der Durchzug ist heftig. Unbedingt ne Jacke mitnehmen - sonst gibt's ne fette Erkältung! Ansonsten kann man da schon hingehen..."
   },
   {
+    key: "4",
     name: "Random German",
-    avatar: "https://api.adorable.io/avatars/50/helmut@mail.com.png",
+    avatar: "https://api.adorable.io/avatars/50/randomgerman@mail.com.png",
     rating: 4,
     content:
       "Also ich find des nicht gut. Die Backwaren sind ganz ok, aber wenn'de kein Englisch kannst, bist in dem Laden uffgeschmissen. Da bleib ich beim Bäcker im Dorf!"
@@ -43,8 +54,9 @@ const dummyReviews = [
 
 // Define Component
 const LocationDetailsScreen = () => {
+  //FIXME: Virtualized Lists Warning
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.imgWrapper}>
         <Image
           style={styles.image}
@@ -62,14 +74,13 @@ const LocationDetailsScreen = () => {
         <View style={styles.horizontalRule} />
         <Text style={styles.secondaryHeaderText}>Reviews</Text>
       </View>
-      <ScrollView
+      <FlatList
+        data={dummyReviews}
         style={styles.contentWrapper}
         showsVerticalScrollIndicator={false}
-      >
-        <ReviewCard reviewData={dummyReviews[0]} />
-        <ReviewCard reviewData={dummyReviews[1]} />
-      </ScrollView>
-    </View>
+        renderItem={({ item }) => <ReviewCard reviewData={item} />}
+      />
+    </ScrollView>
   );
 };
 
