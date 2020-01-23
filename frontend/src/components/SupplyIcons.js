@@ -22,9 +22,8 @@ const CircleIcon = ({ iconName, isTrue }) => {
         width: 50,
         margin: 5,
         borderRadius: 100,
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 10
+        justifyContent: "center",
+        alignItems: "center"
       }}
     >
       <Ionicons name={iconName} size={30} color={color.white} />
@@ -48,10 +47,8 @@ const styles = StyleSheet.create({
   container: {
     flexWrap: "wrap",
     alignItems: "flex-start",
-    flexDirection: "row"
-  },
-  icon: {
-    margin: 10
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
 

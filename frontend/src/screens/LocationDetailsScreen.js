@@ -5,8 +5,10 @@ import { View, Text, StyleSheet, Image } from "react-native";
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
 
+// Import custom built components
 import RatingStars from "../components/RatingStars";
 import SupplyIcons from "../components/SupplyIcons";
+import ReviewCard from "../components/ReviewCard";
 
 // Define Component
 const LocationDetailsScreen = () => {
@@ -21,14 +23,15 @@ const LocationDetailsScreen = () => {
           }}
         ></Image>
       </View>
-      <View style={styles.textWrapper}>
-        <Text style={styles.category}>coffeeshop</Text>
+      <View style={styles.contentWrapper}>
+        <Text style={styles.categoryTag}>coffeeshop</Text>
         <Text style={styles.headerText}>Starbucks Montabaur</Text>
         <RatingStars colorfill={color.brand.normal} rating={4} />
         <SupplyIcons />
+        <View style={styles.horizontalRule} />
+        <Text style={styles.secondaryHeaderText}>Reviews</Text>
+        <ReviewCard />
       </View>
-      <Text>Separator</Text>
-      <Text>UserRatings</Text>
     </View>
   );
 };
@@ -47,17 +50,26 @@ const styles = StyleSheet.create({
     height: 275,
     width: 500
   },
-  textWrapper: {
+  contentWrapper: {
     paddingHorizontal: 30
   },
-  category: {
+  categoryTag: {
     fontSize: 20,
     fontWeight: "300",
     textTransform: "uppercase"
   },
   headerText: {
     fontSize: 30,
-    fontWeight: "900"
+    fontWeight: "700"
+  },
+  horizontalRule: {
+    borderBottomColor: color.gray.dark,
+    borderBottomWidth: 1,
+    marginVertical: 20
+  },
+  secondaryHeaderText: {
+    fontSize: 20,
+    fontWeight: "500"
   }
 });
 

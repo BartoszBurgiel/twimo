@@ -3,13 +3,13 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import RatingStars from "../components/RatingStars";
+import RatingStars from "./RatingStars";
 
 // Import the color utility
 import color from "../../utils/colorPallet";
 
 // Define the card component
-const Card = ({ data, navigation }) => {
+const LocationCard = ({ data, navigation }) => {
   // Function to render star icons based on rating value
 
   return (
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
 });
 
 // Export the Card component to be used inside the App
-export default Card;
+export default LocationCard;

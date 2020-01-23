@@ -3,7 +3,7 @@ import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 
 // Import custom components
-import Card from "../components/Card";
+import LocationCard from "../components/LocationCard";
 
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
@@ -60,7 +60,9 @@ const ListScreen = ({ navigation }) => {
       <FlatList
         data={dummyData}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <Card data={item} navigation={navigation} />}
+        renderItem={({ item }) => (
+          <LocationCard data={item} navigation={navigation} />
+        )}
       />
     </View>
   );
