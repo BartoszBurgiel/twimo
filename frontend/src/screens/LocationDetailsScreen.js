@@ -24,6 +24,20 @@ const dummyReviews = [
     rating: 4,
     content:
       "Klasse Cafe, gemütliches und stilvolles Ambiente mit hervorragenden Backwaren und gutem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
+  },
+  {
+    name: "Bettina Justus",
+    avatar: "https://api.adorable.io/avatars/50/betti@mail.com.png",
+    rating: 3,
+    content:
+      "Naja, gemütliches isses schon irgendwie. Aber der Durchzug ist heftig. Unbedingt ne Jacke mitnehmen - sonst gibt's ne fette Erkältung! Ansonsten kann man da schon hingehen"
+  },
+  {
+    name: "Random German",
+    avatar: "https://api.adorable.io/avatars/50/helmut@mail.com.png",
+    rating: 4,
+    content:
+      "Also ich find des nicht gut. Die Backwaren sind ganz ok, aber wenn'de kein Englisch kannst, bist in dem Laden uffgeschmissen. Da bleib ich beim Bäcker im Dorf!"
   }
 ];
 
