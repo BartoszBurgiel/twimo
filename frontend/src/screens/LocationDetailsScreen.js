@@ -1,7 +1,6 @@
 // Import core functionality dependencies
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
