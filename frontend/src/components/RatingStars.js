@@ -4,18 +4,28 @@ import { Ionicons } from "@expo/vector-icons";
 
 // Define Component
 
-const RatingCounter = ({ rating, colorfill }) => {
+const RatingStars = ({ rating, colorFill, iconSize }) => {
   // Set up targetArray
   let arrayOfIcons = [];
   // Loop ratingValue times
   for (let i = 0; i < 5; i++) {
     if (i < rating) {
       arrayOfIcons.push(
-        <Ionicons name="md-star" key={i} size={25} color={colorfill} />
+        <Ionicons
+          name="md-star"
+          key={i}
+          size={iconSize ? iconSize : 25}
+          color={colorFill}
+        />
       );
     } else {
       arrayOfIcons.push(
-        <Ionicons name="md-star-outline" key={i} size={25} color={colorfill} />
+        <Ionicons
+          name="md-star-outline"
+          key={i}
+          size={iconSize ? iconSize : 25}
+          color={colorFill}
+        />
       );
     }
   }
@@ -23,4 +33,4 @@ const RatingCounter = ({ rating, colorfill }) => {
   return <Text>{arrayOfIcons}</Text>;
 };
 
-export default RatingCounter;
+export default RatingStars;

@@ -23,7 +23,7 @@ const LocationCard = ({ data, navigation }) => {
       <View style={styles.textWrapper}>
         <Text style={styles.cardHeader}>{data.name}</Text>
         <Text style={styles.cardSubHeader}>{data.location}</Text>
-        <RatingStars colorfill={color.brand.dark} rating={data.rating} />
+        <RatingStars colorFill={color.brand.dark} rating={data.rating} />
         <Text style={styles.cardMetrics}>
           <Ionicons name="logo-euro" size={20} color={color.brand.dark} />{" "}
           {data.pricing} / 5

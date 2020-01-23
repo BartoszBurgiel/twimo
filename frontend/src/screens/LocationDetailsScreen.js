@@ -1,6 +1,6 @@
 // Import core functionality dependencies
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
@@ -9,6 +9,23 @@ import color from "../../utils/colorPallet";
 import RatingStars from "../components/RatingStars";
 import SupplyIcons from "../components/SupplyIcons";
 import ReviewCard from "../components/ReviewCard";
+
+const dummyReviews = [
+  {
+    name: "Bartosz Burgiel",
+    avatar: "https://api.adorable.io/avatars/50/bartosz@mail.com.png",
+    rating: 5,
+    content:
+      "Klasse Handwerksbäcker, gemütliches und stilvolles Café mit hervorragenden Backwaren und bestem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
+  },
+  {
+    name: "Louis Beul",
+    avatar: "https://api.adorable.io/avatars/50/louis@mail.com.png",
+    rating: 4,
+    content:
+      "Klasse Cafe, gemütliches und stilvolles Ambiente mit hervorragenden Backwaren und gutem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
+  }
+];
 
 // Define Component
 const LocationDetailsScreen = () => {
@@ -26,12 +43,18 @@ const LocationDetailsScreen = () => {
       <View style={styles.contentWrapper}>
         <Text style={styles.categoryTag}>coffeeshop</Text>
         <Text style={styles.headerText}>Starbucks Montabaur</Text>
-        <RatingStars colorfill={color.brand.normal} rating={4} />
+        <RatingStars colorFill={color.brand.normal} rating={4} />
         <SupplyIcons />
         <View style={styles.horizontalRule} />
         <Text style={styles.secondaryHeaderText}>Reviews</Text>
-        <ReviewCard />
       </View>
+      <ScrollView
+        style={styles.contentWrapper}
+        showsVerticalScrollIndicator={false}
+      >
+        <ReviewCard reviewData={dummyReviews[0]} />
+        <ReviewCard reviewData={dummyReviews[1]} />
+      </ScrollView>
     </View>
   );
 };
@@ -51,7 +74,8 @@ const styles = StyleSheet.create({
     width: 500
   },
   contentWrapper: {
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    marginBottom: 25
   },
   categoryTag: {
     fontSize: 20,
