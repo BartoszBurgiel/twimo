@@ -6,6 +6,7 @@ package repository
 
 import (
 	"fmt"
+	"strings"
 	"twimo/backend/core"
 )
 
@@ -111,7 +112,7 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 }
 
 // GetLocationsAsLink returns all locations' data so that they be displayed as an <a> tag: name and link
-func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
+func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 
 	// Get  rows
 	rows, err := r.db.Query(`SELECT name FROM locations ; `)
@@ -134,12 +135,19 @@ func (r Repo) GetLocationsAsLink() (locations []core.LocationRoute, err error) {
 			return locations, fmt.Errorf("No locations found in the database")
 		}
 
+		locationsLink := strings.ReplaceAll(name, "ä", "+")
+		locationsLink = strings.ReplaceAll(locationsLink, "ü", "*")
+		locationsLink = strings.ReplaceAll(locationsLink, "ö", "$")
+		locationsLink = "/" + strings.ReplaceAll(locationsLink, " ", "_")
+
 		// assemble temporary location
-		tempLocationRoute := core.LocationRoute{}
-		tempLocationRoute.New(name)
+		tempLocation := core.Location{
+			Name:         name,
+			LocationLink: locationsLink,
+		}
 
 		// push to the locations slice
-		locations = append(locations, tempLocationRoute)
+		locations = append(locations, tempLocation)
 	}
 
 	return locations, err
@@ -170,14 +178,13 @@ func (r Repo) GetLocationFromName(locationName string) (location core.Location, 
 
 	// // Set location's id
 	// location.ID = locationID
-
 	return location, err
 }
 
 // GetCommentsOfLocation returns a slice of pointers to comment structs from one location
 func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment, err error) {
 	// Get  rows
-	rows, err := r.db.Query(`SELECT title, content, userID, locationID, id FROM comments WHERE locationID = ?  ; `, locationID)
+	rows, err := r.db.Query(`SELECT title, content, userID, locationID, id FROM comments WHERE locationID = ? LIMIT 10 ; `, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return comments, err
