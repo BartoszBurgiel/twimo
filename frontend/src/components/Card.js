@@ -3,35 +3,14 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+import RatingStars from "../components/RatingStars";
+
 // Import the color utility
 import color from "../../utils/colorPallet";
 
 // Define the card component
 const Card = ({ data, navigation }) => {
   // Function to render star icons based on rating value
-  const ratingCounter = () => {
-    // Set up targetArray
-    let arrayOfIcons = [];
-    // Loop ratingValue times
-    for (let i = 0; i < 5; i++) {
-      if (i < data.rating) {
-        arrayOfIcons.push(
-          <Ionicons name="md-star" key={i} size={25} color={color.brand.dark} />
-        );
-      } else {
-        arrayOfIcons.push(
-          <Ionicons
-            name="md-star-outline"
-            key={i}
-            size={25}
-            color={color.brand.dark}
-          />
-        );
-      }
-    }
-    //Return text element containing the array
-    return <Text style={styles.cardMetrics}>{arrayOfIcons}</Text>;
-  };
 
   return (
     <View style={styles.card}>
@@ -44,7 +23,7 @@ const Card = ({ data, navigation }) => {
       <View style={styles.textWrapper}>
         <Text style={styles.cardHeader}>{data.name}</Text>
         <Text style={styles.cardSubHeader}>{data.location}</Text>
-        {ratingCounter()}
+        <RatingStars colorfill={color.brand.dark} rating={data.rating} />
         <Text style={styles.cardMetrics}>
           <Ionicons name="logo-euro" size={20} color={color.brand.dark} />{" "}
           {data.pricing} / 5
