@@ -46,7 +46,7 @@ const dummyReviews = [
     key: "4",
     name: "Random German",
     avatar: "https://api.adorable.io/avatars/50/randomgerman@mail.com.png",
-    rating: 4,
+    rating: 1,
     content:
       "Also ich find des nicht gut. Die Backwaren sind ganz ok, aber wenn'de kein Englisch kannst, bist in dem Laden uffgeschmissen. Da bleib ich beim Bäcker im Dorf!"
   }
