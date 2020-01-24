@@ -43,8 +43,6 @@ func (u *user) Encode() {
 	// Generate key
 	key, _ := kihmo.StringToKey(code)
 
-	// Encode
-	u.name, _ = key.Lock([]byte(u.name), 60)
 	u.email, _ = key.Lock([]byte(u.email), 60)
 }
 
@@ -58,10 +56,7 @@ func (u *user) Decode() {
 	// Generate key
 	key, _ := kihmo.StringToKey(code)
 
-	// Encode
-	name, _ := key.Unlock(u.name, 60)
 	email, _ := key.Unlock(u.email, 60)
 
-	u.name = string(name)
 	u.email = string(email)
 }

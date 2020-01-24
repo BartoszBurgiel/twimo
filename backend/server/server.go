@@ -43,6 +43,9 @@ func (s *Server) init() error {
 
 	s.router.Route("/locationList")["GET"] = http.HandlerFunc(s.handleLocationListGET)
 
+	s.router.Route("/login")["GET"] = http.HandlerFunc(s.handleLoginGET)
+	s.router.Route("/login/ws")["GET"] = http.HandlerFunc(s.handleLoginWS)
+
 	return nil
 }
 

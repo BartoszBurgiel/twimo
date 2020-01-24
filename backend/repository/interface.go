@@ -15,6 +15,12 @@ type Repository interface {
 	// Get user's name and ID
 	GetUserDataForComment(userID string) (core.User, error)
 
+	// Get user's data from the email
+	GetUserFromEmail(userEmail string) (core.User, error)
+
+	// Get user's data from the name
+	GetUserFromName(userEmail string) (core.User, error)
+
 	// Get ratings user has given
 	GetUsersRatings(userID string) ([]core.Rating, error)
 

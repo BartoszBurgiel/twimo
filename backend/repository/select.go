@@ -65,6 +65,70 @@ func (r Repo) GetUserDataForComment(userID string) (user core.User, err error) {
 	return user, err
 }
 
+// GetUserFromEmail returns a user struct with all user's data
+func (r Repo) GetUserFromEmail(userEmail string) (user core.User, err error) {
+
+	// Set userID
+	user.Email = userEmail
+
+	// Get  rows
+	rows, err := r.db.Query(`SELECT name, password, comments, favlocation, ratings, id FROM users WHERE email = ? ; `, userEmail)
+	if err != nil {
+		fmt.Println(err)
+		return user, err
+	}
+
+	// Schedule closing of the db
+	defer rows.Close()
+
+	// Iterate over rows
+	for rows.Next() {
+		rows.Scan(&user.Name, &user.Password, &user.Comments, &user.FavLocation, &user.Ratings, &user.ID)
+	}
+
+	// Check if name is empty -> no users found
+	if user.Name == "" {
+		return user, fmt.Errorf("No users found with email %s", userEmail)
+	}
+
+	// Decode user
+	user.Decode()
+
+	return user, err
+}
+
+// GetUserFromName returns a user struct with all user's data
+func (r Repo) GetUserFromName(userName string) (user core.User, err error) {
+
+	// Set userID
+	user.Name = userName
+
+	// Get  rows
+	rows, err := r.db.Query(`SELECT email, password, comments, favlocation, ratings, id FROM users WHERE name = ? ; `, userName)
+	if err != nil {
+		fmt.Println(err)
+		return user, err
+	}
+
+	// Schedule closing of the db
+	defer rows.Close()
+
+	// Iterate over rows
+	for rows.Next() {
+		rows.Scan(&user.Email, &user.Password, &user.Comments, &user.FavLocation, &user.Ratings, &user.ID)
+	}
+
+	// Check if name is empty -> no users found
+	if user.Name == "" {
+		return user, fmt.Errorf("No users found with name %s", userName)
+	}
+
+	// Decode user
+	user.Decode()
+
+	return user, err
+}
+
 // GetUsersComments from the database
 func (r Repo) GetUsersComments(userID string) (comments []core.Comment, err error) {
 	return comments, err

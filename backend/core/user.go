@@ -21,8 +21,6 @@ func (u *User) Encode() {
 	// Calculate the key
 	key := u.generateUserKey()
 
-	// Encode name password and email
-	u.Name, _ = key.Lock([]byte(u.Name), 60)
 	u.Email, _ = key.Lock([]byte(u.Email), 60)
 }
 
@@ -32,10 +30,7 @@ func (u *User) Decode() {
 	key := u.generateUserKey()
 
 	// Encode name password and email
-	name, _ := key.Unlock(u.Name, 60)
 	email, _ := key.Unlock(u.Email, 60)
-
-	u.Name = string(name)
 	u.Email = string(email)
 }
 
