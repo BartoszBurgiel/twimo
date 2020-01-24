@@ -59,6 +59,12 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// double check if user is not found
+	if user.Name == "" {
+		fmt.Println("no user found")
+		return
+	}
+
 	// check password
 	ok, err := security.Password(user, userPassword, s.repo)
 	if err != nil {

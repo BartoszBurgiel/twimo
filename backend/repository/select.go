@@ -119,7 +119,7 @@ func (r Repo) GetUserFromName(userName string) (user core.User, err error) {
 	}
 
 	// Check if name is empty -> no users found
-	if user.Name == "" {
+	if user.Comments == "" {
 		return user, fmt.Errorf("No users found with name %s", userName)
 	}
 
