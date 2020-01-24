@@ -5,9 +5,6 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 // Import color utility
 import color from "../../utils/colorPallet";
 
-// Import custom components
-import RatingStars from "./RatingStars";
-
 // Define ReviewCard component
 // ReviewCard receives the reviews' data as properties from the parent component
 const ReviewCard = ({ reviewData }) => {
@@ -16,11 +13,6 @@ const ReviewCard = ({ reviewData }) => {
       <View style={styles.userData}>
         <Image style={styles.image} source={{ uri: reviewData.avatar }}></Image>
         <Text style={styles.userName}>{reviewData.name}</Text>
-        <RatingStars
-          rating={reviewData.rating}
-          colorFill={color.black}
-          iconSize={15}
-        />
       </View>
       <Text style={styles.reviewContent}>{reviewData.content}</Text>
     </TouchableOpacity>
