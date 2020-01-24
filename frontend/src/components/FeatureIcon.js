@@ -14,7 +14,6 @@ const CircleIcon = ({ iconName, isActive }) => {
     activityColor = color.brand.normal;
   }
 
-  //FIXME: Make this thing more intutitive to use through generalization
   return (
     <View
       style={{
@@ -32,17 +31,25 @@ const CircleIcon = ({ iconName, isActive }) => {
   );
 };
 
-const SupplyIcons = ({ coffee, wifi, power, music, food }) => {
+// Define the FeatureIcons component
+// Receives featuresObject as props from parent component
+const FeatureIcons = ({ features }) => {
   return (
     <View style={styles.container}>
-      <CircleIcon iconName="md-cafe" isActive={coffee ? true : false} />
-      <CircleIcon iconName="md-wifi" isActive={wifi ? true : false} />
+      <CircleIcon
+        iconName="md-cafe"
+        isActive={features.coffee ? true : false}
+      />
+      <CircleIcon iconName="md-wifi" isActive={features.wifi ? true : false} />
       <CircleIcon
         iconName="md-battery-charging"
-        isActive={power ? true : false}
+        isActive={features.power ? true : false}
       />
-      <CircleIcon iconName="md-musical-note" isActive={music ? true : false} />
-      <CircleIcon iconName="md-pizza" isActive={food ? true : false} />
+      <CircleIcon
+        iconName="md-musical-note"
+        isActive={features.music ? true : false}
+      />
+      <CircleIcon iconName="md-pizza" isActive={features.food ? true : false} />
     </View>
   );
 };
@@ -57,5 +64,5 @@ const styles = StyleSheet.create({
   }
 });
 
-// Export SupplyIcons to get used across the App
-export default SupplyIcons;
+// Export FeatureIcons to get used across the App
+export default FeatureIcons;

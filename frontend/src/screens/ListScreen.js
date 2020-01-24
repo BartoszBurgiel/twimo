@@ -16,6 +16,13 @@ const dummyData = [
     location: "Montabaur",
     rating: 4,
     pricing: 3,
+    feature: {
+      coffee: true,
+      wifi: true,
+      power: true,
+      music: false,
+      food: true
+    },
     picture:
       "https://www.heikaus-asset.com/wp-content/uploads/2018/01/Test_Starbucks-1024x731.jpg"
   },
@@ -25,6 +32,13 @@ const dummyData = [
     location: "Westerburg",
     rating: 2,
     pricing: 5,
+    feature: {
+      coffee: true,
+      wifi: true,
+      power: false,
+      music: true,
+      food: true
+    },
     picture:
       "https://www.schaefer-dein-baecker.de/sites/default/files/styles/flexslider_full/public/obu2_fcc7f0729f.jpg?itok=PBpOf_EO"
   },
@@ -34,6 +48,13 @@ const dummyData = [
     location: "Herborn",
     rating: 3,
     pricing: 3,
+    feature: {
+      coffee: true,
+      wifi: true,
+      power: true,
+      music: true,
+      food: true
+    },
     picture: "https://10619-2.s.cdn12.com/rests/original/337_507226641.jpg"
   },
   {
@@ -42,6 +63,13 @@ const dummyData = [
     location: "Rennerod",
     rating: 2,
     pricing: 2,
+    feature: {
+      coffee: true,
+      wifi: true,
+      power: false,
+      music: false,
+      food: true
+    },
     picture:
       "https://www.die-muehlenbaecker.de/wp-content/uploads/IMG_5944-1024x683.jpg"
   },
@@ -51,6 +79,13 @@ const dummyData = [
     location: "Frankfurt",
     rating: 3,
     pricing: 2,
+    feature: {
+      coffee: true,
+      wifi: true,
+      power: true,
+      music: false,
+      food: true
+    },
     picture:
       "https://www.coffee-fellows.com/wp-content/uploads/2017/03/coffee-fellows_cf_rs_breisgau_0017.jpg"
   }

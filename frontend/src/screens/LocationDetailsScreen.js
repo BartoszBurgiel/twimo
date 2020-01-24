@@ -14,7 +14,7 @@ import color from "../../utils/colorPallet";
 
 // Import custom built components
 import RatingStars from "../components/RatingStars";
-import SupplyIcons from "../components/SupplyIcons";
+import FeatureIcons from "../components/FeatureIcon";
 import ReviewCard from "../components/ReviewCard";
 
 // Define some dummy Review data
@@ -75,7 +75,7 @@ const LocationDetailsScreen = props => {
         <Text style={styles.categoryTag}>coffeeshop</Text>
         <Text style={styles.headerText}>{data.name}</Text>
         <RatingStars colorFill={color.brand.normal} rating={data.rating} />
-        <SupplyIcons coffee wifi power food />
+        <FeatureIcons features={data.feature} />
         <View style={styles.horizontalRule} />
         <Text style={styles.secondaryHeaderText}>Reviews</Text>
       </View>
