@@ -42,6 +42,29 @@ func (r Repo) GetUser(userID string) (user core.User, err error) {
 	return user, err
 }
 
+// GetUserDataForComment that will be displayed in frontend
+// - full name + id (for avatar)
+func (r Repo) GetUserDataForComment(userID string) (user core.User, err error) {
+
+	// Get user from the db
+	user, err = r.GetUser(userID)
+	if err != nil {
+		fmt.Println(err)
+		return user, err
+	}
+
+	// Set all unnecessary fields to ""
+	// just name and ID can't be pulled from the database, because several more fiels are needed
+	// to decode user's data
+	user.Comments = ""
+	user.Email = ""
+	user.Password = ""
+	user.Ratings = ""
+	user.FavLocation = ""
+
+	return user, err
+}
+
 // GetUsersComments from the database
 func (r Repo) GetUsersComments(userID string) (comments []core.Comment, err error) {
 	return comments, err
@@ -204,6 +227,20 @@ func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment,
 		if comment.Title == "" {
 			return comments, fmt.Errorf("No comments found ")
 		}
+
+		/*
+			Append users to comment structs
+		*/
+
+		// Pull user from the database
+		user, err := r.GetUserDataForComment(comment.User.Key)
+		if err != nil {
+			fmt.Println(err)
+			return comments, err
+		}
+
+		// Append user to comment struct
+		comment.User.User = user
 
 		// Append to comments
 		comments = append(comments, comment)

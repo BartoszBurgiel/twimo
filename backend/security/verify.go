@@ -16,8 +16,15 @@ func VerifyPassword(userID, password string, r repository.Repository) (bool, err
 		return false, err
 	}
 
+	// Generate salt
+	_, salt, err := kihmo.Salt(user.Name, 60)
+	if err != nil {
+		fmt.Println(err)
+		return false, err
+	}
+
 	// hash password
-	hashedPasswords, err := kihmo.Hash(userID, 60)
+	hashedPasswords, err := kihmo.Hash(userID, salt, 60)
 	if err != nil {
 		fmt.Println(err)
 		return false, err

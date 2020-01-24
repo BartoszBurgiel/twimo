@@ -12,6 +12,9 @@ type Repository interface {
 	// Get comments given user has written
 	GetUsersComments(userID string) ([]core.Comment, error)
 
+	// Get user's name and ID
+	GetUserDataForComment(userID string) (core.User, error)
+
 	// Get ratings user has given
 	GetUsersRatings(userID string) ([]core.Rating, error)
 

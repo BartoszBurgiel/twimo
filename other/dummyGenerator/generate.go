@@ -79,7 +79,8 @@ func generateUsers() (string, []user) {
 
 			/* BARTOSZ'S PART */
 			// hash password
-			password, err := kihmo.Hash(password, 60)
+			_, salt, _ := kihmo.Salt(fullName, 60)
+			password, err := kihmo.Hash(password, salt, 60)
 			if err != nil {
 				panic(err)
 			}
@@ -187,7 +188,8 @@ func generateEncodedUsers() (string, []user) {
 
 			/* BARTOSZ'S PART */
 			// hash password
-			password, err := kihmo.Hash(password, 60)
+			_, salt, _ := kihmo.Salt(fullName, 60)
+			password, err := kihmo.Hash(password, salt, 60)
 			if err != nil {
 				panic(err)
 			}
