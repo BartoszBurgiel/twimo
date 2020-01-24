@@ -60,4 +60,5 @@ const color = {
   }
 };
 
+// Export the color utility to get used across the app
 export default color;

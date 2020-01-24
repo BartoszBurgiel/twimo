@@ -5,7 +5,7 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
-// Component & screen imports
+// Screen imports
 import HomeScreen from "./src/screens/HomeScreen";
 import ListScreen from "./src/screens/ListScreen";
 import LocationDetailsScreen from "./src/screens/LocationDetailsScreen";
