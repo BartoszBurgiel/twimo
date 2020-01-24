@@ -15,10 +15,7 @@ const LocationCard = ({ data, navigation }) => {
   return (
     <View style={styles.card}>
       <View style={styles.pictureWrapper}>
-        <Image
-          style={styles.image}
-          source={{ uri: "https://placekitten.com/180/180" }}
-        ></Image>
+        <Image style={styles.image} source={{ uri: data.picture }}></Image>
       </View>
       <View style={styles.textWrapper}>
         <Text style={styles.cardHeader}>{data.name}</Text>
@@ -30,7 +27,11 @@ const LocationCard = ({ data, navigation }) => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("LocationDetails")}
+          onPress={() =>
+            navigation.navigate("LocationDetails", {
+              locationData: data
+            })
+          }
         >
           <Text style={styles.buttonText}>Mehr Infos</Text>
         </TouchableOpacity>

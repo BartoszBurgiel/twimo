@@ -12,43 +12,47 @@ import color from "../../utils/colorPallet";
 const dummyData = [
   {
     key: "1",
-    name: "Cafe ABC",
-    location: "XampleVillage",
-    rating: 5,
+    name: "Starbucks Montabaur",
+    location: "Montabaur",
+    rating: 4,
     pricing: 3,
-    picture: "https://placekitten.com/180/180"
+    picture:
+      "https://www.heikaus-asset.com/wp-content/uploads/2018/01/Test_Starbucks-1024x731.jpg"
   },
   {
     key: "2",
-    name: "Cafe DEF",
-    location: "XampleTown",
+    name: "Bäckerei Schäfer",
+    location: "Westerburg",
     rating: 2,
     pricing: 5,
-    picture: "https://placekitten.com/180/180"
+    picture:
+      "https://www.schaefer-dein-baecker.de/sites/default/files/styles/flexslider_full/public/obu2_fcc7f0729f.jpg?itok=PBpOf_EO"
   },
   {
     key: "3",
-    name: "Cafe GHI",
-    location: "XampleCity",
+    name: "Big Bender",
+    location: "Herborn",
     rating: 3,
     pricing: 3,
-    picture: "https://placekitten.com/180/180"
+    picture: "https://10619-2.s.cdn12.com/rests/original/337_507226641.jpg"
   },
   {
     key: "4",
-    name: "Cafe JKL",
-    location: "XampleHills",
-    rating: 4,
-    pricing: 1,
-    picture: "https://placekitten.com/180/180"
+    name: "Mühlenbäcker",
+    location: "Rennerod",
+    rating: 2,
+    pricing: 2,
+    picture:
+      "https://www.die-muehlenbaecker.de/wp-content/uploads/IMG_5944-1024x683.jpg"
   },
   {
     key: "5",
-    name: "Cafe XYZ",
-    location: "XampleValley",
+    name: "Coffee Fellows",
+    location: "Frankfurt",
     rating: 3,
     pricing: 2,
-    picture: "https://placekitten.com/180/180"
+    picture:
+      "https://www.coffee-fellows.com/wp-content/uploads/2017/03/coffee-fellows_cf_rs_breisgau_0017.jpg"
   }
 ];
 

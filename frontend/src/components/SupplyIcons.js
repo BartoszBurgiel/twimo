@@ -8,9 +8,9 @@ import color from "../../utils/colorPallet";
 
 // Define CircleIcon component
 // Receives iconName and boolean status as properties from parent component
-const CircleIcon = ({ iconName, isTrue }) => {
+const CircleIcon = ({ iconName, isActive }) => {
   let activityColor = color.brand.light;
-  if (isTrue) {
+  if (isActive) {
     activityColor = color.brand.normal;
   }
 
@@ -32,14 +32,17 @@ const CircleIcon = ({ iconName, isTrue }) => {
   );
 };
 
-const SupplyIcons = () => {
+const SupplyIcons = ({ coffee, wifi, power, music, food }) => {
   return (
     <View style={styles.container}>
-      <CircleIcon iconName="md-cafe" isTrue />
-      <CircleIcon iconName="md-wifi" isTrue />
-      <CircleIcon iconName="md-battery-charging" isTrue />
-      <CircleIcon iconName="md-musical-note" />
-      <CircleIcon iconName="md-pizza" isTrue />
+      <CircleIcon iconName="md-cafe" isActive={coffee ? true : false} />
+      <CircleIcon iconName="md-wifi" isActive={wifi ? true : false} />
+      <CircleIcon
+        iconName="md-battery-charging"
+        isActive={power ? true : false}
+      />
+      <CircleIcon iconName="md-musical-note" isActive={music ? true : false} />
+      <CircleIcon iconName="md-pizza" isActive={food ? true : false} />
     </View>
   );
 };

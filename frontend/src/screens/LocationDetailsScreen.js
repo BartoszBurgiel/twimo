@@ -54,24 +54,28 @@ const dummyReviews = [
 ];
 
 // Define LocationDetailsScreen
-const LocationDetailsScreen = () => {
+const LocationDetailsScreen = props => {
   //FIXME: Virtualized Lists Warning
+
+  // Grab locationData from the props and store it in data var
+  const data = props.navigation.state.params.locationData;
+  console.log(data);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imgWrapper}>
         <Image
           style={styles.image}
           source={{
-            uri:
-              "https://www.heikaus-asset.com/wp-content/uploads/2018/01/Test_Starbucks-1024x731.jpg"
+            uri: data.picture
           }}
         ></Image>
       </View>
       <View style={styles.contentWrapper}>
         <Text style={styles.categoryTag}>coffeeshop</Text>
-        <Text style={styles.headerText}>Starbucks Montabaur</Text>
-        <RatingStars colorFill={color.brand.normal} rating={4} />
-        <SupplyIcons />
+        <Text style={styles.headerText}>{data.name}</Text>
+        <RatingStars colorFill={color.brand.normal} rating={data.rating} />
+        <SupplyIcons coffee wifi power food />
         <View style={styles.horizontalRule} />
         <Text style={styles.secondaryHeaderText}>Reviews</Text>
       </View>
