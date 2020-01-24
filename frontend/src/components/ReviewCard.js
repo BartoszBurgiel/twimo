@@ -1,4 +1,4 @@
-// Import core functionality
+// Import core functionality from react and react-native
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
@@ -8,6 +8,8 @@ import color from "../../utils/colorPallet";
 // Import custom components
 import RatingStars from "./RatingStars";
 
+// Define ReviewCard component
+// ReviewCard receives the reviews' data as properties from the parent component
 const ReviewCard = ({ reviewData }) => {
   return (
     <TouchableOpacity style={styles.card}>
@@ -25,6 +27,7 @@ const ReviewCard = ({ reviewData }) => {
   );
 };
 
+// Define the styles
 const styles = StyleSheet.create({
   card: {
     backgroundColor: color.white,
@@ -61,4 +64,5 @@ const styles = StyleSheet.create({
   }
 });
 
+// Export ReviewCard to be used across the app
 export default ReviewCard;

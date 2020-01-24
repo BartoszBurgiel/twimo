@@ -1,4 +1,4 @@
-// Import core functionalities
+// Import core functionalities from react, react-nativ and expo
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,14 +6,15 @@ import { Ionicons } from "@expo/vector-icons";
 // Import color utility
 import color from "../../utils/colorPallet";
 
-// Define the circular icons
+// Define CircleIcon component
+// Receives iconName and boolean status as properties from parent component
 const CircleIcon = ({ iconName, isTrue }) => {
   let activityColor = color.brand.light;
   if (isTrue) {
     activityColor = color.brand.normal;
   }
 
-  //FIXME: Center Icon in the circular view prop
+  //FIXME: Make this thing more intutitive to use through generalization
   return (
     <View
       style={{
@@ -43,6 +44,7 @@ const SupplyIcons = () => {
   );
 };
 
+// Define the styles
 const styles = StyleSheet.create({
   container: {
     flexWrap: "wrap",
@@ -52,4 +54,5 @@ const styles = StyleSheet.create({
   }
 });
 
+// Export SupplyIcons to get used across the App
 export default SupplyIcons;

@@ -1,17 +1,17 @@
-// Import core functionality dependencies
+// Import core functionality dependencies from react, react-native and expo
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+// Import custom components
 import RatingStars from "./RatingStars";
 
 // Import the color utility
 import color from "../../utils/colorPallet";
 
-// Define the card component
+// Define LocationCard component
+// LocationCard receives locationdata and the navigation object as properties from the parent component
 const LocationCard = ({ data, navigation }) => {
-  // Function to render star icons based on rating value
-
   return (
     <View style={styles.card}>
       <View style={styles.pictureWrapper}>
@@ -96,5 +96,5 @@ const styles = StyleSheet.create({
   }
 });
 
-// Export the Card component to be used inside the App
+// Export the Card component to be used across the App
 export default LocationCard;
