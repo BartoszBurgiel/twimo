@@ -1,4 +1,4 @@
-// Import core functionality dependencies
+// Import core functionality dependencies from react & react-native
 import React from "react";
 import {
   View,
@@ -17,6 +17,7 @@ import RatingStars from "../components/RatingStars";
 import SupplyIcons from "../components/SupplyIcons";
 import ReviewCard from "../components/ReviewCard";
 
+// Define some dummy Review data
 const dummyReviews = [
   {
     key: "1",
@@ -52,7 +53,7 @@ const dummyReviews = [
   }
 ];
 
-// Define Component
+// Define LocationDetailsScreen
 const LocationDetailsScreen = () => {
   //FIXME: Virtualized Lists Warning
   return (
@@ -84,7 +85,7 @@ const LocationDetailsScreen = () => {
   );
 };
 
-// Define styles
+// Define the styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -122,5 +123,5 @@ const styles = StyleSheet.create({
   }
 });
 
-// Export the above defined component
+// Export the above defined screen
 export default LocationDetailsScreen;

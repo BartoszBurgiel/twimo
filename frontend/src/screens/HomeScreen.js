@@ -5,14 +5,14 @@ import { View, Text, Button, StyleSheet } from "react-native";
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
 
-// Define Component
-const HomeScreen = props => {
+// Define HomeScreen
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.textStyle}>twimo</Text>
       <Button
         title="Locations"
-        onPress={() => props.navigation.navigate("List")}
+        onPress={() => navigation.navigate("List")}
       ></Button>
     </View>
   );
@@ -33,5 +33,5 @@ const styles = StyleSheet.create({
   }
 });
 
-// Export the above defined component
+// Export the above defined screen
 export default HomeScreen;
