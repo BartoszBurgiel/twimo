@@ -44,7 +44,7 @@ const LocationCard = ({ data, navigation }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: color.white,
-    width: 370,
+    width: "100%",
     height: 200,
     padding: 10,
     marginVertical: 10,

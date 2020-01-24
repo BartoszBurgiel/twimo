@@ -76,6 +76,7 @@ const ListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
     backgroundColor: color.white,
     alignItems: "center",
     justifyContent: "center"
