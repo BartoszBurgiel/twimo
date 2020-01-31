@@ -1,12 +1,13 @@
 -- Table storing all user's information
 -- name, password and email will be encoded with kihmo
+-- Only neccesary information -> no user profile pages anyway
 CREATE TABLE IF NOT EXISTS users (
 	name 	    		TEXT,
 	password	  		TEXT,
 	email       	    TEXT,
-	comments		    VARCHAR(16), 
+
+	-- "xyz location is the fav location of n user"
 	favlocation       	VARCHAR(16), 
-	ratings           	VARCHAR(16), 
 	id					VARCHAR(16)
 ) ;
 
@@ -27,32 +28,6 @@ CREATE TABLE IF NOT EXISTS comments (
 	id            VARCHAR(16)
 ) ;
 
-
--- Table that assigns one favorite location to 
--- a user 
-CREATE TABLE IF NOT EXISTS location_fav_users (
-	userID 		VARCHAR(16), 
-	locationID 	VARCHAR(16)
-) ;
-
--- Stores all features of a location (electricity, internet, ...)
-CREATE TABLE IF NOT EXISTS location_features (
-	name			VARCHAR(16), 
-	descr			VARCHAR(16),
-	locationID	VARCHAR(16),
-	featuresID	VARCHAR(16)
-) ;
-
--- Stores dishes for the thumbnails 
--- Multiple dishes can be stored here, but only one will be chosen for the thumbnail later on 
-CREATE TABLE IF NOT EXISTS dishes (
-	name 			VARCHAR(16),
-	type			VARCHAR(16), 
-	price			NUMERIC,
-	locationID	VARCHAR(16),
-	ID 	    	VARCHAR(16) 
-) ;
-
 -- Stores all location 
 CREATE TABLE IF NOT EXISTS locations (
 	name 	    		VARCHAR(16),
@@ -60,9 +35,15 @@ CREATE TABLE IF NOT EXISTS locations (
 	coordY            NUMERIC,
 	descr              TEXT,
 	webpage				VARCHAR(16),
-	users             VARCHAR(16), 
-	ratings           VARCHAR(16), 
 	id				VARCHAR(16)
 ) ;
 
-
+-- Features of each location
+CREATE TABLE IF NOT EXISTS features (
+	coffee BIT, 
+	wifi  BIT,
+	power BIT,
+	music  BIT,
+	food BIT,
+	locationID VARCHAR(16)
+) ;

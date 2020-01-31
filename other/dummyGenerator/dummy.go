@@ -35,23 +35,11 @@ func Generate() bytes.Buffer {
 	// Write generated querries for adding comments
 	allQuerries.WriteString(commentQuerries)
 
-	// Generate fav location querries
-	favlocationQuerries := generateFavLocations(users, locations)
-
-	// Write generated querries for adding fav locations
-	allQuerries.WriteString(favlocationQuerries)
-
 	// Generate features querries
 	featureQuerries := generateFeatures(locations)
 
 	// Write generated features querries
 	allQuerries.WriteString(featureQuerries)
-
-	// Generate dishes querries
-	dishesQuerries := generateDishes(locations)
-
-	// Write generated dishes querries
-	allQuerries.WriteString(dishesQuerries)
 
 	return allQuerries
 }
@@ -91,23 +79,11 @@ func GenerateEncoded() bytes.Buffer {
 	// Write generated querries for adding comments
 	allQuerries.WriteString(commentQuerries)
 
-	// Generate fav location querries
-	favlocationQuerries := generateFavLocations(users, locations)
-
-	// Write generated querries for adding fav locations
-	allQuerries.WriteString(favlocationQuerries)
-
 	// Generate features querries
 	featureQuerries := generateFeatures(locations)
 
 	// Write generated features querries
 	allQuerries.WriteString(featureQuerries)
-
-	// Generate dishes querries
-	dishesQuerries := generateDishes(locations)
-
-	// Write generated dishes querries
-	allQuerries.WriteString(dishesQuerries)
 
 	return allQuerries
 }

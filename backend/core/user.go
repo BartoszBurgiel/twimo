@@ -10,9 +10,7 @@ type User struct {
 	Name        string
 	Password    string
 	Email       string
-	Comments    string
 	FavLocation string
-	Ratings     string
 	ID          string
 }
 
@@ -38,7 +36,7 @@ func (u *User) Decode() {
 func (u User) generateUserKey() kihmo.Key {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.Comments, "-")
+	dividedComments := strings.SplitAfter(u.FavLocation, "-")
 	code := dividedComments[len(dividedComments)-1]
 	key, _ := kihmo.StringToKey(code)
 	return key

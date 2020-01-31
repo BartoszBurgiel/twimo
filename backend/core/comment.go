@@ -4,14 +4,9 @@ package core
 type Comment struct {
 	Title   string
 	Content string
+	User    User
 
-	// User's ID and user object
-	User struct {
-		Key  string
-		User User
-	}
-
-	// Location's ID
+	// Id of the location
 	Location string
 
 	// Comment's ID

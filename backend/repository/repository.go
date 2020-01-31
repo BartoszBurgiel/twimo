@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path"
 
@@ -32,15 +33,25 @@ func (r *Repo) initSQLite() error {
 	// If not - mkdir
 	p := path.Dir(r.path)
 	if err := os.MkdirAll(p, os.ModePerm); err != nil {
+		fmt.Println(err)
 		return err
 	}
 
 	// Open connection
 	db, err := sql.Open("sqlite3", r.path)
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 
+	// Read setup query from the file
+	tempSetupDb, err := ioutil.ReadFile("../repository/queries/setup.sql")
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	setupDB := string(tempSetupDb)
 	// Execute setup query
 	_, error := db.Exec(setupDB)
 	if error != nil {

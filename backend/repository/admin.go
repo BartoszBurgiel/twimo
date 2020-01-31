@@ -13,7 +13,7 @@ ADMIN AND MAINTENENCE QUERRIES
 func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 
 	// Run querry
-	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, comments, users, ratings, id FROM locations ;`)
+	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, webpage, id FROM locations ;`)
 	if err != nil {
 		fmt.Println(err)
 		return locations, err
@@ -29,11 +29,47 @@ func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 		location := core.Location{}
 
 		// Construct tempLocation
-		err := rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Comments.Key, &location.Users, &location.Ratings, &location.ID)
+		err := rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Webpage, &location.ID)
 		if err != nil {
 			fmt.Println(err)
 			return locations, err
 		}
+
+		// Fill remaining attributes
+
+		// Get current location's comments
+		comments, err := r.GetCommentsOfLocation(location.ID)
+		if err != nil {
+			fmt.Println(err)
+			return locations, err
+		}
+
+		// Append to location struct
+		location.Comments = comments
+
+		// Get locations users
+		users, err := r.GetLocationsFavUsers(location.ID)
+		if err != nil {
+			fmt.Println(err)
+			return locations, err
+		}
+
+		// Append to location struct
+		location.Users = users
+
+		// Get location's average rating
+		rating := r.GetLocationAvrRating(location.ID)
+		location.Rating = rating
+
+		// Get location's features
+		features, err := r.GetLocationFeatures(location.ID)
+		if err != nil {
+			fmt.Println(err)
+			return locations, err
+		}
+
+		// Append to location struct
+		location.Features = features
 
 		// Add tempLocation to locations
 		locations = append(locations, location)
@@ -46,7 +82,7 @@ func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 func (r Repo) GetAllUsers() (users []core.User, err error) {
 
 	// Run querry
-	rows, err := r.db.Query(`SELECT name, password, email, comments, favlocation, ratings, id FROM users ;`)
+	rows, err := r.db.Query(`SELECT name, password, email, favlocation, id FROM users ;`)
 	if err != nil {
 		fmt.Println(err)
 		return users, err
@@ -61,7 +97,7 @@ func (r Repo) GetAllUsers() (users []core.User, err error) {
 		user := core.User{}
 
 		// Construct tempuser
-		err := rows.Scan(&user.Name, &user.Password, &user.Email, &user.Comments, &user.FavLocation, &user.Ratings, &user.ID)
+		err := rows.Scan(&user.Name, &user.Password, &user.Email, &user.FavLocation, &user.ID)
 		if err != nil {
 			fmt.Println(err)
 			return users, err
@@ -89,6 +125,8 @@ func (r Repo) GetAllComments() (comments []core.Comment, err error) {
 	// Schedule closing of the rows
 	defer rows.Close()
 
+	var tempUserID, tempLocationID string
+
 	// Iterate over rows
 	for rows.Next() {
 
@@ -96,11 +134,26 @@ func (r Repo) GetAllComments() (comments []core.Comment, err error) {
 		comment := core.Comment{}
 
 		// Construct tempuser
-		err := rows.Scan(&comment.Title, &comment.Content, &comment.User.Key, &comment.Location, &comment.ID)
+		err := rows.Scan(&comment.Title, &comment.Content, &tempUserID, &tempLocationID, &comment.ID)
 		if err != nil {
 			fmt.Println(err)
 			return comments, err
 		}
+
+		// Fill remaining attributes
+
+		// Get user
+		user, err := r.GetUser(tempLocationID)
+		if err != nil {
+			fmt.Println(err)
+			return comments, err
+		}
+
+		// Append to struct
+		comment.User = user
+
+		// Append to struct
+		comment.Location = tempLocationID
 
 		// Add tempuser to comments
 		comments = append(comments, comment)

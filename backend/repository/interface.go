@@ -42,17 +42,14 @@ type Repository interface {
 	// Get all users that have given location as favorite
 	GetLocationsFavUsers(locationID string) ([]core.User, error)
 
+	// Get all features a location offers
+	GetLocationFeatures(locationID string) (core.Features, error)
+
 	// Get all ratings from the Db of given locations
 	GetLocationRatings(locationID string) ([]core.Rating, error)
 
 	// Get the average of all ratings of the location
 	GetLocationAvrRating(locationID string) float64
-
-	// Get all of the dishes that a location offers
-	GetLocationsDishes(locationID string) ([]core.Dish, error)
-
-	// Get all of the features that a location offers
-	GetLocationsFeatures(locationID string) ([]core.Feature, error)
 
 	// Add a user to the database
 	AddUser(core.User) error
@@ -63,11 +60,8 @@ type Repository interface {
 	// Add a rating about a location by a user
 	AddRating(rating core.Rating) error
 
-	// Add a dish to the database
-	AddDish(dish core.Dish) error
-
 	// Add a feature to the database
-	AddFeature(feature core.Feature) error
+	AddFeature(feature core.Location) error
 
 	// Add one new location to the base
 	AddLocation(location core.Location) error

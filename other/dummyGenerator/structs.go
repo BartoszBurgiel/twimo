@@ -10,23 +10,18 @@ type user struct {
 	name        string
 	password    string
 	email       string
-	comments    string
 	favlocation string
-	ratings     string
 	id          string
 }
 
 // Stores all data of the location needed to compose the querries
 type location struct {
-	name     string
-	coordX   int
-	coordY   int
-	desc     string
-	comments string
-	website  string
-	users    string
-	ratings  string
-	id       string
+	name    string
+	coordX  int
+	coordY  int
+	desc    string
+	website string
+	id      string
 }
 
 /*
@@ -37,7 +32,7 @@ BARTOSZ'S PART
 func (u *user) Encode() {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.comments, "-")
+	dividedComments := strings.SplitAfter(u.favlocation, "-")
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
@@ -50,7 +45,7 @@ func (u *user) Encode() {
 func (u *user) Decode() {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.comments, "-")
+	dividedComments := strings.SplitAfter(u.favlocation, "-")
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key

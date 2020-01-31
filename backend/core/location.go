@@ -12,17 +12,16 @@ type Location struct {
 
 	Desc string
 
-	HomePage string
+	Webpage string
 
-	// Contains key to the comments in the database and comments objects
-	Comments struct {
-		Key      string
-		Comments []Comment
-	}
+	Comments []Comment
 
-	Users string
+	Users []User
 
-	Ratings string
+	Rating float64
+
+	// Each attribute determins if a feature exists or not
+	Features Features
 
 	ID string
 

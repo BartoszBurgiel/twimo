@@ -50,7 +50,7 @@ func determineLocation(r *http.Request, s *Server) (location core.Location, err 
 	}
 
 	// Assign comments to locations' member
-	location.Comments.Comments = comments
+	location.Comments = comments
 	return location, err
 }
 
@@ -65,7 +65,7 @@ func (s *Server) handleLocationHomepage(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	// Open websocket connection
+	// Host file
 	temp, err := template.New("location").ParseFiles("../server/assets/location.html")
 	if err != nil {
 		fmt.Println(err)
@@ -120,14 +120,11 @@ func echoLocationHomepage(conn *websocket.Conn, s *Server, locationData core.Loc
 	// Schedule closure of the connection
 	defer conn.Close()
 
-	for {
-
-		// Write the user to the ws
-		if err := conn.WriteJSON(locationData); err != nil {
-			fmt.Println(err)
-		}
-		break
+	// Write the user to the ws
+	if err := conn.WriteJSON(locationData); err != nil {
+		fmt.Println(err)
 	}
+
 }
 
 // Format locations name so that it can be used as a link
