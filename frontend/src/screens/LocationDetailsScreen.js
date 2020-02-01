@@ -14,7 +14,7 @@ import color from "../../utils/colorPallet";
 
 // Import custom built components
 import RatingStars from "../components/RatingStars";
-import FeatureIcons from "../components/FeatureIcon";
+import FeatureIcons from "../components/FeatureIcons";
 import ReviewCard from "../components/ReviewCard";
 
 // Define some dummy Review data
