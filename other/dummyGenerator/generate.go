@@ -3,6 +3,7 @@ package dummygenerator
 import (
 	"fmt"
 	"kihmo"
+	"kihmo/base"
 	"math/rand"
 	"time"
 
@@ -65,8 +66,8 @@ func generateUsers() (string, []user) {
 
 			/* BARTOSZ'S PART */
 			// hash password
-			_, salt, _ := kihmo.Salt(fullName, 60)
-			password, err := kihmo.Hash(password, salt, 60)
+			_, salt, _ := kihmo.Salt(fullName, base.Base85)
+			password, err := kihmo.Hash(password, salt, base.Base85)
 			if err != nil {
 				panic(err)
 			}
@@ -153,8 +154,8 @@ func generateEncodedUsers() (string, []user) {
 
 			/* BARTOSZ'S PART */
 			// hash password
-			_, salt, _ := kihmo.Salt(fullName, 60)
-			password, err := kihmo.Hash(password, salt, 60)
+			_, salt, _ := kihmo.Salt(fullName, base.Base85)
+			password, err := kihmo.Hash(password, salt, base.Base85)
 			if err != nil {
 				panic(err)
 			}

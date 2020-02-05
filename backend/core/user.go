@@ -2,6 +2,7 @@ package core
 
 import (
 	"kihmo"
+	"kihmo/base"
 	"strings"
 )
 
@@ -19,7 +20,7 @@ func (u *User) Encode() {
 	// Calculate the key
 	key := u.generateUserKey()
 
-	u.Email, _ = key.Lock([]byte(u.Email), 60)
+	u.Email, _ = key.Lock([]byte(u.Email), base.Base85)
 }
 
 // Decode user's personal data with kihmo
@@ -28,7 +29,7 @@ func (u *User) Decode() {
 	key := u.generateUserKey()
 
 	// Encode name password and email
-	email, _ := key.Unlock(u.Email, 60)
+	email, _ := key.Unlock(u.Email, base.Base85)
 	u.Email = string(email)
 }
 

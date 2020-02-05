@@ -3,6 +3,7 @@ package security
 import (
 	"fmt"
 	"kihmo"
+	"kihmo/base"
 	"twimo/backend/core"
 	"twimo/backend/repository"
 )
@@ -11,14 +12,14 @@ import (
 func Password(user core.User, password string, r repository.Repository) (bool, error) {
 
 	// Generate salt
-	_, salt, err := kihmo.Salt(user.Name, 60)
+	_, salt, err := kihmo.Salt(user.Name, base.Base85)
 	if err != nil {
 		fmt.Println(err)
 		return false, err
 	}
 
 	// hash password user has put in
-	hashedPasswords, err := kihmo.Hash(password, salt, 60)
+	hashedPasswords, err := kihmo.Hash(password, salt, base.Base85)
 	if err != nil {
 		fmt.Println(err)
 		return false, err

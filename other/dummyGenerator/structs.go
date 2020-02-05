@@ -2,6 +2,7 @@ package dummygenerator
 
 import (
 	"kihmo"
+	"kihmo/base"
 	"strings"
 )
 
@@ -38,7 +39,7 @@ func (u *user) Encode() {
 	// Generate key
 	key, _ := kihmo.StringToKey(code)
 
-	u.email, _ = key.Lock([]byte(u.email), 60)
+	u.email, _ = key.Lock([]byte(u.email), base.Base85)
 }
 
 // Decode user's personal information with kihmo
@@ -51,7 +52,7 @@ func (u *user) Decode() {
 	// Generate key
 	key, _ := kihmo.StringToKey(code)
 
-	email, _ := key.Unlock(u.email, 60)
+	email, _ := key.Unlock(u.email, base.Base85)
 
 	u.email = string(email)
 }
