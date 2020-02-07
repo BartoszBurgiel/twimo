@@ -2,6 +2,7 @@ package dummygenerator
 
 import (
 	"kihmo"
+	"kihmo/base"
 	"strings"
 )
 
@@ -10,23 +11,18 @@ type user struct {
 	name        string
 	password    string
 	email       string
-	comments    string
 	favlocation string
-	ratings     string
 	id          string
 }
 
 // Stores all data of the location needed to compose the querries
 type location struct {
-	name     string
-	coordX   int
-	coordY   int
-	desc     string
-	comments string
-	website  string
-	users    string
-	ratings  string
-	id       string
+	name    string
+	coordX  int
+	coordY  int
+	desc    string
+	website string
+	id      string
 }
 
 /*
@@ -37,31 +33,26 @@ BARTOSZ'S PART
 func (u *user) Encode() {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.comments, "-")
+	dividedComments := strings.SplitAfter(u.favlocation, "-")
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
 	key, _ := kihmo.StringToKey(code)
 
-	// Encode
-	u.name, _ = key.Lock([]byte(u.name), 60)
-	u.email, _ = key.Lock([]byte(u.email), 60)
+	u.email, _ = key.Lock([]byte(u.email), base.Base85)
 }
 
 // Decode user's personal information with kihmo
 func (u *user) Decode() {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.comments, "-")
+	dividedComments := strings.SplitAfter(u.favlocation, "-")
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
 	key, _ := kihmo.StringToKey(code)
 
-	// Encode
-	name, _ := key.Unlock(u.name, 60)
-	email, _ := key.Unlock(u.email, 60)
+	email, _ := key.Unlock(u.email, base.Base85)
 
-	u.name = string(name)
 	u.email = string(email)
 }

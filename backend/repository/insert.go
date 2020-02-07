@@ -26,13 +26,8 @@ func (r Repo) AddUser(user core.User) error {
 	return nil
 }
 
-// AddDish to the datbaase
-func (r Repo) AddDish(dish core.Dish) error {
-	return nil
-}
-
 // AddFeature to the database
-func (r Repo) AddFeature(feature core.Feature) error {
+func (r Repo) AddFeature(feature core.Location) error {
 	return nil
 }
 
