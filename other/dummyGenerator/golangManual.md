@@ -39,3 +39,8 @@ for [index], [variable] := range [array] { <br>
     ... <br>
 }
 </code>
+
+
+# Terminology
+
+`slice` = array, list

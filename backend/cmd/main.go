@@ -13,6 +13,7 @@ func main() {
 	repo, err := repository.NewSQLite("../repository/sqlitedb/sql/repo.db")
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Println("Launching the server")

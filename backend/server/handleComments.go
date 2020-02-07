@@ -66,7 +66,7 @@ func echoComments(conn *websocket.Conn, s *Server) {
 		if comment, err := s.repo.GetComment(commentID); err != nil {
 
 			// Write log
-			if err := conn.WriteMessage(1, []byte(fmt.Sprintf("No user with the id %s has been found in the DB", comment))); err != nil {
+			if err := conn.WriteMessage(1, []byte(fmt.Sprintf("No user with the id %T has been found in the DB", comment))); err != nil {
 				fmt.Println(err)
 			}
 		} else {
