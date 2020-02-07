@@ -1,79 +1,88 @@
-# Twimo - Fahrplan 
- 
+# Twimo - Fahrplan
+
 # Requirements
 
 ## Homescreen
 
 #### Front-end
 
-* Generate routes for: 
-*   Log in 
-*   Sign-Up 
+- Generate routes for:
+- Log in
+- Sign-Up
 
-#### Back-end 
-* Handle get requests 
+#### Back-end
 
+- Handle get requests
 
-## List screen 
-* search engine for locations 
+## List screen
 
-#### Front-end 
-* User position 
+- search engine for locations
 
-#### Back-end 
-* coordinates -> google API 
-* 10 best matches 
+#### Front-end
 
-* data to send: 
-*   Location name 
-*   Description 
-*   avr. rating (x/5) 
-*   Price level (x/5)
-*   Picture (somehow?)
+- User position
+
+#### Back-end
+
+- coordinates -> google API
+- 10 best matches
+
+- data to send:
+- Location name
+- Description
+- avr. rating (x/5)
+- Price level (x/5)
+- Picture (somehow?)
 
 ## Location page
 
 #### Front-End
-* route -> localhost/locations/ID
-* comment 
-*   userID 
-*   content 
-*   rating 
-* Set to favourite place 
-*   userID 
-*   locationID
 
-#### Back-End 
-* picture 
-* coords 
-* (webpage)
-* desc
-* name 
-* avr. rating 
-* features 
-* 10 comments (most recent) 
+- route -> localhost/locations/ID
+- comment
+- userID
+- content
+- rating
+- Set to favourite place
+- userID
+- locationID
 
+#### Back-End
 
-## New location 
-#### Back-End 
-* Name 
-* Coordinations 
-* Desc 
-* Webpage
-* (location or address)
-* features 
+- picture
+- coords
+- (webpage)
+- desc
+- name
+- avr. rating
+- features
+- 10 comments (most recent)
 
-## User page 
+## New location
 
-#### Front-End 
-* name
-* email 
-* fav location 
-* id 
+#### Back-End
 
-#### Back-End 
-(bei bedarf)
-* new email 
-* new password 
-*   old and new password 
-* new username
+- Name
+- Coordinations
+- Desc
+- Webpage
+- (location or address)
+- features
+
+## User page
+
+#### Front-End
+
+- name
+- email
+- fav location
+- id
+
+#### Back-End
+
+(on demand)
+
+- new email
+- new password
+- old and new password
+- new username
