@@ -74,7 +74,6 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 	if ok {
 		fmt.Println("Successful login")
 		fmt.Println(user)
-		fmt.Println(user.Password)
 	} else {
 		fmt.Println("invalid username or email")
 	}
