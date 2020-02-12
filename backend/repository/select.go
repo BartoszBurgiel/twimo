@@ -6,7 +6,6 @@ package repository
 
 import (
 	"fmt"
-	"strings"
 	"twimo/backend/core"
 )
 
@@ -236,7 +235,7 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 
 	// Get  rows
-	rows, err := r.db.Query(`SELECT name FROM locations ; `)
+	rows, err := r.db.Query(`SELECT id FROM locations ; `)
 	if err != nil {
 		fmt.Println(err)
 		return locations, err
@@ -247,23 +246,20 @@ func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 
 	// Iterate over rows
 	for rows.Next() {
-		name := ""
+		id := ""
 
-		rows.Scan(&name)
+		rows.Scan(&id)
 
-		// Check if name is empty -> comment not found
-		if name == "" {
+		// Check if id is empty -> comment not found
+		if id == "" {
 			return locations, fmt.Errorf("No locations found in the database")
 		}
 
-		locationsLink := strings.ReplaceAll(name, "ä", "+")
-		locationsLink = strings.ReplaceAll(locationsLink, "ü", "*")
-		locationsLink = strings.ReplaceAll(locationsLink, "ö", "$")
-		locationsLink = "/" + strings.ReplaceAll(locationsLink, " ", "_")
+		locationsLink := "/" + id
 
 		// assemble temporary location
 		tempLocation := core.Location{
-			Name:         name,
+			Name:         id,
 			LocationLink: locationsLink,
 		}
 
@@ -277,7 +273,7 @@ func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 // GetLocationFeatures from the database
 func (r Repo) GetLocationFeatures(locationID string) (features core.Features, err error) {
 	// Get  rows
-	rows, err := r.db.Query(`SELECT coffee, wifi, power, music, food, FROM features WHERE locationID = ?  ; `, locationID)
+	rows, err := r.db.Query(`SELECT coffee, wifi, power, music, food FROM features WHERE locationID = ?  ; `, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return features, err
