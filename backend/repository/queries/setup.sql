@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Stores all of the ratings 
 CREATE TABLE IF NOT EXISTS ratings (
 	value			NUMERIC,
+	locationID VARCHAR(16),
     id            VARCHAR(16)
 ) ;
 

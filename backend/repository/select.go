@@ -400,7 +400,6 @@ func (r Repo) GetRating(ratingID string) (rating int, err error) {
 			fmt.Println(err)
 			return 0, err
 		}
-		fmt.Println("hello rating")
 	}
 	return rating, nil
 }

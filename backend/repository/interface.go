@@ -75,9 +75,6 @@ type Repository interface {
 	// Delete a location from the data base with given ID
 	DeleteLocation(locationID string) error
 
-	// Delete a dish from the data base with given ID
-	DeleteDish(dishID string) error
-
 	// Delete a feature from the data base with given ID
 	DeleteFeature(featureID string) error
 
