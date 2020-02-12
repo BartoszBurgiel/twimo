@@ -25,6 +25,12 @@ type location struct {
 	id      string
 }
 
+// stores all data of all ratings
+type rating struct {
+	value int
+	id    string
+}
+
 /*
 BARTOSZ'S PART
 */

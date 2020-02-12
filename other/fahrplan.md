@@ -7,8 +7,8 @@
 #### Front-end
 
 * Generate routes for: 
-*   Log in 
-*   Sign-Up 
+    * Log in 
+    * Sign-Up 
 
 #### Back-end 
 * Handle get requests 
@@ -25,11 +25,11 @@
 * 10 best matches 
 
 * data to send: 
-*   Location name 
-*   Description 
-*   avr. rating (x/5) 
-*   Price level (x/5)
-*   Picture (somehow?)
+    * Location name 
+    * Description 
+    * avr. rating (x/5) 
+    * Price level (x/5)
+    * Picture (somehow?)
 
 ## Location page
 
@@ -48,7 +48,7 @@
 * coords 
 * (webpage)
 * desc
-* name 
+* nam:e 
 * avr. rating 
 * features 
 * 10 comments (most recent) 

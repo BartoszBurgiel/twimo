@@ -268,38 +268,6 @@ func generateLocations() (string, []location) {
 	return querries, locations
 }
 
-// Genrate querries for the ratings table
-// from existing users and location structs
-// every user gives a rating to every location (0-10)
-func generateRatings(users []user, locations []location) string {
-
-	querries := ""
-
-	// Iterate over locations
-	for _, location := range locations {
-
-		// Iterate over users
-		for _, user := range users {
-
-			// New seed of random numbers
-			rand.Seed(time.Now().UnixNano())
-
-			// Generate a random number for the rating 0 - 10
-			rating := rand.Intn(11)
-
-			id := uuid.New().String()
-
-			// Generate querry
-			querries += fmt.Sprintf(addNewRating, user.id, location.id, rating, id)
-
-			// Add new line
-			querries += "\n"
-		}
-	}
-
-	return querries
-}
-
 // Generate comments about every location from every user
 func generateComments(users []user, locations []location) string {
 	querries := ""
@@ -317,8 +285,17 @@ func generateComments(users []user, locations []location) string {
 			content := lorem
 			id := uuid.New().String()
 
-			// Generate querry
-			querries += fmt.Sprintf(addNewComment, title, content, user.id, location.id, id)
+			rand.Seed(time.Now().UnixNano())
+
+			// Generate a random number 0 - 100
+			ratingValue := rand.Intn(6)
+			ratingID := uuid.New().String()
+
+			// Generate querry for new comment
+			querries += fmt.Sprintf(addNewComment, title, content, user.id, location.id, ratingID, id)
+
+			querries += "\n"
+			querries += fmt.Sprintf(addNewRating, ratingValue, ratingID)
 
 			// Add line break
 			querries += "\n"

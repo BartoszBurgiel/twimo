@@ -23,12 +23,6 @@ func Generate() bytes.Buffer {
 	// Write generaetd querries for adding locations
 	allQuerries.WriteString(locationQuerries)
 
-	// Generate rating queries
-	ratingQueries := generateRatings(users, locations)
-
-	// Write generated querries for adding ratings
-	allQuerries.WriteString(ratingQueries)
-
 	// Generate comment querries
 	commentQuerries := generateComments(users, locations)
 
@@ -61,12 +55,6 @@ func GenerateEncoded() bytes.Buffer {
 
 	// Write generaetd querries for adding locations
 	allQuerries.WriteString(locationQuerries)
-
-	// Generate rating queries
-	ratingQueries := generateRatings(users, locations)
-
-	// Write generated querries for adding ratings
-	allQuerries.WriteString(ratingQueries)
 
 	// Decode users so that comment's title isn't hashed
 	for i := 0; i < len(users); i++ {

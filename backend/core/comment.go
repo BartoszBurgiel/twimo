@@ -9,6 +9,9 @@ type Comment struct {
 	// Id of the location
 	Location string
 
+	// Rating of the location
+	Rating int
+
 	// Comment's ID
 	ID string
 }
