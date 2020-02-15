@@ -1,6 +1,6 @@
-# twimo
+# TWIMO
 
-...**t**he **w**orld **i**s **m**y **o**ffice
+...**T**he **W**orld **I**s **M**y **O**ffice
 
 ## The challenge
 
@@ -18,15 +18,17 @@ Coffeeshops and bars, however, do not always provide fast & free wifi or power s
 
 ## The solution
 
-With some help of public APIs like _Google Maps_, _tripadvisor_ and _yelp_, **twimo** is able to retrieve information about potential locations that then can be evaluated by the users.
+With some help of public APIs like _Google Maps_ or _tripadvisor_, **twimo** is able to retrieve information about potential locations that then can be evaluated by the users.
 
-Through that principle, **twimo** gets better and better with every new user.
+Through that principle, **TWIMO** gets better and better with every new user.
 
 ## The implementation
 
 #### FrontEnd
 
 - **React Native** for cross-plattform compatibility
+  - React Navigate for navigation from screen to screen
+  - ExpoIcons for... well, icons.
 - **Expo** for testing
 
 #### BackEnd
