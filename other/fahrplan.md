@@ -78,6 +78,7 @@
 - email
 - fav location
 - id
+- user key
 
 #### Back-End
 
@@ -92,6 +93,7 @@
 ## New User (sign in) 
 #### Front-End 
 - fail (if name exists...)
+- save key in local storage 
 
 #### Back-End 
 - username 
