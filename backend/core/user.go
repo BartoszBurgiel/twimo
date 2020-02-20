@@ -42,3 +42,8 @@ func (u User) generateUserKey() kihmo.Key {
 	key, _ := kihmo.StringToKey(code)
 	return key
 }
+
+// ToChecksum returns a hash of all user's data in base85
+func (u User) ToChecksum() (sum string) {
+	return sum
+}

@@ -28,23 +28,34 @@ func NewServer(r repository.Repository) (*Server, error) {
 // Innitialize the server and add routing
 func (s *Server) init() error {
 
-	// Add route for main page
-	s.router.Route("/")["GET"] = http.HandlerFunc(s.handleIndexGET)
+	/*
+	  MAIN ROUTES
+	*/
+
+	// Route for the home screen
+	s.router.Route("/")["GET"] = http.HandlerFunc(s.handleHomeScreenGET)
+
+	// Route for the login page
+	s.router.Route("/login")["GET"] = http.HandlerFunc(s.handleLoginGET)
+
+	// Route for sign in page
+	s.router.Route("/new")["GET"] = http.HandlerFunc(s.handleSigninGET)
+
+	// Route for the list of all locations
+	s.router.Route("/listscreen")["GET"] = http.HandlerFunc(s.handleListScreenGET)
 
 	// Init location home pages
 	s.initLocationHomepageRouter()
 
-	// Getter pages
-	s.router.Route("/users")["GET"] = http.HandlerFunc(s.handleUsersGET)
-	s.router.Route("/users/ws")["GET"] = http.HandlerFunc(s.handleUserWS)
-
-	s.router.Route("/comments")["GET"] = http.HandlerFunc(s.handleCommentsGET)
-	s.router.Route("/comments/ws")["GET"] = http.HandlerFunc(s.handleCommentsWS)
-
-	s.router.Route("/locationList")["GET"] = http.HandlerFunc(s.handleLocationListGET)
-
-	s.router.Route("/login")["GET"] = http.HandlerFunc(s.handleLoginGET)
-	s.router.Route("/login/ws")["GET"] = http.HandlerFunc(s.handleLoginWS)
+	/* TODO: user routing??? security???
+	- how to determine if user isn't just following the link?
+	- hash?
+		- ssh512?
+		- kihmo
+			- user to hash function already prepared
+		- louis stores user data in local storage + user key
+	*/
+	s.initUserPageRouter()
 
 	return nil
 }
