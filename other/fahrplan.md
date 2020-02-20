@@ -14,6 +14,7 @@
 
 - Handle get requests
 
+---
 ## List screen
 
 - search engine for locations
@@ -33,7 +34,7 @@
 - avr. rating (x/5)
 - Price level (x/5)
 - Picture (somehow?)
-
+---
 ## Location page
 
 #### Front-End
@@ -57,7 +58,7 @@
 - avr. rating
 - features
 - 10 comments (most recent)
-
+---
 ## New location
 
 #### Back-End
@@ -68,7 +69,7 @@
 - Webpage
 - (location or address)
 - features
-
+---
 ## User page
 
 #### Front-End
@@ -86,3 +87,15 @@
 - new password
 - old and new password
 - new username
+
+---
+## New User (sign in) 
+#### Front-End 
+- fail (if name exists...)
+
+#### Back-End 
+- username 
+- password 
+- email 
+- fav location (if not -> null) 
+
