@@ -45,5 +45,22 @@ func (u User) generateUserKey() kihmo.Key {
 
 // ToChecksum returns a hash of all user's data in base85
 func (u User) ToChecksum() (sum string) {
+
+	// Decode information
+	u.Decode()
+
+	// Gather all user's information
+	sum += u.Name
+	sum += u.Email
+	sum += u.FavLocation
+	sum += u.ID
+	u.Encode()
+
+	// Generate salt
+	_, salt, _ := kihmo.Salt(u.Name, base.Base85)
+
+	// Hash and replace salt
+	sum, _ = kihmo.Hash(sum, salt, base.Base85)
+
 	return sum
 }
