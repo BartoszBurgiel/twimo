@@ -55,7 +55,6 @@ const LocationDetailsScreen = props => {
 
   // Grab locationData from the props and store it in data const
   const data = props.navigation.state.params.locationData;
-  console.log(data);
 
   return (
     <ScrollView style={styles.container}>
