@@ -15,6 +15,7 @@
 - Handle get requests
 
 ---
+
 ## List screen
 
 - search engine for locations
@@ -34,7 +35,9 @@
 - avr. rating (x/5)
 - Price level (x/5)
 - Picture (somehow?)
+
 ---
+
 ## Location page
 
 #### Front-End
@@ -58,7 +61,9 @@
 - avr. rating
 - features
 - 10 comments (most recent)
+
 ---
+
 ## New location
 
 #### Back-End
@@ -69,7 +74,9 @@
 - Webpage
 - (location or address)
 - features
+
 ---
+
 ## User page
 
 #### Front-End
@@ -90,14 +97,18 @@
 - new username
 
 ---
-## New User (sign in) 
-#### Front-End 
+
+## New User (sign in)
+
+#### Front-End
+
 - fail (if name exists...)
-- save key in local storage 
+- send credentials to server
+- receive hashed credentials as API-Key for everything related to user
 
-#### Back-End 
-- username 
-- password 
-- email 
-- fav location (if not -> null) 
+#### Back-End
 
+- username
+- password
+- email
+- fav location (if not -> null)
