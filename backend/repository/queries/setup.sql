@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS comments (
 	content  		TEXT,
 	userID        VARCHAR(16),
 	locationID	VARCHAR(16), 
+	ratingID	VARCHAR(16),
 	id            VARCHAR(16)
 ) ;
 
