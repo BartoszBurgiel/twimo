@@ -6,7 +6,6 @@ package repository
 
 import (
 	"fmt"
-	"strings"
 	"twimo/backend/core"
 )
 
@@ -132,18 +131,13 @@ func (r Repo) GetUsersComments(userID string) (comments []core.Comment, err erro
 	return comments, err
 }
 
-// GetUsersRatings from the database
-func (r Repo) GetUsersRatings(userID string) (ratings []core.Rating, err error) {
-	return ratings, err
-}
-
 // GetComment returns a pointer to a commment struct creater from Db
 func (r Repo) GetComment(commentID string) (comment core.Comment, err error) {
 	// Set comment;s id
 	comment.ID = commentID
 
 	// Get  rows
-	rows, err := r.db.Query(`SELECT title, content, userID, locationID FROM comments WHERE id = ? ; `, commentID)
+	rows, err := r.db.Query(`SELECT title, content, userID, locationID, ratingID FROM comments WHERE id = ? ; `, commentID)
 	if err != nil {
 		fmt.Println(err)
 		return comment, err
@@ -155,7 +149,7 @@ func (r Repo) GetComment(commentID string) (comment core.Comment, err error) {
 	// Iterate over rows
 	userID := ""
 	for rows.Next() {
-		rows.Scan(&comment.Title, &comment.Content, &userID, &comment.Location)
+		rows.Scan(&comment.Title, &comment.Content, &userID, &comment.Location, &comment.Rating)
 	}
 
 	// Get user struct
@@ -236,7 +230,7 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 
 	// Get  rows
-	rows, err := r.db.Query(`SELECT name FROM locations ; `)
+	rows, err := r.db.Query(`SELECT id FROM locations ; `)
 	if err != nil {
 		fmt.Println(err)
 		return locations, err
@@ -247,23 +241,20 @@ func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 
 	// Iterate over rows
 	for rows.Next() {
-		name := ""
+		id := ""
 
-		rows.Scan(&name)
+		rows.Scan(&id)
 
-		// Check if name is empty -> comment not found
-		if name == "" {
+		// Check if id is empty -> comment not found
+		if id == "" {
 			return locations, fmt.Errorf("No locations found in the database")
 		}
 
-		locationsLink := strings.ReplaceAll(name, "ä", "+")
-		locationsLink = strings.ReplaceAll(locationsLink, "ü", "*")
-		locationsLink = strings.ReplaceAll(locationsLink, "ö", "$")
-		locationsLink = "/" + strings.ReplaceAll(locationsLink, " ", "_")
+		locationsLink := "/" + id
 
 		// assemble temporary location
 		tempLocation := core.Location{
-			Name:         name,
+			Name:         id,
 			LocationLink: locationsLink,
 		}
 
@@ -277,7 +268,7 @@ func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
 // GetLocationFeatures from the database
 func (r Repo) GetLocationFeatures(locationID string) (features core.Features, err error) {
 	// Get  rows
-	rows, err := r.db.Query(`SELECT coffee, wifi, power, music, food, FROM features WHERE locationID = ?  ; `, locationID)
+	rows, err := r.db.Query(`SELECT coffee, wifi, power, music, food FROM features WHERE locationID = ?  ; `, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return features, err
@@ -324,7 +315,7 @@ func (r Repo) GetLocationFromName(locationName string) (location core.Location, 
 // GetCommentsOfLocation returns a slice of pointers to comment structs from one location
 func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment, err error) {
 	// Get  rows
-	rows, err := r.db.Query(`SELECT title, content, userID, locationID, id FROM comments WHERE locationID = ? LIMIT 10 ; `, locationID)
+	rows, err := r.db.Query(`SELECT title, content, userID, locationID, ratingID, id FROM comments WHERE locationID = ? LIMIT 10 ; `, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return comments, err
@@ -335,11 +326,11 @@ func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment,
 
 	// Temporary comment that will be filled by scan
 	var comment core.Comment
-	var tempUserID, tempLocationID string
+	var tempUserID, tempLocationID, tempRatingID string
 
 	// Iterate over rows
 	for rows.Next() {
-		rows.Scan(&comment.Title, &comment.Content, &tempUserID, &tempLocationID, &comment.ID)
+		rows.Scan(&comment.Title, &comment.Content, &tempUserID, &tempLocationID, &tempRatingID, &comment.ID)
 
 		// Check if title is empty -> comment not found
 		if comment.Title == "" {
@@ -363,6 +354,15 @@ func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment,
 		// Append location to comment struct
 		comment.Location = tempLocationID
 
+		// Set rating
+		rating, err := r.GetRating(tempRatingID)
+		if err != nil {
+			fmt.Println(err)
+			return comments, err
+		}
+
+		comment.Rating = rating
+
 		// Append to comments
 		comments = append(comments, comment)
 	}
@@ -376,13 +376,30 @@ func (r Repo) GetLocationsFavUsers(locationID string) (users []core.User, err er
 	return users, err
 }
 
-// GetLocationRatings returns a slice of pointers to rating structs
-func (r Repo) GetLocationRatings(locationID string) (ratings []core.Rating, err error) {
-
-	return ratings, err
-}
-
 // GetLocationAvrRating from the database
 func (r Repo) GetLocationAvrRating(locationID string) (avr float64) {
 	return avr
+}
+
+// GetRating with the given ID from the database
+func (r Repo) GetRating(ratingID string) (rating int, err error) {
+
+	// Get rows from the database
+	rows, err := r.db.Query(`SELECT value FROM ratings WHERE id = ? ;`, ratingID)
+	if err != nil {
+		fmt.Println(err)
+		return 0, err
+	}
+
+	// Iterate over rows
+	for rows.Next() {
+
+		// Fill the rating variable
+		err = rows.Scan(&rating)
+		if err != nil {
+			fmt.Println(err)
+			return 0, err
+		}
+	}
+	return rating, nil
 }

@@ -15,15 +15,14 @@ import (
 func (s *Server) initLocationHomepageRouter() {
 
 	// Pull all locations from the database
-	names, err := s.repo.GetLocationNames()
+	IDs, err := s.repo.GetLocationIDs()
 	if err != nil {
 		panic(err)
 	}
 
 	// Iterate over location names and create
-	for _, name := range names {
-		s.router.Route(Path(processLocationsNameToRoute(name)))["GET"] = http.HandlerFunc(s.handleLocationHomepage)
-		s.router.Route(Path(processLocationsNameToRoute(name) + "/ws"))["GET"] = http.HandlerFunc(s.handleLocationHomepageWS)
+	for _, id := range IDs {
+		s.router.Route(Path(processLocationsIDToRoute(id)))["GET"] = http.HandlerFunc(s.handleLocationHomepage)
 	}
 }
 
@@ -33,7 +32,7 @@ func determineLocation(r *http.Request, s *Server) (location core.Location, err 
 	locationName := r.URL.String()
 
 	// Pull data from the database -> use processed location name
-	location, err = s.repo.GetLocationFromName(processRouteToLocationName(locationName))
+	location, err = s.repo.GetLocation(processRouteToLocationID(locationName))
 	if err != nil {
 		fmt.Println(err)
 		return location, err
@@ -88,11 +87,6 @@ func (s *Server) handleLocationHomepageWS(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	// Execute only when not on /ws
-	if r.Header.Get("Origin") != "http://"+r.Host {
-		http.Error(w, "Origin not allowed", 403)
-		return
-	}
 	// Define the ubgrader that handles read and write buffer
 	upgrader := websocket.Upgrader{
 		ReadBufferSize:  1024,
@@ -128,29 +122,13 @@ func echoLocationHomepage(conn *websocket.Conn, s *Server, locationData core.Loc
 }
 
 // Format locations name so that it can be used as a link
-func processLocationsNameToRoute(name string) string {
-	// Handle all umlauts
-	name = strings.ReplaceAll(name, "ä", "+")
-	name = strings.ReplaceAll(name, "ü", "*")
-	name = strings.ReplaceAll(name, "ö", "$")
-	return "/" + strings.ReplaceAll(name, " ", "_")
+func processLocationsIDToRoute(ID string) string {
+	return strings.ReplaceAll(ID, " ", "_")
 }
 
 // Format routes and return the valid location name
-func processRouteToLocationName(locationName string) string {
-	// Handle all umlauts
-	locationName = strings.ReplaceAll(locationName, "+", "ä")
-	locationName = strings.ReplaceAll(locationName, "*", "ü")
-	locationName = strings.ReplaceAll(locationName, "$", "ö")
-	locationName = strings.ReplaceAll(locationName, "_", " ")
-
+func processRouteToLocationID(locationRoute string) string {
 	// Split after slashes
-	locationNameSplitted := strings.Split(locationName, "/")
-
-	// If got from websocket -> if last element == "ws"
-	if locationNameSplitted[len(locationNameSplitted)-1] == "ws" {
-		return locationNameSplitted[len(locationNameSplitted)-2]
-	}
-
+	locationNameSplitted := strings.Split(locationRoute, "/")
 	return locationNameSplitted[len(locationNameSplitted)-1]
 }

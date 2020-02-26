@@ -9,6 +9,31 @@ import (
 ADMIN AND MAINTENENCE QUERRIES
 */
 
+// GetAllUsersIDs from the database
+func (r Repo) GetAllUsersIDs() (IDs []string, err error) {
+	// Run querry
+	rows, err := r.db.Query(`SELECT id FROM users ;`)
+	if err != nil {
+		fmt.Println(err)
+		return IDs, err
+	}
+
+	// Schedule closing of the rows
+	defer rows.Close()
+
+	var tempID string
+
+	// Iterate over rows
+	for rows.Next() {
+		err = rows.Scan(&tempID)
+		if err != nil {
+			return IDs, err
+		}
+		IDs = append(IDs, tempID)
+	}
+	return IDs, err
+}
+
 // GetAllLocations from the database
 func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 

@@ -13,9 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Stores all of the ratings 
 CREATE TABLE IF NOT EXISTS ratings (
-	userID 		VARCHAR(16), 
-	locationID 	VARCHAR(16), 
 	value			NUMERIC,
+	locationID VARCHAR(16),
     id            VARCHAR(16)
 ) ;
 
@@ -25,7 +24,7 @@ CREATE TABLE IF NOT EXISTS comments (
 	content  		TEXT,
 	userID        VARCHAR(16),
 	locationID	VARCHAR(16), 
-	ratingID	VARCHAR(16),
+	ratingID VARCHAR(16),
 	id            VARCHAR(16)
 ) ;
 

@@ -21,9 +21,6 @@ type Repository interface {
 	// Get user's data from the name
 	GetUserFromName(userEmail string) (core.User, error)
 
-	// Get ratings user has given
-	GetUsersRatings(userID string) ([]core.Rating, error)
-
 	// Get a comment with given ID
 	GetComment(commentID string) (core.Comment, error)
 
@@ -45,8 +42,8 @@ type Repository interface {
 	// Get all features a location offers
 	GetLocationFeatures(locationID string) (core.Features, error)
 
-	// Get all ratings from the Db of given locations
-	GetLocationRatings(locationID string) ([]core.Rating, error)
+	// GetRating with the given ID from the database
+	GetRating(ratingID string) (int, error)
 
 	// Get the average of all ratings of the location
 	GetLocationAvrRating(locationID string) float64
@@ -56,9 +53,6 @@ type Repository interface {
 
 	// Add a comment by a user about a given location
 	AddComment(comment core.Comment) error
-
-	// Add a rating about a location by a user
-	AddRating(rating core.Rating) error
 
 	// Add a feature to the database
 	AddFeature(feature core.Location) error
@@ -81,9 +75,6 @@ type Repository interface {
 	// Delete a location from the data base with given ID
 	DeleteLocation(locationID string) error
 
-	// Delete a dish from the data base with given ID
-	DeleteDish(dishID string) error
-
 	// Delete a feature from the data base with given ID
 	DeleteFeature(featureID string) error
 
@@ -105,4 +96,7 @@ type Repository interface {
 
 	// Get all IDs of the locations
 	GetLocationIDs() ([]string, error)
+
+	// Get all IDs of the users
+	GetAllUsersIDs() ([]string, error)
 }

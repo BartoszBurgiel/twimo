@@ -11,11 +11,6 @@ func (r Repo) AddComment(comment core.Comment) error {
 	return nil
 }
 
-// AddRating to the database (all fields of struct must not be nil)
-func (r Repo) AddRating(rating core.Rating) error {
-	return nil
-}
-
 // SetAsFavoriteLocation the given location to a favorite location
 func (r Repo) SetAsFavoriteLocation(locationID string, userID string) error {
 	return nil

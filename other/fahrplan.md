@@ -6,15 +6,9 @@
 
 #### Front-end
 
-- Generate routes for:
-- Log in
-- Sign-Up
-
-#### Back-end
-
-- Handle get requests
-
----
+* Generate routes for: 
+    * Log in 
+    * Sign-Up 
 
 ## List screen
 
@@ -29,86 +23,56 @@
 - coordinates -> google API
 - 10 best matches
 
-- data to send:
-- Location name
-- Description
-- avr. rating (x/5)
-- Price level (x/5)
-- Picture (somehow?)
-
----
+* data to send: 
+    * Location name 
+    * Description 
+    * avr. rating (x/5) 
+    * Price level (x/5)
+    * Picture (somehow?)
 
 ## Location page
 
 #### Front-End
+* route -> localhost/locations/ID
+* comment 
+*   userID 
+*   content 
+*   rating 
+* Set to favourite place 
+*   userID 
+*   locationID
 
-- route -> localhost/locations/ID
-- comment
-- userID
-- content
-- rating
-- Set to favourite place
-- userID
-- locationID
+#### Back-End 
+* picture 
+* coords 
+* (webpage)
+* desc
+* nam:e 
+* avr. rating 
+* features 
+* 10 comments (most recent) 
 
-#### Back-End
 
-- picture
-- coords
-- (webpage)
-- desc
-- name
-- avr. rating
-- features
-- 10 comments (most recent)
+## New location 
+#### Back-End 
+* Name 
+* Coordinations 
+* Desc 
+* Webpage
+* (location or address)
+* features 
 
----
+## User page 
 
-## New location
+#### Front-End 
+* name
+* email 
+* fav location 
+* id 
 
-#### Back-End
-
-- Name
-- Coordinations
-- Desc
-- Webpage
-- (location or address)
-- features
-
----
-
-## User page
-
-#### Front-End
-
-- name
-- email
-- fav location
-- id
-- user key
-
-#### Back-End
-
-(on demand)
-
-- new email
-- new password
-- old and new password
-- new username
-
----
-
-## New User (sign in)
-
-#### Front-End
-
-- fail (if name exists...)
-- send credentials to server
-- receive hashed credentials as API-Key for everything related to user
-
-#### Back-End
-
-- username
-- password
-- email
-- fav location (if not -> null)
+#### Back-End 
+(bei bedarf)
+* new email 
+* new password 
+*   old and new password 
+* new username
