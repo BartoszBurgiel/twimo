@@ -19,7 +19,7 @@ import (
 */
 
 // Generate user querries
-func generateUsers() (string, []user) {
+func generateUsers(location location) (string, []user) {
 
 	// Array storing all names
 	names := []string{
@@ -76,10 +76,11 @@ func generateUsers() (string, []user) {
 
 			// Build temporary user struct
 			tempUser := user{
-				name:     fullName,
-				email:    email,
-				password: password,
-				id:       id,
+				name:        fullName,
+				email:       email,
+				password:    password,
+				favlocation: location.id,
+				id:          id,
 			}
 
 			// Add temp user to the array of users
@@ -107,7 +108,7 @@ func generateUsers() (string, []user) {
 }
 
 // Generate user querries
-func generateEncodedUsers() (string, []user) {
+func generateEncodedUsers(location location) (string, []user) {
 
 	// Array storing all names
 	names := []string{
@@ -161,10 +162,11 @@ func generateEncodedUsers() (string, []user) {
 
 			// Build temporary user struct
 			tempUser := user{
-				name:     fullName,
-				email:    email,
-				password: password,
-				id:       id,
+				name:        fullName,
+				email:       email,
+				password:    password,
+				favlocation: location.id,
+				id:          id,
 			}
 
 			// Encode tempUser
@@ -195,7 +197,7 @@ func generateEncodedUsers() (string, []user) {
 }
 
 // generate location querries
-func generateLocations(users *[]user) (string, []location) {
+func generateLocations() (string, []location) {
 
 	// Array storing names for the location
 	names := []string{
@@ -247,12 +249,6 @@ func generateLocations(users *[]user) (string, []location) {
 				price:   price,
 				id:      id,
 			}
-
-			for _, user := range *users {
-				// set favlocation
-				user.favlocation = id
-			}
-
 			// Append to location array
 			locations = append(locations, tempLocation)
 		}
