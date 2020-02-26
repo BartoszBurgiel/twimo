@@ -22,6 +22,7 @@ const dummyReviews = [
   {
     key: "1",
     name: "Ford Prefect",
+    rating: 5,
     avatar: "https://api.adorable.io/avatars/50/fordprefect.png",
     content:
       "Klasse Handwerksbäcker, gemütliches und stilvolles Café mit hervorragenden Backwaren und bestem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
@@ -29,6 +30,7 @@ const dummyReviews = [
   {
     key: "2",
     name: "Zaphod Beeblebrox",
+    rating: 4,
     avatar: "https://api.adorable.io/avatars/50/zaphodbeeblebrox.png",
     content:
       "Klasse Cafe, gemütliches und stilvolles Ambiente mit hervorragenden Backwaren und gutem Kaffee. Unbedingt den Cafe Latte probieren - ein echter Genuss an diesen kalten Winterertagen!"
@@ -36,6 +38,7 @@ const dummyReviews = [
   {
     key: "3",
     name: "Arthur Weasley",
+    rating: 2,
     avatar: "https://api.adorable.io/avatars/50/arthurweasley.png",
     content:
       "Naja, gemütliches isses schon irgendwie. Aber der Durchzug ist heftig. Unbedingt ne Jacke mitnehmen - sonst gibt's ne fette Erkältung! Ansonsten kann man da schon hingehen..."
@@ -43,6 +46,7 @@ const dummyReviews = [
   {
     key: "4",
     name: "Bellatrix Lestrange",
+    rating: 1,
     avatar: "https://api.adorable.io/avatars/50/bellatrixlestrange.png",
     content:
       "Also ich find des nicht gut. Die Backwaren sind ganz ok, aber wenn'de kein Englisch kannst, bist in dem Laden uffgeschmissen. Da bleib ich beim Bäcker im Dorf!"
