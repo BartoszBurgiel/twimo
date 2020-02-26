@@ -18,7 +18,7 @@ func Generate() bytes.Buffer {
 	allQuerries.WriteString(userQuerries)
 
 	// Generate structs and querries for locations
-	locationQuerries, locations := generateLocations()
+	locationQuerries, locations := generateLocations(&users)
 
 	// Write generaetd querries for adding locations
 	allQuerries.WriteString(locationQuerries)
@@ -51,7 +51,7 @@ func GenerateEncoded() bytes.Buffer {
 	allQuerries.WriteString(userQuerries)
 
 	// Generate structs and querries for locations
-	locationQuerries, locations := generateLocations()
+	locationQuerries, locations := generateLocations(&users)
 
 	// Write generaetd querries for adding locations
 	allQuerries.WriteString(locationQuerries)

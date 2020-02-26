@@ -22,6 +22,7 @@ type location struct {
 	coordY  int
 	desc    string
 	website string
+	price   int
 	id      string
 }
 
@@ -39,7 +40,7 @@ BARTOSZ'S PART
 func (u *user) Encode() {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.favlocation, "-")
+	dividedComments := strings.SplitAfter(u.id, "-")
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
@@ -52,7 +53,7 @@ func (u *user) Encode() {
 func (u *user) Decode() {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.favlocation, "-")
+	dividedComments := strings.SplitAfter(u.id, "-")
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
