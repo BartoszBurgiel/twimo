@@ -23,7 +23,6 @@ func (s *Server) initLocationHomepageRouter() {
 	// Iterate over location names and create
 	for _, id := range IDs {
 		s.router.Route(Path(processLocationsIDToRoute(id)))["GET"] = http.HandlerFunc(s.handleLocationHomepage)
-		s.router.Route(Path(processLocationsIDToRoute(id) + "/ws"))["GET"] = http.HandlerFunc(s.handleLocationHomepageWS)
 	}
 }
 
@@ -88,11 +87,6 @@ func (s *Server) handleLocationHomepageWS(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	// Execute only when not on /ws
-	if r.Header.Get("Origin") != "http://"+r.Host {
-		http.Error(w, "Origin not allowed", 403)
-		return
-	}
 	// Define the ubgrader that handles read and write buffer
 	upgrader := websocket.Upgrader{
 		ReadBufferSize:  1024,
@@ -136,11 +130,5 @@ func processLocationsIDToRoute(ID string) string {
 func processRouteToLocationID(locationRoute string) string {
 	// Split after slashes
 	locationNameSplitted := strings.Split(locationRoute, "/")
-
-	// If got from websocket -> if last element == "ws"
-	if locationNameSplitted[len(locationNameSplitted)-1] == "ws" {
-		return locationNameSplitted[len(locationNameSplitted)-2]
-	}
-
 	return locationNameSplitted[len(locationNameSplitted)-1]
 }

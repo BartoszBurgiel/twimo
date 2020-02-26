@@ -96,4 +96,7 @@ type Repository interface {
 
 	// Get all IDs of the locations
 	GetLocationIDs() ([]string, error)
+
+	// Get all IDs of the users
+	GetAllUsersIDs() ([]string, error)
 }

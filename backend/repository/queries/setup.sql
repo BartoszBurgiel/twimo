@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS locations (
 	coordY            NUMERIC,
 	descr              TEXT,
 	webpage				VARCHAR(16),
+	price			NUMERIC,
 	id				VARCHAR(16)
 ) ;
 
