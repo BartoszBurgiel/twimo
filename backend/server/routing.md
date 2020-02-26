@@ -4,6 +4,9 @@
 * /login
     * login
 ---
+* /signin
+    * sign in
+---
 * /listscreen
     * list screen 
 ---
@@ -12,5 +15,6 @@
 ---
 * /user/[id]
     * user's page 
+---
 * /new
     * new location
