@@ -17,7 +17,7 @@ const ReviewCard = ({ reviewData }) => {
         <Image style={styles.image} source={{ uri: reviewData.avatar }}></Image>
         <Text style={styles.userName}>{reviewData.name}</Text>
         <RatingStars
-          colorFill={color.brand.dark}
+          colorFill={color.black}
           rating={reviewData.rating}
           iconSize={20}
         />
