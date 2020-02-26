@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   cardHeader: {
     fontWeight: "900",
-    fontSize: 25,
+    fontSize: 20,
     color: color.brand.normal
   },
   cardSubHeader: {
