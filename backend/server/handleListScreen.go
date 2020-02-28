@@ -2,8 +2,9 @@ package server
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
+
+	"github.com/gorilla/websocket"
 )
 
 // handle the GET request for the location list page
@@ -16,15 +17,19 @@ func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	temp, err := template.New("locationList").ParseFiles("../server/assets/locationList.html")
+	// Open websocket connection
+	conn, err := websocket.Upgrade(w, r, w.Header(), 1024, 1024)
 	if err != nil {
 		fmt.Println(err)
-		return
+		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 	}
 
-	err = temp.Execute(w, allLocations)
-	if err != nil {
-		fmt.Println(err)
-		return
+	// Iterate over locations and send JSONS
+	for _, location := range allLocations {
+		if err := conn.WriteJSON(location); err != nil {
+			fmt.Println(err)
+			return
+		}
 	}
+
 }
