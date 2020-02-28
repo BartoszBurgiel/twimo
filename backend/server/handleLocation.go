@@ -38,9 +38,6 @@ func determineLocation(r *http.Request, s *Server) (location core.Location, err 
 		return location, err
 	}
 
-	// Set location's link to the url
-	location.LocationLink = locationName
-
 	// Pull all comments of the location
 	comments, err := s.repo.GetCommentsOfLocation(location.ID)
 	if err != nil {

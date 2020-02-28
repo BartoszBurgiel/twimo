@@ -23,7 +23,8 @@ func NewSQLite(path string) (*Repo, error) {
 	r := &Repo{
 		path: path,
 	}
-
+	r.config.init("../repository/config.json")
+	fmt.Println(r.config)
 	return r, r.initSQLite()
 }
 

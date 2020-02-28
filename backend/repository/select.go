@@ -275,8 +275,11 @@ func (r Repo) GetLocationFromName(locationName string) (location core.Location, 
 
 // GetCommentsOfLocation returns a slice of pointers to comment structs from one location
 func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment, err error) {
+	// Prepare query
+	query := fmt.Sprintf(`SELECT title, content, userID, locationID, ratingID, id FROM comments WHERE locationID = ? LIMIT %d ; `, r.config.CommentsOfLocationLimit)
+
 	// Get  rows
-	rows, err := r.db.Query(`SELECT title, content, userID, locationID, ratingID, id FROM comments WHERE locationID = ? LIMIT 10 ; `, locationID)
+	rows, err := r.db.Query(query, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return comments, err
@@ -401,13 +404,16 @@ func (r Repo) GetRating(ratingID string) (rating int, err error) {
 // GetLocationsForList returns all data that is displayed on the
 // list screen
 func (r Repo) GetLocationsForList() (locations []core.Location, err error) {
-	// Get rows from the database
-	rows, err := r.db.Query(`  SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
+	// Prepare query
+	query := fmt.Sprintf(`SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
 	FROM locations
 	LEFT JOIN ratings
 	ON locations.id = ratings.locationID
 	ORDER BY AVG(ratings.value) ASC
-	LIMIT 20 ;`)
+	LIMIT %d ;`, r.config.LocationForListLimit)
+
+	// Get rows from the database
+	rows, err := r.db.Query(query)
 	if err != nil {
 		fmt.Println(err)
 		return locations, err
