@@ -215,6 +215,10 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 	rating := r.GetLocationAvrRating(locationID)
 	location.Rating = rating
 
+	// Pricing
+	pricing := r.GetLocationsPrice(locationID)
+	location.Price = pricing
+
 	// Features
 	features, err := r.GetLocationFeatures(locationID)
 	if err != nil {
@@ -360,7 +364,7 @@ func (r Repo) GetLocationsFavUsersCount(locationID string) (n int, err error) {
 func (r Repo) GetLocationAvrRating(locationID string) (avr float64) {
 
 	// Get rows from the database
-	rows, err := r.db.Query(`SELECT AVR(value) FROM ratings WHERE locationID = ? ;`, locationID)
+	rows, err := r.db.Query(`SELECT AVG(value) FROM ratings WHERE locationID = ? ;`, locationID)
 	if err != nil {
 		fmt.Println(err)
 		return avr
@@ -376,6 +380,28 @@ func (r Repo) GetLocationAvrRating(locationID string) (avr float64) {
 	}
 
 	return avr
+}
+
+// GetLocationsPrice returns the price of the location with the given ID
+func (r Repo) GetLocationsPrice(locationID string) (n int) {
+
+	// Get rows from the database
+	rows, err := r.db.Query(`SELECT price FROM locations WHERE id = ? ;`, locationID)
+	if err != nil {
+		fmt.Println(err)
+		return n
+	}
+
+	// Iterate over rows
+	for rows.Next() {
+		err = rows.Scan(&n)
+		if err != nil {
+			fmt.Println(err)
+			return n
+		}
+	}
+
+	return n
 }
 
 // GetRating with the given ID from the database

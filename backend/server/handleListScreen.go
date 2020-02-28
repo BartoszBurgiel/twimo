@@ -10,8 +10,10 @@ import (
 // handle the GET request for the location list page
 func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 
+	// GET MESSAGE AND DETERMINE HOW TO SORT
+
 	// Get all locations from the database
-	allLocations, err := s.repo.GetLocationsForList()
+	allLocations, err := s.repo.GetLocationsForList("rating")
 	if err != nil {
 		fmt.Println(err)
 		return

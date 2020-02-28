@@ -2,7 +2,6 @@ package server
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"strings"
 	"twimo/backend/core"
@@ -22,7 +21,7 @@ func (s *Server) initLocationHomepageRouter() {
 
 	// Iterate over location names and create
 	for _, id := range IDs {
-		s.router.Route(Path(processLocationsIDToRoute(id)))["GET"] = http.HandlerFunc(s.handleLocationHomepage)
+		s.router.Route(Path("/location" + id))["GET"] = http.HandlerFunc(s.handleLocationHomepage)
 	}
 }
 
@@ -50,33 +49,8 @@ func determineLocation(r *http.Request, s *Server) (location core.Location, err 
 	return location, err
 }
 
-// handle the GET request from the location homepage
-func (s *Server) handleLocationHomepage(w http.ResponseWriter, r *http.Request) {
-	/*
-		Determine which location
-	*/
-	locationData, err := determineLocation(r, s)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// Host file
-	temp, err := template.New("location").ParseFiles("../server/assets/location.html")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	err = temp.Execute(w, locationData)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-}
-
 // websocket handler for location homepage
-func (s *Server) handleLocationHomepageWS(w http.ResponseWriter, r *http.Request) {
+func (s *Server) handleLocationHomepage(w http.ResponseWriter, r *http.Request) {
 
 	locationData, err := determineLocation(r, s)
 	if err != nil {
@@ -118,14 +92,11 @@ func echoLocationHomepage(conn *websocket.Conn, s *Server, locationData core.Loc
 
 }
 
-// Format locations name so that it can be used as a link
-func processLocationsIDToRoute(ID string) string {
-	return strings.ReplaceAll(ID, " ", "_")
-}
-
 // Format routes and return the valid location name
 func processRouteToLocationID(locationRoute string) string {
 	// Split after slashes
 	locationNameSplitted := strings.Split(locationRoute, "/")
+
+	// return last element [id]
 	return locationNameSplitted[len(locationNameSplitted)-1]
 }

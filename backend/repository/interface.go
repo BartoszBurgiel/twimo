@@ -40,6 +40,9 @@ type Repository interface {
 	// Get the average rating of a location
 	GetLocationAvrRating(locationID string) (avr float64)
 
+	// Get the pricing of the location
+	GetLocationsPrice(locationID string) (n int)
+
 	// Get the number of users whose location is the favorite
 	GetLocationsFavUsersCount(locationID string) (n int, err error)
 
