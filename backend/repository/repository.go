@@ -13,9 +13,9 @@ import (
 
 // Repo represents a data base with its all methods
 type Repo struct {
-	db     *sql.DB
-	path   string
-	config config
+	db   *sql.DB
+	path string
+	vars vars
 }
 
 // NewSQLite creates a new repository
@@ -23,8 +23,7 @@ func NewSQLite(path string) (*Repo, error) {
 	r := &Repo{
 		path: path,
 	}
-	r.config.init("../repository/config.json")
-	fmt.Println(r.config)
+	r.vars.init("../repository/vars.json")
 	return r, r.initSQLite()
 }
 

@@ -28,7 +28,8 @@ type Repository interface {
 	GetLocation(locationID string) (core.Location, error)
 
 	// Get all data from location table that are needed on the location screen
-	GetLocationsForList() ([]core.Location, error)
+	// criteria determine how they shall be sorted
+	GetLocationsForList(criteria string) ([]core.Location, error)
 
 	// Get a location with given name
 	GetLocationFromName(locationName string) (core.Location, error)
