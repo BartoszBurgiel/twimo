@@ -204,7 +204,7 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 	location.Comments = comments
 
 	// Users
-	users, err := r.GetLocationsFavUsers(locationID)
+	users, err := r.GetLocationsFavUsersCount(locationID)
 	if err != nil {
 		fmt.Println(err)
 		return location, err
@@ -224,45 +224,6 @@ func (r Repo) GetLocation(locationID string) (location core.Location, err error)
 	location.Features = features
 
 	return location, err
-}
-
-// GetLocationsAsLink returns all locations' data so that they be displayed as an <a> tag: name and link
-func (r Repo) GetLocationsAsLink() (locations []core.Location, err error) {
-
-	// Get  rows
-	rows, err := r.db.Query(`SELECT id FROM locations ; `)
-	if err != nil {
-		fmt.Println(err)
-		return locations, err
-	}
-
-	// Schedule closing of the db
-	defer rows.Close()
-
-	// Iterate over rows
-	for rows.Next() {
-		id := ""
-
-		rows.Scan(&id)
-
-		// Check if id is empty -> comment not found
-		if id == "" {
-			return locations, fmt.Errorf("No locations found in the database")
-		}
-
-		locationsLink := "/" + id
-
-		// assemble temporary location
-		tempLocation := core.Location{
-			Name:         id,
-			LocationLink: locationsLink,
-		}
-
-		// push to the locations slice
-		locations = append(locations, tempLocation)
-	}
-
-	return locations, err
 }
 
 // GetLocationFeatures from the database
@@ -370,14 +331,47 @@ func (r Repo) GetCommentsOfLocation(locationID string) (comments []core.Comment,
 	return comments, err
 }
 
-// GetLocationsFavUsers returns a slice of pointers to user structs whose given location is the favorite
-func (r Repo) GetLocationsFavUsers(locationID string) (users []core.User, err error) {
+// GetLocationsFavUsersCount returns the number of location's favorite users
+func (r Repo) GetLocationsFavUsersCount(locationID string) (n int, err error) {
 
-	return users, err
+	// Get rows from the database
+	rows, err := r.db.Query(`SELECT COUNT(name) FROM users WHERE favLocation = ? ;`, locationID)
+	if err != nil {
+		fmt.Println(err)
+		return n, err
+	}
+
+	// Iterate over rows
+	for rows.Next() {
+		err = rows.Scan(&n)
+		if err != nil {
+			fmt.Println(err)
+			return n, err
+		}
+	}
+
+	return n, err
 }
 
 // GetLocationAvrRating from the database
 func (r Repo) GetLocationAvrRating(locationID string) (avr float64) {
+
+	// Get rows from the database
+	rows, err := r.db.Query(`SELECT AVR(value) FROM ratings WHERE locationID = ? ;`, locationID)
+	if err != nil {
+		fmt.Println(err)
+		return avr
+	}
+
+	// Iterate over rows
+	for rows.Next() {
+		err = rows.Scan(&avr)
+		if err != nil {
+			fmt.Println(err)
+			return avr
+		}
+	}
+
 	return avr
 }
 

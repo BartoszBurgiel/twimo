@@ -13,8 +13,9 @@ import (
 
 // Repo represents a data base with its all methods
 type Repo struct {
-	db   *sql.DB
-	path string
+	db     *sql.DB
+	path   string
+	config config
 }
 
 // NewSQLite creates a new repository

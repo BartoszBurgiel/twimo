@@ -16,7 +16,8 @@ type Location struct {
 
 	Comments []Comment
 
-	Users []User
+	// Number of the users whose location is favorite
+	Users int
 
 	Rating float64
 
@@ -27,9 +28,4 @@ type Location struct {
 	Features Features
 
 	ID string
-
-	/*HELPER FIELDS*/
-
-	// Link of the route on server
-	LocationLink string
 }

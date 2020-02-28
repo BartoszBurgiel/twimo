@@ -73,7 +73,7 @@ func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 		location.Comments = comments
 
 		// Get locations users
-		users, err := r.GetLocationsFavUsers(location.ID)
+		users, err := r.GetLocationsFavUsersCount(location.ID)
 		if err != nil {
 			fmt.Println(err)
 			return locations, err

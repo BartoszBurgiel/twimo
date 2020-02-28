@@ -36,17 +36,15 @@ type Repository interface {
 	// Get all comments of a location with given ID
 	GetCommentsOfLocation(locationID string) ([]core.Comment, error)
 
-	// Get all users that have given location as favorite
-	GetLocationsFavUsers(locationID string) ([]core.User, error)
+	// Get the average rating of a location
+	GetLocationAvrRating(locationID string) (avr float64)
 
-	// Get all features a location offers
-	GetLocationFeatures(locationID string) (core.Features, error)
+	// Get the number of users whose location is the favorite
+	GetLocationsFavUsersCount(locationID string) (n int, err error)
 
-	// GetRating with the given ID from the database
-	GetRating(ratingID string) (int, error)
-
-	// Get the average of all ratings of the location
-	GetLocationAvrRating(locationID string) float64
+	/*
+		INSERT METHODS
+	*/
 
 	// Add a user to the database
 	AddUser(core.User) error
@@ -62,6 +60,10 @@ type Repository interface {
 
 	// Set a given location as the favorite location of a user
 	SetAsFavoriteLocation(locationID, userID string) error
+
+	/*
+		DELETE METHODS
+	*/
 
 	// Delete a comment from the data base with given ID
 	DeleteComment(commentID string) error
