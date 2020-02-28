@@ -27,8 +27,8 @@ type Repository interface {
 	// Get a location with given ID
 	GetLocation(locationID string) (core.Location, error)
 
-	// Get all data from location table so that they can be displayed as link (name + link on server)
-	GetLocationsAsLink() ([]core.Location, error)
+	// Get all data from location table that are needed on the location screen
+	GetLocationsForList() ([]core.Location, error)
 
 	// Get a location with given name
 	GetLocationFromName(locationName string) (core.Location, error)

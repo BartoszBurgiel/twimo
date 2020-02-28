@@ -20,6 +20,9 @@ type Location struct {
 
 	Rating float64
 
+	// Price level
+	Price int
+
 	// Each attribute determins if a feature exists or not
 	Features Features
 

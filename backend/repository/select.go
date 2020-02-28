@@ -403,3 +403,35 @@ func (r Repo) GetRating(ratingID string) (rating int, err error) {
 	}
 	return rating, nil
 }
+
+// GetLocationsForList returns all data that is displayed on the
+// list screen
+func (r Repo) GetLocationsForList() (locations []core.Location, err error) {
+	// Get rows from the database
+	rows, err := r.db.Query(`  SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
+	FROM locations
+	LEFT JOIN ratings
+	ON locations.id = ratings.locationID
+	ORDER BY AVG(ratings.value) ASC
+	LIMIT 20 ;`)
+	if err != nil {
+		fmt.Println(err)
+		return locations, err
+	}
+
+	// Iterate over rows
+	for rows.Next() {
+		tempLoc := core.Location{}
+
+		err = rows.Scan(&tempLoc.Name, &tempLoc.Desc, &tempLoc.ID, &tempLoc.Price, &tempLoc.Rating)
+		if err != nil {
+			fmt.Println(err)
+			return locations, err
+		}
+
+		// Append to locations
+		locations = append(locations, tempLoc)
+	}
+
+	return locations, err
+}

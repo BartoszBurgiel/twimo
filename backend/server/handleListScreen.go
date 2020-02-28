@@ -11,7 +11,7 @@ import (
 func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 
 	// Get all locations from the database
-	allLocations, err := s.repo.GetLocationsAsLink()
+	allLocations, err := s.repo.GetLocationsForList()
 	if err != nil {
 		fmt.Println(err)
 		return
