@@ -16,5 +16,4 @@
 * /user/[id]
     * user's page 
 ---
-* /new
     * new location
