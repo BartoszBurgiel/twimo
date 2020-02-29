@@ -17,8 +17,6 @@ type server interface {
 	// (if ever needed)
 	handleHomeScreenGET(w http.ResponseWriter, r *http.Request)
 
-	// handle the GET request of the login page -> establish ws connection
-	handleLoginGET(w http.ResponseWriter, r *http.Request)
 	// websocket communication on the login page
 	handleLoginWS(w http.ResponseWriter, r *http.Request)
 

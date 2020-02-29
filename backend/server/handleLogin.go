@@ -8,29 +8,16 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-// send login.html file to the client
-func (s *Server) handleLoginGET(w http.ResponseWriter, r *http.Request) {
-	// Serve the file
-	http.ServeFile(w, r, "../server/assets/login.html")
-}
-
 // Websocket handler for login
 func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 
-	// Execute only when not on /ws
-	if r.Header.Get("Origin") != "http://"+r.Host {
-		http.Error(w, "Origin not allowed", 403)
-		return
+	// Open websocket connection
+	conn, err := websocket.Upgrade(w, r, w.Header(), 1024, 1024)
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 	}
-
-	// Define the ubgrader that handles read and write buffer
-	var upgrader = websocket.Upgrader{
-		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,
-	}
-
-	// Make connection
-	conn, err := upgrader.Upgrade(w, r, nil)
+	defer conn.Close()
 
 	// Error handling
 	if err != nil {
@@ -55,11 +42,18 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 	user, err := s.repo.GetUserFromName(userName)
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 
 	// double check if user is not found
 	if user.Name == "" {
+
+		// Send message that states that login failed
+		// type 1 -> text message
+		err := conn.WriteMessage(1, []byte("0"))
+		if err != nil {
+			fmt.Println(err)
+		}
+		conn.Close()
 		fmt.Println("no user found")
 		return
 	}
@@ -72,18 +66,50 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if ok {
+		// Send message that states that login failed
+		// type 1 -> text message
+		err := conn.WriteMessage(1, []byte("1"))
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println("Successful login")
 		fmt.Println(user)
+
+		// Send the hashed user key
+
+		// Generate key
+		key := user.ToChecksum()
+
+		// assemble json
+		temp := struct {
+			Username string
+			Key      string
+		}{
+			Username: user.Name,
+			Key:      key,
+		}
+
+		// Send message
+		err = conn.WriteJSON(temp)
+		if err != nil {
+			fmt.Println(err)
+		}
+
 	} else {
+		// Send message that states that login failed
+		// type 1 -> text message
+		err := conn.WriteMessage(1, []byte("0"))
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println("invalid username or email")
+		conn.Close()
 	}
 
 }
 
 // Websocket echoer
 func echoLogin(conn *websocket.Conn, s *Server, userData chan string, stopper chan bool) {
-	// Schedule closure of the connection
-	defer conn.Close()
 
 	for {
 

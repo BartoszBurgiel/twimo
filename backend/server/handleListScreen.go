@@ -25,6 +25,7 @@ func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 	}
+	defer conn.Close()
 
 	// Iterate over locations and send JSONS
 	for _, location := range allLocations {
@@ -34,4 +35,6 @@ func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Close the connection
+	conn.Close()
 }

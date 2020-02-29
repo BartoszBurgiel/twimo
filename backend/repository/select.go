@@ -448,7 +448,7 @@ func (r Repo) GetLocationsForList(criteria string) (locations []core.Location, e
 		tempLoc := core.Location{}
 
 		r.vars.getLocationPointer(&tempLoc)
-		err = rows.Scan(r.vars.locationListPointers)
+		err = rows.Scan(r.vars.locationListPointers...)
 		if err != nil {
 			fmt.Println(err)
 			return locations, err
