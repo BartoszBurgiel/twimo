@@ -1,9 +1,9 @@
 package core
 
 import (
-	"kihmo"
-	"kihmo/base"
 	"strings"
+	"twimo/backend/encr"
+	"twimo/backend/encr/base"
 )
 
 // User struct represents a user
@@ -34,12 +34,12 @@ func (u *User) Decode() {
 }
 
 // Generate code from user's id
-func (u User) generateUserKey() kihmo.Key {
+func (u User) generateUserKey() encr.Key {
 
 	// KeyCode = last bit from comment code
 	dividedComments := strings.SplitAfter(u.FavLocation, "-")
 	code := dividedComments[len(dividedComments)-1]
-	key, _ := kihmo.StringToKey(code)
+	key, _ := encr.StringToKey(code)
 	return key
 }
 
@@ -57,10 +57,10 @@ func (u User) ToChecksum() (sum string) {
 	u.Encode()
 
 	// Generate salt
-	_, salt, _ := kihmo.Salt(u.Name, base.Base85)
+	_, salt, _ := encr.Salt(u.Name, base.Base85)
 
 	// Hash and replace salt
-	sum, _ = kihmo.Hash(sum, salt, base.Base85)
+	sum, _ = encr.Hash(sum, salt, base.Base85)
 
 	return sum
 }
