@@ -39,7 +39,7 @@ func (s *Server) init() error {
 	s.router.Route("/login")["GET"] = http.HandlerFunc(s.handleLoginWS)
 
 	// Route for sign in page
-	s.router.Route("/new")["GET"] = http.HandlerFunc(s.handleSigninGET)
+	s.router.Route("/signin")["GET"] = http.HandlerFunc(s.handleSigninGET)
 
 	// Route for the list of all locations
 	s.router.Route("/listscreen")["GET"] = http.HandlerFunc(s.handleListScreenGET)

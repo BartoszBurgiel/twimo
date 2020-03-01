@@ -249,3 +249,30 @@ func (r Repo) GetLocationIDs() (IDs []string, err error) {
 
 	return IDs, err
 }
+
+// UserExists in the database by couinting returning rows
+// in the database
+func (r Repo) UserExists(username string) (ok bool, err error) {
+	// Run querry
+	rows, err := r.db.Query(`SELECT id FROM users WHERE users.name = ? ;`, username)
+	if err != nil {
+		fmt.Println(err)
+		return false, err
+	}
+
+	// Schedule closing of the rows
+	defer rows.Close()
+
+	// counter of the rows
+	cnt := 0
+
+	// interate over rows
+	for rows.Next() {
+		cnt++
+		if cnt > 0 {
+			fmt.Println("User with the username", username, "was found in the database")
+			return true, nil
+		}
+	}
+	return false, nil
+}

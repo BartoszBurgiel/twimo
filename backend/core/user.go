@@ -37,8 +37,8 @@ func (u *User) Decode() {
 func (u User) generateUserKey() encr.Key {
 
 	// KeyCode = last bit from comment code
-	dividedComments := strings.SplitAfter(u.FavLocation, "-")
-	code := dividedComments[len(dividedComments)-1]
+	dividedID := strings.SplitAfter(u.ID, "-")
+	code := dividedID[len(dividedID)-1]
 	key, _ := encr.StringToKey(code)
 	return key
 }
@@ -51,9 +51,8 @@ func (u User) ToChecksum() (sum string) {
 
 	// Gather all user's information
 	sum += u.Name
-	sum += u.Email
-	sum += u.FavLocation
 	sum += u.ID
+	sum += u.Email
 	u.Encode()
 
 	// Generate salt

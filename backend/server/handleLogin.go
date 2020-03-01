@@ -32,7 +32,7 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 	stopper := make(chan bool)
 
 	// Start goroutine echoing the websocket
-	go echoLogin(conn, s, userData, stopper)
+	go echoLogin(conn, userData, stopper)
 	<-stopper
 
 	// Get user from the db
@@ -75,26 +75,6 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Successful login")
 		fmt.Println(user)
 
-		// Send the hashed user key
-
-		// Generate key
-		key := user.ToChecksum()
-
-		// assemble json
-		temp := struct {
-			Username string
-			Key      string
-		}{
-			Username: user.Name,
-			Key:      key,
-		}
-
-		// Send message
-		err = conn.WriteJSON(temp)
-		if err != nil {
-			fmt.Println(err)
-		}
-
 	} else {
 		// Send message that states that login failed
 		// type 1 -> text message
@@ -109,7 +89,7 @@ func (s *Server) handleLoginWS(w http.ResponseWriter, r *http.Request) {
 }
 
 // Websocket echoer
-func echoLogin(conn *websocket.Conn, s *Server, userData chan string, stopper chan bool) {
+func echoLogin(conn *websocket.Conn, userData chan string, stopper chan bool) {
 
 	for {
 

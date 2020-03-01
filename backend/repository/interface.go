@@ -105,4 +105,7 @@ type Repository interface {
 
 	// Get all IDs of the users
 	GetAllUsersIDs() ([]string, error)
+
+	// Check if user with the existing username exists in the database
+	UserExists(username string) (ok bool, err error)
 }

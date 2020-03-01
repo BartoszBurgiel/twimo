@@ -1,6 +1,9 @@
 package repository
 
-import "twimo/backend/core"
+import (
+	"fmt"
+	"twimo/backend/core"
+)
 
 /*
 	ALL INSERT INTO QUERRIES
@@ -18,6 +21,12 @@ func (r Repo) SetAsFavoriteLocation(locationID string, userID string) error {
 
 // AddUser to the database with the values from the struct passed as parameter
 func (r Repo) AddUser(user core.User) error {
+	_, err := r.db.Exec("INSERT INTO users VALUES(?, ?, ?, ?, ?) ;", user.Name, user.Password, user.Email, user.FavLocation, user.ID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	fmt.Println("user has been added")
 	return nil
 }
 
