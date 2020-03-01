@@ -50,22 +50,24 @@ func getLocationListQuery(criteria string) string {
 	switch criteria {
 	case "rating":
 		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
-		FROM locations
-		LEFT JOIN ratings
-		ON locations.id = ratings.locationID
-		ORDER BY AVG(ratings.value) DESC
+		FROM locations, ratings
+		WHERE locations.id = ratings.locationID
+		GROUP BY ratings.locationID 
+		ORDER BY AVG(ratings.value) DESC 
 		LIMIT %d`
 	case "nFavUsers":
-		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
-		FROM locations, ratings
-		LEFT JOIN users
-		ON locations.id = users.favlocation
+		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value), COUNT(users.favlocation)
+		FROM locations, ratings, users
+		WHERE locations.id = users.favlocation
+		GROUP BY users.favlocation
 		ORDER BY COUNT(users.favlocation) DESC
 		LIMIT %d
 	  `
 	case "price":
 		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
 		FROM locations, ratings
+		WHERE locations.id = ratings.locationID
+		GROUP BY ratings.locationID
 		ORDER BY locations.price DESC
 		LIMIT %d`
 	}
