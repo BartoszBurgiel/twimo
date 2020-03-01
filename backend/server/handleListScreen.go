@@ -10,31 +10,50 @@ import (
 // handle the GET request for the location list page
 func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 
-	// GET MESSAGE AND DETERMINE HOW TO SORT
-
-	// Get all locations from the database
-	allLocations, err := s.repo.GetLocationsForList("rating")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
 	// Open websocket connection
 	conn, err := websocket.Upgrade(w, r, w.Header(), 1024, 1024)
 	if err != nil {
 		fmt.Println(err)
 		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 	}
-	defer conn.Close()
 
-	// Iterate over locations and send JSONS
-	for _, location := range allLocations {
-		if err := conn.WriteJSON(location); err != nil {
+	defer conn.Close()
+	// GET MESSAGE AND DETERMINE HOW TO SORT
+	sorting := make(chan string)
+
+	// Listen to the websocket and fetch the sorting clue
+	go listenForSortingCriteria(conn, sorting)
+
+	for {
+		fmt.Println("going")
+
+		// Get all locations from the database
+		allLocations, err := s.repo.GetLocationsForList(<-sorting)
+		if err != nil {
 			fmt.Println(err)
 			return
 		}
-	}
 
-	// Close the connection
-	conn.Close()
+		// Iterate over locations and send JSONS
+		for _, location := range allLocations {
+			if err := conn.WriteJSON(location); err != nil {
+				fmt.Println(err)
+			}
+		}
+	}
+}
+
+// Listen to the websocket and establish the sorting criteria
+func listenForSortingCriteria(conn *websocket.Conn, sorting chan string) {
+	for {
+		// Get message
+		_, msg, err := conn.ReadMessage()
+		if err != nil {
+			fmt.Println("Error reading message", err)
+			return
+		}
+
+		// Convert msg to string
+		sorting <- string(msg)
+	}
 }

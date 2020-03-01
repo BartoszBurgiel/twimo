@@ -6,10 +6,8 @@
 
     <div>
         <form>
-            <label for="namefield">name</label>
+            <label for="namefield">sorting</label>
             <input type="text" id="namefield" placeholder="12"/><br />
-            <label for="passwordfield">password</label>
-            <input type="text" id="passwordfield" placeholder="12"/><br />
             <button type="button" id="sendBtn">Send</button>
         </form>
     </div>
@@ -43,7 +41,6 @@
                 //e.preventDefault();
                 
                 ws.send($("#namefield").val());
-                ws.send($("#passwordfield").val());
             });
         });
     </script>

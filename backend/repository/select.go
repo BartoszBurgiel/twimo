@@ -435,7 +435,6 @@ func (r Repo) GetLocationsForList(criteria string) (locations []core.Location, e
 
 	// Prepare query
 	query = fmt.Sprintf(query, r.vars.LocationForListLimit)
-
 	// Get rows from the database
 	rows, err := r.db.Query(query)
 	if err != nil {

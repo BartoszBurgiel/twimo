@@ -57,7 +57,7 @@ func getLocationListQuery(criteria string) string {
 		LIMIT %d`
 	case "nFavUsers":
 		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
-		FROM locations
+		FROM locations, ratings
 		LEFT JOIN users
 		ON locations.id = users.favlocation
 		ORDER BY COUNT(users.favlocation) DESC
@@ -65,7 +65,7 @@ func getLocationListQuery(criteria string) string {
 	  `
 	case "price":
 		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
-		FROM locations 
+		FROM locations, ratings
 		ORDER BY locations.price DESC
 		LIMIT %d`
 	}

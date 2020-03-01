@@ -5,6 +5,11 @@ that will be send and recieved via the websocket on all (affected) routes
 
 # /listscreen 
 
+## front end sends 
+* a single message either **"rating"**, **"nFavUsers"** or **"price"** to determine the sorting schema
+
+## back end responds
+
 * json with the locations (see on /backend/server/assets/login.html)
 * `{"Name":"Betties Place","Coords":{"X":0,"Y":0},"Desc":"Betties Places description...","Webpage":"","Comments":null,"Users":0,"Rating":2.5590277777777777,"Price":4,"Features":{"Coffee":false,"Wifi":false,"Power":false,"Music":false,"Food":false},"ID":"6dc2eb46-5fb4-44a6-8957-5a432885860d"}`
 
