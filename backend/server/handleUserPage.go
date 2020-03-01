@@ -21,7 +21,6 @@ func (s *Server) initUserPageRouter() {
 		fmt.Println(err)
 		return
 	}
-
 	for _, id := range IDs {
 		s.router.Route(Path(id))["GET"] = http.HandlerFunc(s.handleUserWS)
 	}

@@ -46,7 +46,6 @@ func (s *Server) init() error {
 
 	// Init location home pages
 	s.initLocationHomepageRouter()
-
 	/* TODO: user routing??? security???
 	- how to determine if user isn't just following the link?
 	- hash?

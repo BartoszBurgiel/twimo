@@ -56,7 +56,7 @@ func getLocationListQuery(criteria string) string {
 		ORDER BY AVG(ratings.value) DESC 
 		LIMIT %d`
 	case "nFavUsers":
-		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value), COUNT(users.favlocation)
+		return `SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
 		FROM locations, ratings, users
 		WHERE locations.id = users.favlocation
 		GROUP BY users.favlocation

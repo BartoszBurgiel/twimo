@@ -62,6 +62,5 @@ func (r *Repo) initSQLite() error {
 
 	// Add opened DB to repo struct
 	r.db = db
-
 	return nil
 }
