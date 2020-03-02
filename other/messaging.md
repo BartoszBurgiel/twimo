@@ -50,3 +50,5 @@ that will be send and recieved via the websocket on all (affected) routes
 * single message confirming the login -> **bool** (0/1)
     * if **0** -> relogin (new key will be generated)
 * user information
+    * `{"Name":"Louis Beul","Password":"","Email":"\u0005","FavLocation":"6dc2eb46-5fb4-44a6-8957-5a432885860d","ID":"8501beec-a714-4318-b3ba-08bdb66755f1"}`
+    * `{"Name":"Betties Place","Coords":{"X":0,"Y":0},"Desc":"Betties Places description...","Webpage":"www.BettiesPlace.de","Comments":null,"Users":0,"Rating":2.2291666666666665,"Price":4,"Features":{"Coffee":true,"Wifi":false,"Power":false,"Music":false,"Food":true},"ID":"6dc2eb46-5fb4-44a6-8957-5a432885860d"}` (fav location)
