@@ -44,6 +44,9 @@ func (s *Server) init() error {
 	// Route for the list of all locations
 	s.router.Route("/listscreen")["GET"] = http.HandlerFunc(s.handleListScreenGET)
 
+	// Route for the userpage
+	s.router.Route("/user")["GET"] = http.HandlerFunc(s.handleUserWS)
+
 	// Init location home pages
 	s.initLocationHomepageRouter()
 	/* TODO: user routing??? security???
@@ -54,7 +57,6 @@ func (s *Server) init() error {
 			- user to hash function already prepared
 		- louis stores user data in local storage + user key
 	*/
-	s.initUserPageRouter()
 
 	return nil
 }

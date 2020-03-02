@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"twimo/backend/core"
+	"twimo/backend/security"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
@@ -90,10 +91,7 @@ func (s *Server) handleSigninGET(w http.ResponseWriter, r *http.Request) {
 	key := tempUser.ToChecksum()
 
 	// assemble json
-	temp := struct {
-		Username string
-		Key      string
-	}{
+	temp := security.UserData{
 		Username: tempUser.Name,
 		Key:      key,
 	}
@@ -122,9 +120,6 @@ func listenForSigninData(conn *websocket.Conn, userData chan string, stopper cha
 
 		// Convert msg to string
 		userData <- string(msg)
-
-		// Log message
-		fmt.Println("Got message: ", string(msg))
 
 		if len(userData) == 3 {
 			stopper <- true

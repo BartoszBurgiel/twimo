@@ -2,10 +2,10 @@ package dummygenerator
 
 import (
 	"fmt"
-	"kihmo"
-	"kihmo/base"
 	"math/rand"
 	"time"
+	"twimo/backend/encr"
+	"twimo/backend/encr/base"
 
 	"github.com/google/uuid"
 )
@@ -66,8 +66,8 @@ func generateUsers(location location) (string, []user) {
 
 			/* BARTOSZ'S PART */
 			// hash password
-			_, salt, _ := kihmo.Salt(fullName, base.Base85)
-			password, err := kihmo.Hash(password, salt, base.Base85)
+			_, salt, _ := encr.Salt(fullName, base.TwimoBase)
+			password, err := encr.Hash(password, salt, base.TwimoBase)
 			if err != nil {
 				panic(err)
 			}
@@ -152,8 +152,8 @@ func generateEncodedUsers(location location) (string, []user) {
 
 			/* BARTOSZ'S PART */
 			// hash password
-			_, salt, _ := kihmo.Salt(fullName, base.Base85)
-			password, err := kihmo.Hash(password, salt, base.Base85)
+			_, salt, _ := encr.Salt(fullName, base.TwimoBase)
+			password, err := encr.Hash(password, salt, base.TwimoBase)
 			if err != nil {
 				panic(err)
 			}

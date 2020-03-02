@@ -20,7 +20,7 @@ func (u *User) Encode() {
 	// Calculate the key
 	key := u.generateUserKey()
 
-	u.Email, _ = key.Lock([]byte(u.Email), base.Base85)
+	u.Email, _ = key.Lock([]byte(u.Email), base.TwimoBase)
 }
 
 // Decode user's personal data with kihmo
@@ -29,7 +29,7 @@ func (u *User) Decode() {
 	key := u.generateUserKey()
 
 	// Encode name password and email
-	email, _ := key.Unlock(u.Email, base.Base85)
+	email, _ := key.Unlock(u.Email, base.TwimoBase)
 	u.Email = string(email)
 }
 
@@ -43,7 +43,7 @@ func (u User) generateUserKey() encr.Key {
 	return key
 }
 
-// ToChecksum returns a hash of all user's data in base85
+// ToChecksum returns a hash of all user's data in TwimoBase
 func (u User) ToChecksum() (sum string) {
 
 	// Decode information
@@ -56,10 +56,10 @@ func (u User) ToChecksum() (sum string) {
 	u.Encode()
 
 	// Generate salt
-	_, salt, _ := encr.Salt(u.Name, base.Base85)
+	_, salt, _ := encr.Salt(u.Name, base.TwimoBase)
 
 	// Hash and replace salt
-	sum, _ = encr.Hash(sum, salt, base.Base85)
+	sum, _ = encr.Hash(sum, salt, base.TwimoBase)
 
 	return sum
 }

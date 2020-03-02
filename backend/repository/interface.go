@@ -34,6 +34,9 @@ type Repository interface {
 	// Get a location with given name
 	GetLocationFromName(locationName string) (core.Location, error)
 
+	// Get location data that is needed for its card
+	GetLocationCard(locationID string) (core.Location, error)
+
 	// Get all comments of a location with given ID
 	GetCommentsOfLocation(locationID string) ([]core.Comment, error)
 

@@ -17,3 +17,6 @@ var Base60 Base = []byte("abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLNMOPQRSTUVWXYZ01
 
 // Base85 = [a-z][A+Z][0-9] && all special characters exept {-, `, ", ', ´}
 var Base85 Base = []byte("abcdefghijklmnoprstuvwxzyABCDEFGHIJKLNMOPRSTUVWXYZ0123456789!#$%^&*()_+~=[{}];:,./<>?")
+
+// TwimoBase is a custom base used in twimo, a variant of base75
+var TwimoBase Base = []byte("a2[]34bcQR?dA_BCD+stEF.Gef,ghijk*lmn;VWX(YZ0op)qruMO}vwxzyHIJKLNPSTU156789{")

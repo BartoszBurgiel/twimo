@@ -13,7 +13,7 @@
 * /location/[id]
     * location's home page 
 ---
-* /user/[id]
+* /user
     * user's page 
 ---
     * new location

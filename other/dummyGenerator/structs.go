@@ -1,9 +1,9 @@
 package dummygenerator
 
 import (
-	"kihmo"
-	"kihmo/base"
 	"strings"
+	"twimo/backend/encr"
+	"twimo/backend/encr/base"
 )
 
 // Stores all data of the user needed to compose the querries
@@ -36,7 +36,7 @@ type rating struct {
 BARTOSZ'S PART
 */
 
-// Encode user's personal information with kihmo
+// Encode user's personal information with encr
 func (u *user) Encode() {
 
 	// KeyCode = last bit from comment code
@@ -44,12 +44,12 @@ func (u *user) Encode() {
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
-	key, _ := kihmo.StringToKey(code)
+	key, _ := encr.StringToKey(code)
 
-	u.email, _ = key.Lock([]byte(u.email), base.Base85)
+	u.email, _ = key.Lock([]byte(u.email), base.TwimoBase)
 }
 
-// Decode user's personal information with kihmo
+// Decode user's personal information with encr
 func (u *user) Decode() {
 
 	// KeyCode = last bit from comment code
@@ -57,9 +57,9 @@ func (u *user) Decode() {
 	code := dividedComments[len(dividedComments)-1]
 
 	// Generate key
-	key, _ := kihmo.StringToKey(code)
+	key, _ := encr.StringToKey(code)
 
-	email, _ := key.Unlock(u.email, base.Base85)
+	email, _ := key.Unlock(u.email, base.TwimoBase)
 
 	u.email = string(email)
 }

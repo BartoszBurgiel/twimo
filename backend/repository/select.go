@@ -459,3 +459,42 @@ func (r Repo) GetLocationsForList(criteria string) (locations []core.Location, e
 
 	return locations, err
 }
+
+// GetLocationCard returns a location with the most relevant information
+// about the location
+func (r Repo) GetLocationCard(locationID string) (location core.Location, err error) {
+	location.ID = locationID
+
+	// Get  rows
+	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, webpage FROM locations WHERE id = ?  ; `, locationID)
+	if err != nil {
+		fmt.Println(err)
+		return location, err
+	}
+
+	// Schedule closing of the db
+	defer rows.Close()
+
+	// Iterate over rows
+	for rows.Next() {
+		rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Webpage)
+	}
+
+	// Rating
+	rating := r.GetLocationAvrRating(locationID)
+	location.Rating = rating
+
+	// Pricing
+	pricing := r.GetLocationsPrice(locationID)
+	location.Price = pricing
+
+	// Features
+	features, err := r.GetLocationFeatures(locationID)
+	if err != nil {
+		fmt.Println(err)
+		return location, err
+	}
+	location.Features = features
+
+	return location, err
+}
