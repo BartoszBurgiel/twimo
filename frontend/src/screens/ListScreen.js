@@ -93,6 +93,17 @@ const dummyData = [
 
 // Define the ListScreen
 const ListScreen = ({ navigation }) => {
+  //FIXME: Fetch() spits out some errors....
+  fetch(
+    "https://github.com/LBeul/blockchainJS/blob/master/test_data/locations.json"
+  )
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    });
+
   // Iterate over the given nodes and display them as LocationCards in a FlatList
   return (
     <View style={styles.container}>
