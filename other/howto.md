@@ -1,12 +1,11 @@
-init postgresql server
+`init postgresql server`
 
 https://github.com/malnvenshorn/OctoPrint-FilamentManager/wiki/Setup-PostgreSQL-on-Arch-Linux
 
-start postgresql server 
+`start postgresql server`
 
-sudo systemctl start postgresql.service
-sudo systemctl enable postgresql.service
-
+`sudo systemctl start postgresql.service`
+`sudo systemctl enable postgresql.service`
 
 Install Golang and twimo's dependencies (on Mac)
 
