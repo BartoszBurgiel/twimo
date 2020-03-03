@@ -20,10 +20,10 @@ type server interface {
 	// websocket communication on the login page
 	handleLoginWS(w http.ResponseWriter, r *http.Request)
 
-	// handle the get request of the signin page -> establish ws connection
-	handleSigninGET(w http.ResponseWriter, r *http.Request)
-	// websocket communication on the signin page
-	handleSigninWS(w http.ResponseWriter, r *http.Request)
+	// handle the get request of the signup page -> establish ws connection
+	handleSignupGET(w http.ResponseWriter, r *http.Request)
+	// websocket communication on the signup page
+	handleSignupWS(w http.ResponseWriter, r *http.Request)
 
 	// handle the GET request of the listscreen page -> establish ws connection
 	handleListScreenGET(w http.ResponseWriter, r *http.Request)

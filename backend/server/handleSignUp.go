@@ -12,7 +12,7 @@ import (
 
 // handleSigninGET recieves the data from the frontend and
 // creates new user entry
-func (s *Server) handleSigninGET(w http.ResponseWriter, r *http.Request) {
+func (s *Server) handleSignupGET(w http.ResponseWriter, r *http.Request) {
 
 	// Define the ubgrader that handles read and write buffer
 	upgrader := websocket.Upgrader{
@@ -39,7 +39,7 @@ func (s *Server) handleSigninGET(w http.ResponseWriter, r *http.Request) {
 	stopper := make(chan bool)
 
 	// Start goroutine echoing the websocket
-	go listenForSigninData(conn, userData, stopper)
+	go listenForSignupData(conn, userData, stopper)
 	<-stopper
 
 	// retrieve information from the channel
@@ -106,9 +106,9 @@ func (s *Server) handleSigninGET(w http.ResponseWriter, r *http.Request) {
 	conn.Close()
 }
 
-// listenForSigninData listens to the port and waits for the user to
+// listenForSignupData listens to the port and waits for the user to
 // enter his credentials
-func listenForSigninData(conn *websocket.Conn, userData chan string, stopper chan bool) {
+func listenForSignupData(conn *websocket.Conn, userData chan string, stopper chan bool) {
 	for {
 
 		// Get message

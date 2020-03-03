@@ -24,7 +24,7 @@ that will be send and recieved via the websocket on all (affected) routes
 * single message confirming the login -> **bool** (0/1)
 * 
 
-# /signin
+# /signup
 
 ## front end sends
 
