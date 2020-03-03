@@ -1,6 +1,6 @@
 `init postgresql server`
 
-https://github.com/malnvenshorn/OctoPrint-FilamentManager/wiki/Setup-PostgreSQL-on-Arch-Linux
+[Setup Postgres on Arch](https://github.com/malnvenshorn/OctoPrint-FilamentManager/wiki/Setup-PostgreSQL-on-Arch-Linux)
 
 `start postgresql server`
 
