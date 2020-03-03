@@ -93,8 +93,9 @@ const dummyData = [
 
 // Define the ListScreen
 const ListScreen = ({ navigation }) => {
+  //FIXME: Fetch() spits out some errors....
   fetch(
-    "https://github.com/LBeul/blockchainJS/blob/master/test_data/locations.js"
+    "https://github.com/LBeul/blockchainJS/blob/master/test_data/locations.json"
   )
     .then(response => {
       return response.json();
