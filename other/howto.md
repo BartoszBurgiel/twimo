@@ -7,7 +7,7 @@
 `sudo systemctl start postgresql.service`
 `sudo systemctl enable postgresql.service`
 
-Install Golang and twimo's dependencies (on Mac)
+### Install Golang and twimo's dependencies (on Mac)
 
 brew install go
 go get github.com/google/uuid
