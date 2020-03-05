@@ -31,10 +31,7 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text style={styles.buttonPrimaryText}>login</Text>
       </TouchableOpacity>
-      <Button
-        title="Sign up"
-        onPress={() => console.log("Sir, we need a fucking signup page.")}
-      ></Button>
+      <Button title="Sign up" onPress={() => console.log("signup")}></Button>
     </View>
   );
 };
