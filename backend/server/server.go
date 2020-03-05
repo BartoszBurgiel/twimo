@@ -47,6 +47,9 @@ func (s *Server) init() error {
 	// Route for the userpage
 	s.router.Route("/user")["GET"] = http.HandlerFunc(s.handleUserWS)
 
+	// Route for the new location
+	s.router.Route("/new")["GET"] = http.HandlerFunc(s.handleNewWS)
+
 	// Init location home pages
 	s.initLocationHomepageRouter()
 	/* TODO: user routing??? security???

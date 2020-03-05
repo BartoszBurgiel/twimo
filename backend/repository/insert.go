@@ -37,5 +37,14 @@ func (r Repo) AddFeature(feature core.Location) error {
 
 // AddLocation to the database
 func (r Repo) AddLocation(location core.Location) error {
+
+	_, err := r.db.Exec("INSERT INTO locations VALUES(?, ?, ?, ?, ?, ?, ?) ;", location.Name, location.Coords.X, location.Coords.Y, location.Desc, location.Webpage, location.Price, location.ID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	fmt.Println("location has been added")
+	return nil
+
 	return nil
 }
