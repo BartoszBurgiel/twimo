@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  ScrollView,
+  SafeAreaView,
   FlatList,
   Text,
   StyleSheet,
@@ -19,8 +19,6 @@ import ReviewCard from "../components/ReviewCard";
 
 // Define LocationDetailsScreen
 const LocationDetailsScreen = props => {
-  //FIXME: Virtualized Lists Warning
-
   // Grab locationData from the props and store it in data const
   const data = props.navigation.state.params.locationData;
   // Extract locationID from data prop
@@ -48,7 +46,7 @@ const LocationDetailsScreen = props => {
 
   // Render LocationDetailScreen
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.imgWrapper}>
         <Image
           style={styles.image}
@@ -73,7 +71,7 @@ const LocationDetailsScreen = props => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <ReviewCard reviewData={item} />}
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
