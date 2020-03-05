@@ -18,12 +18,12 @@ const LocationCard = ({ data, navigation }) => {
         <Image style={styles.image} source={{ uri: data.picture }}></Image>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.cardHeader}>{data.name}</Text>
-        <Text style={styles.cardSubHeader}>{data.location}</Text>
-        <RatingStars colorFill={color.brand.dark} rating={data.rating} />
+        <Text style={styles.cardHeader}>{data.Name}</Text>
+        <Text style={styles.cardSubHeader}>{data.Desc}</Text>
+        <RatingStars colorFill={color.brand.dark} rating={data.Rating} />
         <Text style={styles.cardMetrics}>
           <Ionicons name="logo-euro" size={20} color={color.brand.dark} />{" "}
-          {data.pricing} / 5
+          {data.Price} / 5
         </Text>
         <TouchableOpacity
           style={styles.button}

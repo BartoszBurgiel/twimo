@@ -10,29 +10,24 @@ import color from "../../utils/colorPallet";
 
 // Define the ListScreen
 const ListScreen = ({ navigation }) => {
-  // Enable an mutable state
-  const [locationData, setLocationData] = useState(0);
-
-  // Fetch Location data from web API and store it in state
-  useEffect(() => {
-    fetch("http://127.0.0.1:5500/frontend/data/locations.json")
-      .then(response => response.json())
-      .then(data => setLocationData(data));
-  });
-
-  // Web socket
+  // Web socket state
   const [socketMessages, setSocketMessages] = useState();
 
+  // Web socket connection
   useEffect(() => {
+    // Define socket
     let socket = new WebSocket("ws://localhost:8080/listscreen");
+
+    // Fetch JSON sorted by rating
     socket.onopen = () => {
-      socket.send("price");
+      socket.send("rating");
       socket.onmessage = response => {
-        setSocketMessages(response.data);
+        let data = JSON.parse(response.data);
+        setSocketMessages(data);
       };
     };
-    console.log(socketMessages);
 
+    // Close socket connection if data is fetched
     if (socketMessages) {
       socket.close();
     }

@@ -43,10 +43,10 @@ const LocationDetailsScreen = props => {
         ></Image>
       </View>
       <View style={styles.contentWrapper}>
-        <Text style={styles.categoryTag}>coffeeshop</Text>
-        <Text style={styles.headerText}>{data.name}</Text>
-        <RatingStars colorFill={color.brand.normal} rating={data.rating} />
-        <FeatureIcons features={data.feature} />
+        <Text style={styles.categoryTag}>{data.Desc}</Text>
+        <Text style={styles.headerText}>{data.Name}</Text>
+        <RatingStars colorFill={color.brand.normal} rating={data.Rating} />
+        <FeatureIcons features={data.Features} />
         <View style={styles.horizontalRule} />
         <Text style={styles.secondaryHeaderText}>Kommentare</Text>
       </View>
