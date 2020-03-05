@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 	"twimo/backend/repository"
+	"twimo/backend/security"
 )
 
 // Server struct
@@ -54,9 +55,10 @@ func (s *Server) init() error {
 		ADMIN SECTION
 	*/
 	s.router.Route("/admin")["GET"] = http.HandlerFunc(s.handleAdmin)
+	s.router.Route("/admin")["POST"] = http.HandlerFunc(security.AdminLogin)
+
 	s.router.Route("/admin/locations")["GET"] = http.HandlerFunc(s.handleAdminLocations)
 	s.router.Route("/admin/users")["GET"] = http.HandlerFunc(s.handleAdminUsersGET)
-	s.router.Route("/admin/users")["POST"] = http.HandlerFunc(s.handleAdminUsersPOST)
 
 	// Init location home pages
 	s.initLocationHomepageRouter()

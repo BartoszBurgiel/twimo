@@ -6,8 +6,8 @@ import (
 	"twimo/backend/encr/base"
 )
 
-// AuthAdminPassword checkes if admin password is valid
-func AuthAdminPassword(adminPassword string) bool {
+// authAdminPassword checkes if admin password is valid
+func authAdminPassword(adminPassword string) bool {
 	// hash the password
 	hashed := hashAdminPassword(adminPassword)
 	// Read saved hashed original password
