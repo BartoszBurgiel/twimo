@@ -1,6 +1,7 @@
 package security
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/google/uuid"
@@ -20,7 +21,6 @@ func AuthAdminSession(w http.ResponseWriter, r *http.Request) bool {
 
 	// Check if user is authenticated
 	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, `Sorry, you need to log in`, http.StatusForbidden)
 		return false
 	}
 
@@ -33,7 +33,7 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 
 	// Fetch password
 	pword := r.FormValue("pword")
-
+	fmt.Println(pword)
 	// Set user as authenticated
 	session.Values["authenticated"] = authAdminPassword(pword)
 	session.Save(r, w)
