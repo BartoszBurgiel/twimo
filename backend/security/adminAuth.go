@@ -10,9 +10,8 @@ import (
 func AuthAdminPassword(adminPassword string) bool {
 	// hash the password
 	hashed := hashAdminPassword(adminPassword)
-
 	// Read saved hashed original password
-	originalPassword, _ := ioutil.ReadFile("admin.pword")
+	originalPassword, _ := ioutil.ReadFile("../security/admin.pword")
 
 	// if both passwords are equal
 	if string(originalPassword) == hashed {
