@@ -1,1 +1,10 @@
 <!DOCTYPE html>
+<html>
+    <h1>
+        These are all the users of twimo 
+    </h1>
+    {{range . }}
+        {{template "user" .}}
+    {{end}}
+
+</html>

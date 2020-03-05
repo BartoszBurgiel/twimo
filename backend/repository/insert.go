@@ -46,5 +46,4 @@ func (r Repo) AddLocation(location core.Location) error {
 	fmt.Println("location has been added")
 	return nil
 
-	return nil
 }

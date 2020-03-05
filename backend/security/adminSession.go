@@ -39,10 +39,18 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 }
 
-func logout(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "admin-login-session")
+// CheckKillSession checks if the admin destroyed his session
+// and renders the authentication to unvalid
+func CheckKillSession(w http.ResponseWriter, r *http.Request) {
+	killSession := r.FormValue("killSession")
 
-	// Revoke users authentication
-	session.Values["authenticated"] = false
-	session.Save(r, w)
+	// If killSession has a value ->
+	// if admin insisted on destroying the session
+	if killSession != "" {
+		session, _ := store.Get(r, "admin-login-session")
+
+		// Revoke users authentication
+		session.Values["authenticated"] = false
+		session.Save(r, w)
+	}
 }

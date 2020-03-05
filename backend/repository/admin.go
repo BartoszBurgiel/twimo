@@ -105,7 +105,6 @@ func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 
 // GetAllUsers from the database
 func (r Repo) GetAllUsers() (users []core.User, err error) {
-
 	// Run querry
 	rows, err := r.db.Query(`SELECT name, password, email, favlocation, id FROM users ;`)
 	if err != nil {
@@ -118,6 +117,7 @@ func (r Repo) GetAllUsers() (users []core.User, err error) {
 
 	// Iterate over rows
 	for rows.Next() {
+
 		// Temporary variable for the user struct that will be build
 		user := core.User{}
 
@@ -130,7 +130,6 @@ func (r Repo) GetAllUsers() (users []core.User, err error) {
 
 		// Decode user
 		user.Decode()
-
 		// Add tempuser to users
 		users = append(users, user)
 	}

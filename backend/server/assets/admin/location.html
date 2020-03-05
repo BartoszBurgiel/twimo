@@ -8,18 +8,29 @@
         {{.Desc}}
         <br>
         <a href="{{.Webpage}}">{{.Webpage}}</a>
+        <br>
+        {{.Users}}
+        <br>
+        {{.Rating}}
+        <br>
+        {{.Price}}
+        <br>
+        {{.Features.Coffee}}
+        <br>
+        {{.Features.Wifi}}
+        <br>
+        {{.Features.Power}}
+        <br>
+        {{.Features.Music}}
+        <br>
+        {{.Features.Food}}
+        <br>
+        {{.ID}}
+        <br>
         {{range .Comments}}
             {{template "comment" .}}
         {{end}}
-        {{.Users}}
-        {{.Rating}}
-        {{.Price}}
-        {{.Features.Coffee}}
-        {{.Features.Wifi}}
-        {{.Features.Power}}
-        {{.Features.Music}}
-        {{.Features.Food}}
-        {{.ID}}
+        <br>
     </div>
 
 {{end}}
