@@ -38,6 +38,7 @@ const ListScreen = ({ navigation }) => {
     <View style={styles.container}>
       <FlatList
         data={socketMessages}
+        keyExtractor={item => item.ID}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <LocationCard data={item} navigation={navigation} />

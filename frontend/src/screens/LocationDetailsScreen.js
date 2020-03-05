@@ -1,5 +1,5 @@
 // Import core functionality dependencies from react & react-native
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   ScrollView,
@@ -21,24 +21,40 @@ import ReviewCard from "../components/ReviewCard";
 const LocationDetailsScreen = props => {
   //FIXME: Virtualized Lists Warning
 
-  // Set up component's state
-  const [reviews, setReviews] = useState(0);
-
   // Grab locationData from the props and store it in data const
   const data = props.navigation.state.params.locationData;
+  // Extract locationID from data prop
+  let locationID = data.ID;
 
-  // Fetch review data from API
-  fetch("http://127.0.0.1:5500/frontend/data/reviews.json")
-    .then(response => response.json())
-    .then(data => setReviews(data));
+  // Web socket state
+  const [socketReviews, setSocketReviews] = useState();
 
+  // Web socket connection
+  useEffect(() => {
+    // Define socket
+    let socket = new WebSocket(`ws://localhost:8080/location/${locationID}`);
+
+    // Fetch JSON sorted by rating
+    socket.onmessage = response => {
+      let data = JSON.parse(response.data);
+      setSocketReviews(data.Comments);
+    };
+
+    // Close socket connection if data is fetched
+    if (socketReviews) {
+      socket.close();
+    }
+  }, [socketReviews]);
+
+  // Render LocationDetailScreen
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imgWrapper}>
         <Image
           style={styles.image}
           source={{
-            uri: data.picture
+            uri:
+              "https://www.heikaus-asset.com/wp-content/uploads/2018/01/Test_Starbucks-1024x731.jpg"
           }}
         ></Image>
       </View>
@@ -51,7 +67,8 @@ const LocationDetailsScreen = props => {
         <Text style={styles.secondaryHeaderText}>Kommentare</Text>
       </View>
       <FlatList
-        data={reviews}
+        keyExtractor={item => item.ID}
+        data={socketReviews}
         style={styles.contentWrapper}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <ReviewCard reviewData={item} />}

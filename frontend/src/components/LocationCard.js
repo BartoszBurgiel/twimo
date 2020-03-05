@@ -15,7 +15,13 @@ const LocationCard = ({ data, navigation }) => {
   return (
     <View style={styles.card}>
       <View style={styles.pictureWrapper}>
-        <Image style={styles.image} source={{ uri: data.picture }}></Image>
+        <Image
+          style={styles.image}
+          source={{
+            uri:
+              "https://www.heikaus-asset.com/wp-content/uploads/2018/01/Test_Starbucks-1024x731.jpg"
+          }}
+        ></Image>
       </View>
       <View style={styles.textWrapper}>
         <Text style={styles.cardHeader}>{data.Name}</Text>

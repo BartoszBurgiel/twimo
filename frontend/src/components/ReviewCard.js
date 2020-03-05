@@ -14,15 +14,20 @@ const ReviewCard = ({ reviewData }) => {
   return (
     <TouchableOpacity style={styles.card}>
       <View style={styles.userData}>
-        <Image style={styles.image} source={{ uri: reviewData.avatar }}></Image>
-        <Text style={styles.userName}>{reviewData.name}</Text>
+        <Image
+          style={styles.image}
+          source={{
+            uri: `https://api.adorable.io/avatars/50/${reviewData.User.ID}.png`
+          }}
+        ></Image>
+        <Text style={styles.userName}>{reviewData.User.Name}</Text>
         <RatingStars
           colorFill={color.black}
-          rating={reviewData.rating}
+          rating={reviewData.Rating}
           iconSize={20}
         />
       </View>
-      <Text style={styles.reviewContent}>{reviewData.content}</Text>
+      <Text style={styles.reviewContent}>{reviewData.Content}</Text>
     </TouchableOpacity>
   );
 };
