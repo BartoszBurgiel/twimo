@@ -46,8 +46,7 @@ const LocationCard = ({ data, navigation }) => {
   );
 };
 
-// FIXME: Finally fix the fucking card lyout on android - right now it sucks
-// TODO: Figure out why the goddamn schäfer picture doesn't load on android
+// FIXME: Android Layout
 
 // Define the stylesheet
 const styles = StyleSheet.create({

@@ -1,40 +1,45 @@
 // Import core functionalities from react & react-native library
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
-  Text,
-  Button,
+  StyleSheet,
   TextInput,
-  TouchableOpacity,
-  StyleSheet
+  Text,
+  TouchableOpacity
 } from "react-native";
 
-// Import color utility for consistent styling
+// Import color utility
 import color from "../../utils/colorPallet";
 
-//TODO: Implement real credential check!
-
-// Define HomeScreen
-const HomeScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
+  // Render component
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>twimo</Text>
-      <TextInput style={styles.input} autoCompleteType="off" />
+      <Text style={styles.header}>Sign up</Text>
+      <Text>Name</Text>
       <TextInput
         style={styles.input}
-        secureTextEntry={true}
         autoCompleteType="off"
+        placeholder="e.g. Luke Skywalker"
+      />
+      <Text>Email</Text>
+      <TextInput
+        style={styles.input}
+        autoCompleteType="off"
+        placeholder="e.g. luke@jedi-mail.com"
+      />
+      <Text>Password</Text>
+      <TextInput
+        style={styles.input}
+        autoCompleteType="off"
+        placeholder="e.g. uSmellLikeChewbacca247"
       />
       <TouchableOpacity
         style={styles.buttonPrimary}
         onPress={() => navigation.navigate("List")}
       >
-        <Text style={styles.buttonPrimaryText}>Login</Text>
+        <Text style={styles.buttonPrimaryText}>Let's go!</Text>
       </TouchableOpacity>
-      <Button
-        title="Sign up"
-        onPress={() => navigation.navigate("SignUp")}
-      ></Button>
     </View>
   );
 };
@@ -48,8 +53,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   header: {
-    fontSize: 50,
+    fontSize: 30,
     fontWeight: "bold",
+    marginBottom: 20,
     color: color.brand.normal
   },
   input: {
@@ -64,7 +70,7 @@ const styles = StyleSheet.create({
   buttonPrimary: {
     backgroundColor: color.brand.normal,
     height: 50,
-    width: "30%",
+    width: "50%",
     borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
@@ -78,5 +84,5 @@ const styles = StyleSheet.create({
   }
 });
 
-// Export the above defined screen
-export default HomeScreen;
+// Export Screen
+export default SignUpScreen;
