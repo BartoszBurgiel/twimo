@@ -1,0 +1,25 @@
+{{define "location" }}
+    <div>
+        {{.Name}}
+        <br>
+        {{.Coords.X}}
+        {{.Coords.Y}}
+        <br>
+        {{.Desc}}
+        <br>
+        <a href="{{.Webpage}}">{{.Webpage}}</a>
+        {{range .Comments}}
+            {{template "comment" .}}
+        {{end}}
+        {{.Users}}
+        {{.Rating}}
+        {{.Price}}
+        {{.Features.Coffee}}
+        {{.Features.Wifi}}
+        {{.Features.Power}}
+        {{.Features.Music}}
+        {{.Features.Food}}
+        {{.ID}}
+    </div>
+
+{{end}}
