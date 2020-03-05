@@ -79,10 +79,10 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleAdminLocationPOST(w http.ResponseWriter, r *http.Request) {
+func (s *Server) handleAdminLocationsPOST(w http.ResponseWriter, r *http.Request) {
 	security.CheckKillSession(w, r)
 }
 
-func handleAdminUserPOST(w http.ResponseWriter, r *http.Request) {
+func (s *Server) handleAdminUsersPOST(w http.ResponseWriter, r *http.Request) {
 	security.CheckKillSession(w, r)
 }
