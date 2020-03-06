@@ -1,5 +1,5 @@
 // Import core functionalities from react & react-native library
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -12,31 +12,80 @@ import {
 import color from "../../utils/colorPallet";
 
 const SignUpScreen = ({ navigation }) => {
+  // State storage for login credentials
+  const [userName, setUserName] = useState();
+  const [userMail, setUserMail] = useState();
+  const [userPwd, setUserPwd] = useState();
+  let userData = [];
+
+  // State storage for socket
+  const [socketMessages, setSocketMessages] = useState();
+
+  // Submit user credentials
+  const initSignUp = () => {
+    userData.push(userName, userMail, userPwd);
+    connectToSocket(userData);
+    userData = [];
+  };
+
+  // Connect to the websocket
+  const connectToSocket = arr => {
+    // Socket url
+    const socket = new WebSocket("ws://localhost:8080/signup");
+
+    //Open socket and send data
+    socket.onopen = () => {
+      // Loop array
+      arr.map(item => {
+        socket.send(item);
+      });
+      //Receive validation hash
+      while (!socketMessages) {
+        socket.onmessage = response => {
+          let data = JSON.parse(response.data);
+          setSocketMessages(data);
+        };
+      }
+      // Log validation
+      console.log(socketMessages);
+    };
+  };
+
   // Render component
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Sign up</Text>
-      <Text>Name</Text>
+      <Text style={styles.label}>Name</Text>
       <TextInput
         style={styles.input}
         autoCompleteType="off"
         placeholder="e.g. Luke Skywalker"
+        placeholderTextColor={color.brand.dark}
+        onChangeText={text => setUserName(text)}
       />
-      <Text>Email</Text>
+      <Text style={styles.label}>Email</Text>
       <TextInput
         style={styles.input}
         autoCompleteType="off"
         placeholder="e.g. luke@jedi-mail.com"
+        placeholderTextColor={color.brand.dark}
+        onChangeText={text => setUserMail(text)}
       />
-      <Text>Password</Text>
+      <Text style={styles.label}>Password</Text>
       <TextInput
         style={styles.input}
         autoCompleteType="off"
-        placeholder="e.g. uSmellLikeChewbacca247"
+        secureTextEntry={true}
+        placeholder="e.g. RedLightSaber#69"
+        placeholderTextColor={color.brand.dark}
+        onChangeText={text => setUserPwd(text)}
       />
       <TouchableOpacity
         style={styles.buttonPrimary}
-        onPress={() => navigation.navigate("List")}
+        onPress={() => {
+          navigation.navigate("List");
+          initSignUp();
+        }}
       >
         <Text style={styles.buttonPrimaryText}>Let's go!</Text>
       </TouchableOpacity>
@@ -57,6 +106,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     color: color.brand.normal
+  },
+  label: {
+    width: "70%",
+    textAlign: "left",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    color: color.black
   },
   input: {
     height: 50,
