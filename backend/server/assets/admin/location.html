@@ -1,0 +1,36 @@
+{{define "location" }}
+    <div>
+        {{.Name}}
+        <br>
+        {{.Coords.X}}
+        {{.Coords.Y}}
+        <br>
+        {{.Desc}}
+        <br>
+        <a href="{{.Webpage}}">{{.Webpage}}</a>
+        <br>
+        {{.Users}}
+        <br>
+        {{.Rating}}
+        <br>
+        {{.Price}}
+        <br>
+        {{.Features.Coffee}}
+        <br>
+        {{.Features.Wifi}}
+        <br>
+        {{.Features.Power}}
+        <br>
+        {{.Features.Music}}
+        <br>
+        {{.Features.Food}}
+        <br>
+        {{.ID}}
+        <br>
+        {{range .Comments}}
+            {{template "comment" .}}
+        {{end}}
+        <br>
+    </div>
+
+{{end}}

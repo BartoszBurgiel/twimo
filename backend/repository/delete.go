@@ -1,17 +1,50 @@
 package repository
 
+import "fmt"
+
 /*
 ALL DELETE QUERRIES
 */
 
 // DeleteComment with a given ID from the database
 func (r Repo) DeleteComment(commentID string) error {
-	return nil
+	// Get rating's ID
+	rows, err := r.db.Query("SELECT ratingID from comments WHERE ID = ? ;", commentID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	defer rows.Close()
+	ratingID := ""
+
+	// iterate over rows
+	for rows.Next() {
+		err = rows.Scan(&ratingID)
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+	}
+
+	// remove comment
+	_, err = r.db.Exec("DELETE FROM comments WHERE ID = ? ; ", commentID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	r.DeleteRating(ratingID)
+	return err
 }
 
 // DeleteRating with a given ID from the database
 func (r Repo) DeleteRating(ratingID string) error {
-	return nil
+	// remove rating
+	_, err := r.db.Exec("DELETE FROM ratings WHERE ID = ? ; ", ratingID)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return err
 }
 
 // DeleteUser from the datbase

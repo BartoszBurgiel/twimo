@@ -1,0 +1,17 @@
+{{ define "comment"}}
+    <div>
+        <h2>Title: {{.Title}}</h1>
+        <br>
+        <h3>Content</h3>
+        <br>
+        {{.Content}}
+        <br>
+        <br>
+        Location rated at: {{.Rating}}/5
+        <br>
+        Comment ID: {{.ID}}
+        <br>
+        <input type="hidden" name="deleteComment" value="{{.ID}}">
+        <input type="submit" name="submit" value="deleteComment">
+    </div>
+{{end}}
