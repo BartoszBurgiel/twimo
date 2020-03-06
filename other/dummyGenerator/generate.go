@@ -283,7 +283,7 @@ func generateComments(users []user, locations []location) string {
 			title := user.name + "s comment..."
 
 			// Lorem ipsum -> declared in ./querryTemplates.go
-			content := lorem
+			content := "Super Location!"
 			id := uuid.New().String()
 
 			rand.Seed(time.Now().UnixNano())

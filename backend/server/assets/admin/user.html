@@ -1,8 +1,16 @@
 {{ define "user"}} 
-    {{.Name}}
+    
+<br>
+    <h1>User's name: {{.Name}}</h1>
     <br>
-    {{.Email}}
+    User's email: {{.Email}}
     <br>
-    {{.ID}}
+    User's ID: {{.ID}}
     <br>
+    User's comments:
+    <form method="POST">
+        {{range .Comments }}
+            {{template "comment" .}}
+        {{end}}
+    </form>
 {{end}}

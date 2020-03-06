@@ -6,5 +6,8 @@
     {{range . }}
         {{template "user" .}}
     {{end}}
-
+    <form method="POST">
+        <input type="hidden" name=killSession value="ds">
+        <input type="submit" name="killSession" value="log out">
+    </form>
 </html>

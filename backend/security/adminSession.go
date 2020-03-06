@@ -34,8 +34,17 @@ func AdminLogin(w http.ResponseWriter, r *http.Request) {
 	// Fetch password
 	pword := r.FormValue("pword")
 	fmt.Println(pword)
-	// Set user as authenticated
-	session.Values["authenticated"] = authAdminPassword(pword)
+
+	if pword != "" {
+
+		// Set user as authenticated
+		session.Values["authenticated"] = authAdminPassword(pword)
+	} else {
+
+		// if no password entered -> kihmo unvalid
+		// and just set the authenticated value to false
+		session.Values["authenticated"] = false
+	}
 	session.Save(r, w)
 }
 
@@ -47,6 +56,7 @@ func CheckKillSession(w http.ResponseWriter, r *http.Request) {
 	// If killSession has a value ->
 	// if admin insisted on destroying the session
 	if killSession != "" {
+		fmt.Println("yo!")
 		session, _ := store.Get(r, "admin-login-session")
 
 		// Revoke users authentication

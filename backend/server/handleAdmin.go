@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+	"twimo/backend/core"
 	"twimo/backend/security"
 )
 
@@ -17,6 +18,7 @@ func (s *Server) handleAdmin(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleAdminPOST(w http.ResponseWriter, r *http.Request) {
 	security.AdminLogin(w, r)
+	security.CheckKillSession(w, r)
 
 	// Check if the admin has logged in
 	if !security.AuthAdminSession(w, r) {
@@ -43,11 +45,39 @@ func (s *Server) handleAdminUsersGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Temporary object that will be parsed into the template
+	type tempUserWithComments struct {
+		Name     string
+		Email    string
+		ID       string
+		Comments []core.Comment
+	}
+
+	// Build temp users with comments
+	tempUsers := []tempUserWithComments{}
+	for _, user := range users {
+
+		// Get user's comments
+		comments, err := s.repo.GetUsersComments(user.ID)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		tempUsers = append(tempUsers, tempUserWithComments{
+			Name:     user.Name,
+			Email:    user.Email,
+			ID:       user.ID,
+			Comments: comments,
+		})
+
+	}
+
 	// Path reassigned to variable p to shorten the code
 	p := pathToAdminAssets
 
-	temp := template.Must(template.ParseFiles(p+"users.html", p+"user.html"))
-	err = temp.Execute(w, users)
+	temp := template.Must(template.ParseFiles(p+"users.html", p+"user.html", p+"comment.html"))
+	err = temp.Execute(w, tempUsers)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -81,8 +111,31 @@ func (s *Server) handleAdminLocations(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleAdminLocationsPOST(w http.ResponseWriter, r *http.Request) {
 	security.CheckKillSession(w, r)
+	// Check if the admin has logged in
+	if !security.AuthAdminSession(w, r) {
+		w.Write([]byte(`You need to log in!`))
+		return
+	}
 }
 
 func (s *Server) handleAdminUsersPOST(w http.ResponseWriter, r *http.Request) {
 	security.CheckKillSession(w, r)
+	// Check if the admin has logged in
+	if !security.AuthAdminSession(w, r) {
+		w.Write([]byte(`You need to log in!`))
+		return
+	}
+
+	// Check post values
+	deleteComment := r.FormValue("deleteComment")
+	fmt.Println(deleteComment)
+	// If delete comment has been clicked
+	if deleteComment != "" {
+		err := s.repo.DeleteComment(deleteComment)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+	s.handleAdminUsersGET(w, r)
 }
