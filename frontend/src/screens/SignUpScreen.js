@@ -24,7 +24,7 @@ const SignUpScreen = ({ navigation }) => {
   // Submit user credentials
   const initSignUp = () => {
     userData.push(userName, userMail, userPwd);
-    connectToSocket(userData);
+    //connectToSocket(userData);
     userData = [];
   };
 
@@ -46,6 +46,7 @@ const SignUpScreen = ({ navigation }) => {
           setSocketMessages(data);
         };
       }
+      socket.close();
       // Log validation
       console.log(socketMessages);
     };
