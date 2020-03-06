@@ -1,5 +1,5 @@
 // Import core functionalities from react & react-native library
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
