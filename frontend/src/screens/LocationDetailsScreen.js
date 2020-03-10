@@ -42,7 +42,7 @@ const LocationDetailsScreen = props => {
     if (socketReviews) {
       socket.close();
     }
-  }, [socketReviews]);
+  }, []);
 
   // Render LocationDetailScreen
   return (
