@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <h1>
-        These are all of the location
-    </h1>
-    {{range .}}
+    <head>
+		<link rel="stylesheet" type="text/css" href="./style/main.css" />
+    </head>
+    <body>
+        <h1>
+            These are all of the location
+        </h1>
+        {{range .}}
         {{template "location" . }}
-    {{end}}
-    <form method="POST">
-        <input type="hidden" name=killSession value="ds">
-        <input type="submit" name="killSession" value="log out">
-    </form>
+        {{end}}
+        <form method="POST">
+            <input type="hidden" name=killSession value="ds">
+            <input type="submit" name="killSession" value="log out">
+        </form>
+    </body>
 </html>

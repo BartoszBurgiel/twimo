@@ -228,7 +228,7 @@ func generateLocations() (string, []location) {
 
 			// Compose variables
 			fullName := names[i] + " " + places[j]
-			desc := fullName + "s description..."
+			desc := "COFFEESHOP"
 			website := "www." + names[i] + places[j] + ".de"
 
 			rand.Seed(time.Now().UnixNano())
