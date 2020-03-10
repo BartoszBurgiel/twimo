@@ -70,7 +70,7 @@ func (s *Server) init() error {
 // ServeHTTP to the server
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.String()
-	if !prefixChecker(url, "/style", "/favicon.ico") {
+	if !prefixChecker(url, "/admin/style", "/favicon.ico") {
 		p := Path(r.URL.Path)
 		m := Method(r.Method)
 
@@ -85,7 +85,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // If assets are called -> host assets
 func (s Server) handleGETAssets(w http.ResponseWriter, r *http.Request) {
-	http.FileServer(http.Dir("../server/assets/")).ServeHTTP(w, r)
+	http.FileServer(http.Dir("../server/assets")).ServeHTTP(w, r)
 }
 
 // prefixChecker checks if any of given prefixes is in the url

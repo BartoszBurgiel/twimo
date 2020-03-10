@@ -3,56 +3,94 @@
         <div class="location-name">
             {{.Name}}
         </div>
-        <div class="location-coords">
-            {{.Coords.X}}
-            {{.Coords.Y}}
-        </div>
         <div class="location-desc">
             {{.Desc}}
+        </div>
+        <div class="location-coords">
+            x: {{.Coords.X}}
+            y: {{.Coords.Y}}
         </div>
         <div class="location-link">
             <a href="{{.Webpage}}">{{.Webpage}}</a>
         </div>
-        <div class="locations-users">
-            Number of users that like this location: {{.Users}}
-        </div>
-        <div class="location-rating">
-            Location's rating: {{.Rating}}/5
-        </div>
-        <div class="locations-price">
-            Location's pricing: {{.Price}}/5
-        </div>
 
-        <div class="locations-features">
+        <div class="location-card-flex">
+            
+        <div class="location-card-flex">
+            <div class="location-card-flex-element">
+                <div class="locations-users">
+                    Number of users that like this location: <b>{{.Users}}</b>
+                </div>
+                <div class="location-rating">
+                    Location's rating: <b>{{.Rating}}/5</b>
+                </div>
+                <div class="locations-price">
+                    Location's pricing: <b>{{.Price}}/5</b>
+                </div>    
+            </div>
+        </div>
+    </div>
+        <div class="location-features">
             <div class="location-feature">
-                Coffee: {{.Features.Coffee}}
+                {{if .Features.Coffee}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Coffee
+                    </div>
             </div>
             <div class="location-feature">
-                Wifi: {{.Features.Wifi}}
+                {{if .Features.Wifi}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Wifi
+                    </div>
             </div>
             <div class="location-feature">
-                Power: {{.Features.Power}}
+                {{if .Features.Power}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Power
+                    </div>
             </div>
             <div class="location-feature">
-                Music: {{.Features.Music}}
+                {{if .Features.Music}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Music
+                    </div>
             </div>
             <div class="location-feature">
-                Food: {{.Features.Food}}
+                {{if .Features.Food}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Food
+                    </div>
             </div>
         </div>
         <div class="location-id">
-            Location's ID: {{.ID}}
+            Location's ID: <code>{{.ID}}</code>
         </div> 
+        <div class="location-button">
+            <form method="POST">
+                <input type="hidden" name="deleteLocation" value="{{.ID}}">
+                <input type="submit" name="submit" value="deleteLocation">
+            </form>
+        </div>
+            </div>
 
         {{range .Comments}}
             {{template "comment" .}}
         {{end}}
         <br>
-
-        <form method="POST">
-            <input type="hidden" name="deleteLocation" value="{{.ID}}">
-            <input type="submit" name="submit" value="deleteLocation">
-        </form>
-    </div>
 
 {{end}}
