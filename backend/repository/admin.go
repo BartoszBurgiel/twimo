@@ -38,7 +38,7 @@ func (r Repo) GetAllUsersIDs() (IDs []string, err error) {
 func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 
 	// Run querry
-	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, webpage, id FROM locations ;`)
+	rows, err := r.db.Query(`SELECT name, coordX, coordY, descr, webpage, price, id FROM locations ;`)
 	if err != nil {
 		fmt.Println(err)
 		return locations, err
@@ -54,7 +54,7 @@ func (r Repo) GetAllLocations() (locations []core.Location, err error) {
 		location := core.Location{}
 
 		// Construct tempLocation
-		err := rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Webpage, &location.ID)
+		err := rows.Scan(&location.Name, &location.Coords.X, &location.Coords.Y, &location.Desc, &location.Webpage, &location.Price, &location.ID)
 		if err != nil {
 			fmt.Println(err)
 			return locations, err

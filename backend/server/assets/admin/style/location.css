@@ -1,0 +1,64 @@
+.locations {
+    margin:auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.location-name{
+    font-size: 36px;
+}
+
+.location-desc{
+    font-size: 32px;
+    color: #bebfc0;
+}
+
+.location-name, .location-link, .location-desc, .location-coords, .location-button, .location-features, .location-id {
+    margin: auto;
+    width:max-content;
+}
+
+.location-card-flex{
+    font-size: 24px;
+    margin: auto;
+    width: max-content;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.location-id{
+    font-size: 24px;
+}
+
+.location-card-flex-element{
+    display: flex;
+    flex-direction: column;
+}
+
+.location-card {
+    background-color: #d7e4fc;
+    margin: auto;
+    width: 50%;
+}
+
+.location-features {
+    display: flex;
+    font-size: 24px;
+    flex-direction: row;
+}
+.location-feature {
+    margin-left: 5%;
+    width: max-content;
+}
+
+.red {
+    background-color: #ec5465;
+}
+
+.green {
+    background-color: #50dd70;
+}
