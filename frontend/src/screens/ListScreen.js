@@ -31,7 +31,7 @@ const ListScreen = ({ navigation }) => {
     if (socketMessages) {
       socket.close();
     }
-  }, [socketMessages]);
+  }, []);
 
   // Iterate over the given nodes and display them as LocationCards in a FlatList
   return (
