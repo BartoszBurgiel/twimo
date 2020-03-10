@@ -1,17 +1,21 @@
 {{ define "comment"}}
-    <div>
-        <h2>Title: {{.Title}}</h1>
-        <br>
-        <h3>Content</h3>
-        <br>
-        {{.Content}}
-        <br>
-        <br>
-        Location rated at: {{.Rating}}/5
-        <br>
-        Comment ID: {{.ID}}
-        <br>
-        <input type="hidden" name="deleteComment" value="{{.ID}}">
-        <input type="submit" name="submit" value="deleteComment">
+    <div class="comment">
+        <div class="comment-title">
+            Title: {{.Title}}
+        </div>
+        <div class="comment-content">
+            {{.Content}}
+        </div>
+        <div class="comment-rating">
+            Location rated at: {{.Rating}}/5
+        </div>
+        <div class="comment-id">
+            Comment ID: {{.ID}}
+        </div>
+        
+        <div class="comment-button">
+            <input type="hidden" name="deleteComment" value="{{.ID}}">
+            <input type="submit" name="submit" value="deleteComment">
+        </div>
     </div>
 {{end}}
