@@ -49,11 +49,51 @@ func (r Repo) DeleteRating(ratingID string) error {
 
 // DeleteUser from the datbase
 func (r Repo) DeleteUser(userID string) error {
-	return nil
+	_, err := r.db.Exec("DELETE FROM users WHERE ID = ? ; ", userID)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return err
+
 }
 
 // DeleteLocation from the database
 func (r Repo) DeleteLocation(locationID string) error {
+
+	// Delete from location table
+	_, err := r.db.Exec("DELETE FROM locations WHERE ID = ? ; ", locationID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Delete all location's comments
+	_, err = r.db.Exec("DELETE FROM comments WHERE locationID = ? ; ", locationID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Delete all location's features
+	_, err = r.db.Exec("DELETE FROM features WHERE locationID = ? ; ", locationID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Delete all location's ratings
+	_, err = r.db.Exec("DELETE FROM ratings WHERE locationID = ? ; ", locationID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	// Reset user's fav location
+	_, err = r.db.Exec(`UPDATE users SET favlocation="" WHERE favlocation = ? ;`, locationID)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
 	return nil
 }
 

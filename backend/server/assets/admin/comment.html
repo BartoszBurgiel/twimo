@@ -14,8 +14,10 @@
         </div>
         
         <div class="comment-button">
-            <input type="hidden" name="deleteComment" value="{{.ID}}">
-            <input type="submit" name="submit" value="deleteComment">
+            <form method="POST">
+                <input type="hidden" name="deleteComment" value="{{.ID}}">
+                <input type="submit" name="submit" value="deleteComment">
+            </form>
         </div>
     </div>
 {{end}}

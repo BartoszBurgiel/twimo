@@ -48,6 +48,11 @@
             {{template "comment" .}}
         {{end}}
         <br>
+
+        <form method="POST">
+            <input type="hidden" name="deleteLocation" value="{{.ID}}">
+            <input type="submit" name="submit" value="deleteLocation">
+        </form>
     </div>
 
 {{end}}

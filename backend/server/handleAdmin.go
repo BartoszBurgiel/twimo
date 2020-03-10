@@ -116,6 +116,35 @@ func (s *Server) handleAdminLocationsPOST(w http.ResponseWriter, r *http.Request
 		w.Write([]byte(`You need to log in!`))
 		return
 	}
+
+	// Fetch post variables
+	deleteComment := r.FormValue("deleteComment")
+	deleteLocation := r.FormValue("deleteLocation")
+
+	// determine what to do
+
+	// id delete comment was clicked
+	// If delete comment has been clicked
+	if deleteComment != "" {
+		fmt.Println("commentID to delete: ", deleteComment)
+		err := s.repo.DeleteComment(deleteComment)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println("comment has been deleted")
+	} else if deleteLocation != "" {
+		fmt.Println("locationID to delete: ", deleteComment)
+		err := s.repo.DeleteLocation(deleteComment)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println("location has been deleted")
+	}
+
+	// reopen the page
+	s.handleAdminLocations(w, r)
 }
 
 func (s *Server) handleAdminUsersPOST(w http.ResponseWriter, r *http.Request) {
@@ -128,14 +157,26 @@ func (s *Server) handleAdminUsersPOST(w http.ResponseWriter, r *http.Request) {
 
 	// Check post values
 	deleteComment := r.FormValue("deleteComment")
-	fmt.Println(deleteComment)
+	deleteUser := r.FormValue("deleteUser")
+
 	// If delete comment has been clicked
 	if deleteComment != "" {
+		fmt.Println("commentID to delete: ", deleteComment)
 		err := s.repo.DeleteComment(deleteComment)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
+		fmt.Println("comment has been deleted")
+		// if delete user has been clicked
+	} else if deleteUser != "" {
+		fmt.Println("userID to delete: ", deleteComment)
+		err := s.repo.DeleteUser(deleteUser)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println("user has been deleted")
 	}
 	s.handleAdminUsersGET(w, r)
 }
