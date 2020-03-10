@@ -19,5 +19,11 @@
             {{template "comment" .}}
         {{end}}
     </div>
+    <div class="user-button">
+        <form method="POST">
+            <input type="hidden" name="deleteUser" value="{{.ID}}">
+            <input type="submit" name="submit" value="deleteUser">
+        </form>
+    </div>
 </div>
 {{end}}
