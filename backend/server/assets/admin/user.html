@@ -15,11 +15,9 @@
     <div class="user-comments">
 
         User's comments:
-        <form method="POST">
-            {{range .Comments }}
+        {{range .Comments }}
             {{template "comment" .}}
-            {{end}}
-        </form>
+        {{end}}
     </div>
 </div>
 {{end}}

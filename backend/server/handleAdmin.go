@@ -136,6 +136,7 @@ func (s *Server) handleAdminUsersPOST(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 			return
 		}
+		fmt.Println("comment has been deleted")
 	}
 	s.handleAdminUsersGET(w, r)
 }
