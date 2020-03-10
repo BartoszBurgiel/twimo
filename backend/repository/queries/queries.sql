@@ -21,25 +21,27 @@ SELECT AVG(value) FROM ratings WHERE ratings.locationID = ?
   -- distance from user (LATER)
   
   -- rating
-  SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
-  FROM locations
-  LEFT JOIN ratings
-  ON locations.id = ratings.locationID
-  ORDER BY AVG(ratings.value) ASC
+SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
+		FROM locations, ratings
+		WHERE locations.id = ratings.locationID
+		GROUP BY ratings.locationID 
+		ORDER BY AVG(ratings.value) DESC 
   LIMIT 20
 
   -- number of fav users
-  SELECT locations.name, locations.descr, locations.id, locations.price, COUNT(users.favlocation)
-  FROM locations
-  LEFT JOIN users
-  ON locations.id = users.favlocation
-  ORDER BY COUNT(users.favlocation) ASC
+SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
+		FROM locations, ratings, users
+		WHERE locations.id = users.favlocation
+		GROUP BY users.favlocation
+		ORDER BY COUNT(users.favlocation) DESC
   LIMIT 20
 
   -- price
-  SELECT TOP 20 locations.name, locations.descr, locations.id, locations.price
-  FROM locations 
-  ORDER BY locations.price DESC
+SELECT locations.name, locations.descr, locations.id, locations.price, AVG(ratings.value)
+		FROM locations, ratings
+		WHERE locations.id = ratings.locationID
+		GROUP BY ratings.locationID
+		ORDER BY locations.price DESC
 
 -- DELETE:
 

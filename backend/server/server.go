@@ -47,16 +47,22 @@ func (s *Server) init() error {
 	// Route for the userpage
 	s.router.Route("/user")["GET"] = http.HandlerFunc(s.handleUserWS)
 
+	// Route for the new location
+	s.router.Route("/new")["GET"] = http.HandlerFunc(s.handleNewWS)
+
+	/*
+		ADMIN SECTION
+	*/
+	s.router.Route("/admin")["GET"] = http.HandlerFunc(s.handleAdmin)
+	s.router.Route("/admin")["POST"] = http.HandlerFunc(s.handleAdminPOST)
+
+	s.router.Route("/admin/locations")["GET"] = http.HandlerFunc(s.handleAdminLocations)
+	s.router.Route("/admin/locations")["POST"] = http.HandlerFunc(s.handleAdminLocationsPOST)
+	s.router.Route("/admin/users")["GET"] = http.HandlerFunc(s.handleAdminUsersGET)
+	s.router.Route("/admin/users")["POST"] = http.HandlerFunc(s.handleAdminUsersPOST)
+
 	// Init location home pages
 	s.initLocationHomepageRouter()
-	/* TODO: user routing??? security???
-	- how to determine if user isn't just following the link?
-	- hash?
-		- ssh512?
-		- kihmo
-			- user to hash function already prepared
-		- louis stores user data in local storage + user key
-	*/
 
 	return nil
 }

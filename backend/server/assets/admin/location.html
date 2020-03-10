@@ -1,0 +1,58 @@
+{{define "location" }}
+    <div class="location-card">
+        <div class="location-name">
+            {{.Name}}
+        </div>
+        <div class="location-coords">
+            {{.Coords.X}}
+            {{.Coords.Y}}
+        </div>
+        <div class="location-desc">
+            {{.Desc}}
+        </div>
+        <div class="location-link">
+            <a href="{{.Webpage}}">{{.Webpage}}</a>
+        </div>
+        <div class="locations-users">
+            Number of users that like this location: {{.Users}}
+        </div>
+        <div class="location-rating">
+            Location's rating: {{.Rating}}/5
+        </div>
+        <div class="locations-price">
+            Location's pricing: {{.Price}}/5
+        </div>
+
+        <div class="locations-features">
+            <div class="location-feature">
+                Coffee: {{.Features.Coffee}}
+            </div>
+            <div class="location-feature">
+                Wifi: {{.Features.Wifi}}
+            </div>
+            <div class="location-feature">
+                Power: {{.Features.Power}}
+            </div>
+            <div class="location-feature">
+                Music: {{.Features.Music}}
+            </div>
+            <div class="location-feature">
+                Food: {{.Features.Food}}
+            </div>
+        </div>
+        <div class="location-id">
+            Location's ID: {{.ID}}
+        </div> 
+
+        {{range .Comments}}
+            {{template "comment" .}}
+        {{end}}
+        <br>
+
+        <form method="POST">
+            <input type="hidden" name="deleteLocation" value="{{.ID}}">
+            <input type="submit" name="submit" value="deleteLocation">
+        </form>
+    </div>
+
+{{end}}

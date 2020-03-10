@@ -1,0 +1,29 @@
+{{ define "user"}} 
+    
+<div class="user">
+
+    <div class="user-username">
+
+        Username: {{.Name}}
+    </div>
+    <div class="user-email">
+        User's email: {{.Email}}
+    </div>
+    <div class="user-id">
+        User's ID: {{.ID}}
+    </div>
+    <div class="user-comments">
+
+        User's comments:
+        {{range .Comments }}
+            {{template "comment" .}}
+        {{end}}
+    </div>
+    <div class="user-button">
+        <form method="POST">
+            <input type="hidden" name="deleteUser" value="{{.ID}}">
+            <input type="submit" name="submit" value="deleteUser">
+        </form>
+    </div>
+</div>
+{{end}}
