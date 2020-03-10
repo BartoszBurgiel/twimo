@@ -1,32 +1,49 @@
 {{define "location" }}
-    <div>
-        {{.Name}}
-        <br>
-        {{.Coords.X}}
-        {{.Coords.Y}}
-        <br>
-        {{.Desc}}
-        <br>
-        <a href="{{.Webpage}}">{{.Webpage}}</a>
-        <br>
-        {{.Users}}
-        <br>
-        {{.Rating}}
-        <br>
-        {{.Price}}
-        <br>
-        {{.Features.Coffee}}
-        <br>
-        {{.Features.Wifi}}
-        <br>
-        {{.Features.Power}}
-        <br>
-        {{.Features.Music}}
-        <br>
-        {{.Features.Food}}
-        <br>
-        {{.ID}}
-        <br>
+    <div class="location-card">
+        <div class="location-name">
+            {{.Name}}
+        </div>
+        <div class="location-coords">
+            {{.Coords.X}}
+            {{.Coords.Y}}
+        </div>
+        <div class="location-desc">
+            {{.Desc}}
+        </div>
+        <div class="location-link">
+            <a href="{{.Webpage}}">{{.Webpage}}</a>
+        </div>
+        <div class="locations-users">
+            Number of users that like this location: {{.Users}}
+        </div>
+        <div class="location-rating">
+            Location's rating: {{.Rating}}/5
+        </div>
+        <div class="locations-price">
+            Location's pricing: {{.Price}}/5
+        </div>
+
+        <div class="locations-features">
+            <div class="location-feature">
+                Coffee: {{.Features.Coffee}}
+            </div>
+            <div class="location-feature">
+                Wifi: {{.Features.Wifi}}
+            </div>
+            <div class="location-feature">
+                Power: {{.Features.Power}}
+            </div>
+            <div class="location-feature">
+                Music: {{.Features.Music}}
+            </div>
+            <div class="location-feature">
+                Food: {{.Features.Food}}
+            </div>
+        </div>
+        <div class="location-id">
+            Location's ID: {{.ID}}
+        </div> 
+
         {{range .Comments}}
             {{template "comment" .}}
         {{end}}

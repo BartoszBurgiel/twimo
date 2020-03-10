@@ -1,16 +1,25 @@
 {{ define "user"}} 
     
-<br>
-    <h1>User's name: {{.Name}}</h1>
-    <br>
-    User's email: {{.Email}}
-    <br>
-    User's ID: {{.ID}}
-    <br>
-    User's comments:
-    <form method="POST">
-        {{range .Comments }}
+<div class="user">
+
+    <div class="user-username">
+
+        Username: {{.Name}}
+    </div>
+    <div class="user-email">
+        User's email: {{.Email}}
+    </div>
+    <div class="user-id">
+        User's ID: {{.ID}}
+    </div>
+    <div class="user-comments">
+
+        User's comments:
+        <form method="POST">
+            {{range .Comments }}
             {{template "comment" .}}
-        {{end}}
-    </form>
+            {{end}}
+        </form>
+    </div>
+</div>
 {{end}}
