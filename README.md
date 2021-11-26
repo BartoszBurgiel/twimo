@@ -2,6 +2,8 @@
 
 ...**T**he **W**orld **I**s **M**y **O**ffice
 
+<img src="https://raw.githubusercontent.com/BartoszBurgiel/twimo/master/other/screenshots.png" alt="Screenshots of the current TWIMO iteration">
+
 ## The challenge
 
 _"Remote Work"_ is one of the biggest buzzwords in the 21st century and that's mainly because it's f\*cking awesome. However, remote work brings up some caveats, some requirements that one must fulfill in order to enjoy the ability to work from whatever place he likes. These requirements are...
