@@ -34,12 +34,11 @@ func (s *Server) handleListScreenGET(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Iterate over locations and send JSONS
-		for _, location := range allLocations {
-			if err := conn.WriteJSON(location); err != nil {
-				fmt.Println(err)
-			}
+		// Send locations as an array of locations
+		if err := conn.WriteJSON(allLocations); err != nil {
+			fmt.Println(err)
 		}
+
 	}
 }
 

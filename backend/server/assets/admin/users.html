@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<link rel="stylesheet" type="text/css" href="./style/users.css" />
+		<link rel="stylesheet" type="text/css" href="./style/comment.css" />
+    </head>
+    <h1>
+        These are all the users of twimo 
+    </h1>
+    {{range . }}
+        {{template "user" .}}
+    {{end}}
+    <form method="POST">
+        <input type="hidden" name=killSession value="ds">
+        <input type="submit" name="killSession" value="log out">
+    </form>
+</html>

@@ -1,0 +1,96 @@
+{{define "location" }}
+    <div class="location-card">
+        <div class="location-name">
+            {{.Name}}
+        </div>
+        <div class="location-desc">
+            {{.Desc}}
+        </div>
+        <div class="location-coords">
+            x: {{.Coords.X}}
+            y: {{.Coords.Y}}
+        </div>
+        <div class="location-link">
+            <a href="{{.Webpage}}">{{.Webpage}}</a>
+        </div>
+
+        <div class="location-card-flex">
+            
+        <div class="location-card-flex">
+            <div class="location-card-flex-element">
+                <div class="locations-users">
+                    Number of users that like this location: <b>{{.Users}}</b>
+                </div>
+                <div class="location-rating">
+                    Location's rating: <b>{{.Rating}}/5</b>
+                </div>
+                <div class="locations-price">
+                    Location's pricing: <b>{{.Price}}/5</b>
+                </div>    
+            </div>
+        </div>
+    </div>
+        <div class="location-features">
+            <div class="location-feature">
+                {{if .Features.Coffee}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Coffee
+                    </div>
+            </div>
+            <div class="location-feature">
+                {{if .Features.Wifi}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Wifi
+                    </div>
+            </div>
+            <div class="location-feature">
+                {{if .Features.Power}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Power
+                    </div>
+            </div>
+            <div class="location-feature">
+                {{if .Features.Music}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Music
+                    </div>
+            </div>
+            <div class="location-feature">
+                {{if .Features.Food}}
+                    <div class="green">
+                {{else}}
+                    <div class="red">
+                {{end}}
+                Food
+                    </div>
+            </div>
+        </div>
+        <div class="location-id">
+            Location's ID: <code>{{.ID}}</code>
+        </div> 
+        <div class="location-button">
+            <form method="POST">
+                <input type="hidden" name="deleteLocation" value="{{.ID}}">
+                <input type="submit" name="submit" value="deleteLocation">
+            </form>
+        </div>
+            </div>
+
+        {{range .Comments}}
+            {{template "comment" .}}
+        {{end}}
+        <br>
+
+{{end}}

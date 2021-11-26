@@ -47,16 +47,22 @@ func (s *Server) init() error {
 	// Route for the userpage
 	s.router.Route("/user")["GET"] = http.HandlerFunc(s.handleUserWS)
 
+	// Route for the new location
+	s.router.Route("/new")["GET"] = http.HandlerFunc(s.handleNewWS)
+
+	/*
+		ADMIN SECTION
+	*/
+	s.router.Route("/admin")["GET"] = http.HandlerFunc(s.handleAdmin)
+	s.router.Route("/admin")["POST"] = http.HandlerFunc(s.handleAdminPOST)
+
+	s.router.Route("/admin/locations")["GET"] = http.HandlerFunc(s.handleAdminLocations)
+	s.router.Route("/admin/locations")["POST"] = http.HandlerFunc(s.handleAdminLocationsPOST)
+	s.router.Route("/admin/users")["GET"] = http.HandlerFunc(s.handleAdminUsersGET)
+	s.router.Route("/admin/users")["POST"] = http.HandlerFunc(s.handleAdminUsersPOST)
+
 	// Init location home pages
 	s.initLocationHomepageRouter()
-	/* TODO: user routing??? security???
-	- how to determine if user isn't just following the link?
-	- hash?
-		- ssh512?
-		- kihmo
-			- user to hash function already prepared
-		- louis stores user data in local storage + user key
-	*/
 
 	return nil
 }
@@ -64,7 +70,7 @@ func (s *Server) init() error {
 // ServeHTTP to the server
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.String()
-	if !prefixChecker(url, "/style", "/favicon.ico") {
+	if !prefixChecker(url, "/admin/style", "/favicon.ico") {
 		p := Path(r.URL.Path)
 		m := Method(r.Method)
 
@@ -79,7 +85,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // If assets are called -> host assets
 func (s Server) handleGETAssets(w http.ResponseWriter, r *http.Request) {
-	http.FileServer(http.Dir("../server/assets/")).ServeHTTP(w, r)
+	http.FileServer(http.Dir("../server/assets")).ServeHTTP(w, r)
 }
 
 // prefixChecker checks if any of given prefixes is in the url

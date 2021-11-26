@@ -1,5 +1,5 @@
 // Import core functionalities from react & react-native library
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 
 // Import custom components
@@ -10,19 +10,35 @@ import color from "../../utils/colorPallet";
 
 // Define the ListScreen
 const ListScreen = ({ navigation }) => {
-  // Enable an mutable state
-  const [locationData, setLocationData] = useState(0);
+  // Web socket state
+  const [socketMessages, setSocketMessages] = useState();
 
-  // Fetch Location data from web API and store it in state
-  fetch("http://127.0.0.1:5500/frontend/data/locations.json")
-    .then(response => response.json())
-    .then(data => setLocationData(data));
+  // Web socket connection
+  useEffect(() => {
+    // Define socket
+    let socket = new WebSocket("ws://localhost:8080/listscreen");
+
+    // Fetch JSON sorted by rating
+    socket.onopen = () => {
+      socket.send("rating");
+      socket.onmessage = response => {
+        let data = JSON.parse(response.data);
+        setSocketMessages(data);
+      };
+    };
+
+    // Close socket connection if data is fetched
+    if (socketMessages) {
+      socket.close();
+    }
+  }, []);
 
   // Iterate over the given nodes and display them as LocationCards in a FlatList
   return (
     <View style={styles.container}>
       <FlatList
-        data={locationData}
+        data={socketMessages}
+        keyExtractor={item => item.ID}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <LocationCard data={item} navigation={navigation} />

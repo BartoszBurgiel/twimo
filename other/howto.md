@@ -13,3 +13,7 @@ brew install go
 go get github.com/google/uuid
 go get github.com/mattn/go-sqlite3
 go get github.com/gorilla/websocket
+
+### Set path
+
+`export GOPATH="/Users/louis/Documents/Engineering/go"`

@@ -1,4 +1,4 @@
-# We need following querries:
+# We need following queries:
 
 to get an insight on our datastructure look on:
 twimo/backend/repository/queries/setup.sql

@@ -15,15 +15,21 @@ const LocationCard = ({ data, navigation }) => {
   return (
     <View style={styles.card}>
       <View style={styles.pictureWrapper}>
-        <Image style={styles.image} source={{ uri: data.picture }}></Image>
+        <Image
+          style={styles.image}
+          source={{
+            uri:
+              "https://www.heikaus-asset.com/wp-content/uploads/2018/01/Test_Starbucks-1024x731.jpg"
+          }}
+        ></Image>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.cardHeader}>{data.name}</Text>
-        <Text style={styles.cardSubHeader}>{data.location}</Text>
-        <RatingStars colorFill={color.brand.dark} rating={data.rating} />
+        <Text style={styles.cardHeader}>{data.Name}</Text>
+        <Text style={styles.cardSubHeader}>{data.Desc}</Text>
+        <RatingStars colorFill={color.brand.dark} rating={data.Rating} />
         <Text style={styles.cardMetrics}>
           <Ionicons name="logo-euro" size={20} color={color.brand.dark} />{" "}
-          {data.pricing} / 5
+          {data.Price} / 5
         </Text>
         <TouchableOpacity
           style={styles.button}
@@ -40,8 +46,7 @@ const LocationCard = ({ data, navigation }) => {
   );
 };
 
-// FIXME: Finally fix the fucking card lyout on android - right now it sucks
-// TODO: Figure out why the goddamn schäfer picture doesn't load on android
+// FIXME: Android Layout
 
 // Define the stylesheet
 const styles = StyleSheet.create({

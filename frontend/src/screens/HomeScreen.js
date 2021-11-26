@@ -3,6 +3,7 @@ import React from "react";
 import {
   View,
   Text,
+  Image,
   Button,
   TextInput,
   TouchableOpacity,
@@ -11,6 +12,7 @@ import {
 
 // Import color utility for consistent styling
 import color from "../../utils/colorPallet";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 //TODO: Implement real credential check!
 
@@ -18,22 +20,32 @@ import color from "../../utils/colorPallet";
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>twimo</Text>
-      <TextInput style={styles.input} autoCompleteType="off" />
+      <Image
+        style={styles.wordmark}
+        source={require("../../assets/wordmark.png")}
+      />
+      <TextInput
+        style={styles.input}
+        autoCompleteType="off"
+        placeholder="Username"
+        placeholderTextColor={color.brand.dark}
+      />
       <TextInput
         style={styles.input}
         secureTextEntry={true}
         autoCompleteType="off"
+        placeholder="Password"
+        placeholderTextColor={color.brand.dark}
       />
       <TouchableOpacity
         style={styles.buttonPrimary}
         onPress={() => navigation.navigate("List")}
       >
-        <Text style={styles.buttonPrimaryText}>login</Text>
+        <Text style={styles.buttonPrimaryText}>Login</Text>
       </TouchableOpacity>
       <Button
         title="Sign up"
-        onPress={() => console.log("Sir, we need a fucking signup page.")}
+        onPress={() => navigation.navigate("SignUp")}
       ></Button>
     </View>
   );
@@ -47,6 +59,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  wordmark: {
+    marginVertical: 50
+  },
   header: {
     fontSize: 50,
     fontWeight: "bold",
@@ -59,12 +74,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 12,
     backgroundColor: color.brand.light,
-    color: color.brand.dark
+    color: color.black
   },
   buttonPrimary: {
     backgroundColor: color.brand.normal,
     height: 50,
-    width: "35%",
+    width: "30%",
     borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",

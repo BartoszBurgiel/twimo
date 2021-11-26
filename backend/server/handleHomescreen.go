@@ -5,5 +5,5 @@ import (
 )
 
 func (s *Server) handleHomeScreenGET(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../server/assets/index.html")
+	w.Write([]byte("<b>TWIMO</b> Webpage is currently still under construction. :)"))
 }

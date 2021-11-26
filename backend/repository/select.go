@@ -128,6 +128,36 @@ func (r Repo) GetUserFromName(userName string) (user core.User, err error) {
 
 // GetUsersComments from the database
 func (r Repo) GetUsersComments(userID string) (comments []core.Comment, err error) {
+	// Get  rows
+	rows, err := r.db.Query(`SELECT title, content, locationID, ratingID, ID FROM comments WHERE userID = ? ; `, userID)
+	if err != nil {
+		fmt.Println(err)
+		return comments, err
+	}
+	defer rows.Close()
+
+	// temporary comment struct
+	tempComment := core.Comment{}
+	ratingID := ""
+	for rows.Next() {
+		err = rows.Scan(&tempComment.Title, &tempComment.Content, &tempComment.Location, &ratingID, &tempComment.ID)
+		if err != nil {
+			fmt.Println(err)
+			return comments, err
+		}
+
+		// Fetch the rating
+		rating, err := r.GetRating(ratingID)
+		if err != nil {
+			fmt.Println(err)
+			return comments, err
+		}
+		tempComment.Rating = rating
+
+		// Add to comments
+		comments = append(comments, tempComment)
+	}
+
 	return comments, err
 }
 

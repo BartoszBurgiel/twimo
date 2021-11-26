@@ -38,18 +38,18 @@ const FeatureIcons = ({ features }) => {
     <View style={styles.container}>
       <CircleIcon
         iconName="md-cafe"
-        isActive={features.coffee ? true : false}
+        isActive={features.Coffee ? true : false}
       />
-      <CircleIcon iconName="md-wifi" isActive={features.wifi ? true : false} />
+      <CircleIcon iconName="md-wifi" isActive={features.Wifi ? true : false} />
       <CircleIcon
         iconName="md-battery-charging"
-        isActive={features.power ? true : false}
+        isActive={features.Power ? true : false}
       />
       <CircleIcon
         iconName="md-musical-note"
-        isActive={features.music ? true : false}
+        isActive={features.Music ? true : false}
       />
-      <CircleIcon iconName="md-pizza" isActive={features.food ? true : false} />
+      <CircleIcon iconName="md-pizza" isActive={features.Food ? true : false} />
     </View>
   );
 };
